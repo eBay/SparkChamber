@@ -19,6 +19,9 @@ Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, de
 	* [Scrolling events](#scrolling-events "What are scrolling events, and how are they triggered?")
 	* [Target Action events](#target-action-events "What are target action events, and how are they triggered?")
 	* [Selection events](#selection-events "What are selection events, and how are they triggered?")
+* [SparkKit](#sparkkit)
+	* [SparkKit Introduction](#sparkkit-introduction "What is SparkKit, and why/when will you need it?")
+	* [SparkKit Installation and Use](#sparkkit-installation-and-use "How to install and setup the SparkKit framework in your project")
 
 ### Introduction
 Spark Chamber is built as a trigger-action event tracking system. Its purpose is to allow the attachment of event objects to various UI elements and then execute the event's `action` (code) asynchronously when the event's trigger condition is met. The optional value `trace` (String) allows debugging, and the optional value `identifier` (String) allows identification and correlation.
@@ -173,7 +176,9 @@ view.sparkEvents = @[appearEvent, disappearEvent];
 
 ### Detecting Events
 #### Spark Detector
-While Spark Events define the trigger-action-trace events for the system, the Spark Detector is the engine that acts as a discriminator and executor for appropriate event actions. The Spark detector is either invoked from your app's UIKit subclasses to process events, or through the SparkKit framework (coming soon).
+While Spark Events define the trigger-action-trace events for the system, the Spark Detector is the engine that acts as a discriminator and executor for appropriate event actions. The Spark detector is either invoked from your app's UIKit subclasses to process events, or through the [SparkKit](#sparkkit) framework.
+
+**Note:** When using subclasses of UI components from SparkKit - the appearance, disappearance, and touch method calls will automatically be invoked by the superclass or protocol extension provided in SparkKit. You're not required to manually implement the code in the following three sections unless your UI component requires unique support.
 
 #### Appearance events
 Appearance events are triggered by calling Spark Detector's class method: 
@@ -262,3 +267,14 @@ class func trackDidDeselectControl(control: UIControl?) -> Bool
 This method accepts an optional UIControl and returns a boolean value of true if the supplied control triggers an appropriate `DidSelect` or `DidDeselect` event.
 
 Selection events are especially useful when the `selected` state of a UIControl needs to be measured.
+
+### SparkKit
+#### SparkKit Introduction
+Spark Kit ties Spark Chamber's mechanisms to Apple's UIKit and allows UI to automatically notify the Detector portions of the Spark Chamber framework for seamless event processing.
+
+#### SparkKit Installation and Use
+1. In Xcode, add the SparkChamberAPI-ios .xcodeproj file by selecting your project and choosing 'Add Files to...' from the File menu
+2. Next, select your project in Xcode from the project navigator on the left side of the project window
+2. Select the target to which you want to add frameworks in the project settings editor
+3. Select the “Build Phases” tab, and click the small triangle next to “Link Binary With Libraries” to view all of the frameworks in your application
+4. To add the SparkKit framework, click the “+” below the list of frameworks

@@ -20,7 +20,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SparkViewController.h"
+#import "SparkKitTests-Swift.h"
 @import SparkChamber;
 
 
@@ -33,7 +33,7 @@
 
 - (void)testSparkViewControllerViewDidAppear
 {
-	SparkViewController *viewController = [[SparkViewController alloc] init];
+	SparkViewController *viewController = [SparkViewController new];
 	UIView *view = [[UIView alloc] init];
 	[viewController.view addSubview:view];
 	
@@ -50,5 +50,26 @@
 
 	[self waitForExpectationsWithTimeout:3.0 handler:nil];
 }
+
+- (void)testSparkViewControllerViewDidDisppear
+{
+	SparkViewController *viewController = [SparkViewController new];
+	UIView *view = [[UIView alloc] init];
+	[viewController.view addSubview:view];
+	
+	XCTestExpectation *expectation = [self expectationWithDescription:@"A SparkViewController's disappear action failed to execute."];
+	__block SparkEvent *event = [[SparkEvent alloc] initWithTrigger:SparkTriggerTypeDidDisappear
+															  trace:@"view disappeared"
+															 action:^(NSDate * _Nonnull timestamp)
+								 {
+									 [expectation fulfill];
+								 }];
+	view.sparkEvents = @[event];
+	
+	[viewController viewDidDisappear:NO];
+	
+	[self waitForExpectationsWithTimeout:3.0 handler:nil];
+}
+
 
 @end

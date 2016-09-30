@@ -28,5 +28,3 @@ FOUNDATION_EXPORT double SparkKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char SparkKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SparkKit/PublicHeader.h>
-
-#import <SparkKit/SparkViewController.h>

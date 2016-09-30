@@ -3,12 +3,12 @@ dist: osx
 language: swift
 osx_image: xcode8
 
-script: ./spark-chamber_tests
+script: ./spark-chamber_tests.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -cF spark_chamber
 
-script: ./spark-kit_tests
+script: ./spark-kit_tests.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -cF spark_kit

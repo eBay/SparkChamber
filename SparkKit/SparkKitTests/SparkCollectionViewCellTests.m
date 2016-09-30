@@ -20,7 +20,6 @@
 
 #import <XCTest/XCTest.h>
 
-#import "SparkCollectionViewCell.h"
 #import "SparkKitTests-Swift.h"
 @import SparkChamber;
 
@@ -34,7 +33,7 @@
 
 - (void)testSparkCollectionViewCellTouchesEnded
 {
-	PointInsideSparkCollectionViewCellMock *cell = [[PointInsideSparkCollectionViewCellMock alloc] init];
+	PointInsideSparkCollectionViewCellMock *cell = [PointInsideSparkCollectionViewCellMock new];
 	
 	XCTestExpectation *expectation = [self expectationWithDescription:@"A SparkCollectionViewCell's touch event action failed to execute."];
 	__block SparkEvent *event = [[SparkEvent alloc] initWithTrigger:SparkTriggerTypeDidEndTouch

@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0CD7641D9EEDC2009F388F /* SparkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CD7631D9EEDC2009F388F /* SparkCollectionViewCell.swift */; };
+		4D0CD7661D9EEE43009F388F /* SparkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CD7651D9EEE43009F388F /* SparkTableViewCell.swift */; };
 		4D6ACAA01D905DA4006DBD99 /* SparkChamber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8D7A8A1D905033005CF55A /* SparkChamber.framework */; };
 		4D8D7A191D904508005CF55A /* SparkKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D8D7A181D904508005CF55A /* SparkKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D8D7A201D904508005CF55A /* SparkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8D7A151D904508005CF55A /* SparkKit.framework */; };
-		4D8D7A3A1D90455A005CF55A /* SparkCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D8D7A311D90455A005CF55A /* SparkCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4D8D7A3B1D90455A005CF55A /* SparkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A321D90455A005CF55A /* SparkCollectionViewCell.m */; };
-		4D8D7A3C1D90455A005CF55A /* SparkTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D8D7A331D90455A005CF55A /* SparkTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4D8D7A3D1D90455A005CF55A /* SparkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A341D90455A005CF55A /* SparkTableViewCell.m */; };
 		4D8D7A3E1D90455A005CF55A /* SparkUIKitProtocolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */; };
 		4D8D7A3F1D90455A005CF55A /* SparkViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D8D7A361D90455A005CF55A /* SparkViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D8D7A401D90455A005CF55A /* SparkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A371D90455A005CF55A /* SparkViewController.m */; };
@@ -37,15 +35,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D0CD7631D9EEDC2009F388F /* SparkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkCollectionViewCell.swift; sourceTree = "<group>"; };
+		4D0CD7651D9EEE43009F388F /* SparkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkTableViewCell.swift; sourceTree = "<group>"; };
 		4D8D7A151D904508005CF55A /* SparkKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SparkKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8D7A181D904508005CF55A /* SparkKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SparkKit.h; sourceTree = "<group>"; };
 		4D8D7A1A1D904508005CF55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D8D7A1F1D904508005CF55A /* SparkKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SparkKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8D7A261D904508005CF55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D8D7A311D90455A005CF55A /* SparkCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparkCollectionViewCell.h; sourceTree = "<group>"; };
-		4D8D7A321D90455A005CF55A /* SparkCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkCollectionViewCell.m; sourceTree = "<group>"; };
-		4D8D7A331D90455A005CF55A /* SparkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparkTableViewCell.h; sourceTree = "<group>"; };
-		4D8D7A341D90455A005CF55A /* SparkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkTableViewCell.m; sourceTree = "<group>"; };
 		4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkUIKitProtocolExtensions.swift; sourceTree = "<group>"; };
 		4D8D7A361D90455A005CF55A /* SparkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparkViewController.h; sourceTree = "<group>"; };
 		4D8D7A371D90455A005CF55A /* SparkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkViewController.m; sourceTree = "<group>"; };
@@ -103,10 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				4DFE25C81D91B45A007BA1F9 /* SparkButton.swift */,
-				4D8D7A311D90455A005CF55A /* SparkCollectionViewCell.h */,
-				4D8D7A321D90455A005CF55A /* SparkCollectionViewCell.m */,
-				4D8D7A331D90455A005CF55A /* SparkTableViewCell.h */,
-				4D8D7A341D90455A005CF55A /* SparkTableViewCell.m */,
+				4D0CD7631D9EEDC2009F388F /* SparkCollectionViewCell.swift */,
+				4D0CD7651D9EEE43009F388F /* SparkTableViewCell.swift */,
 				4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */,
 				4D8D7A361D90455A005CF55A /* SparkViewController.h */,
 				4D8D7A371D90455A005CF55A /* SparkViewController.m */,
@@ -162,8 +156,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D8D7A3A1D90455A005CF55A /* SparkCollectionViewCell.h in Headers */,
-				4D8D7A3C1D90455A005CF55A /* SparkTableViewCell.h in Headers */,
 				4D8D7A191D904508005CF55A /* SparkKit.h in Headers */,
 				4D8D7A3F1D90455A005CF55A /* SparkViewController.h in Headers */,
 			);
@@ -269,10 +261,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D8D7A3B1D90455A005CF55A /* SparkCollectionViewCell.m in Sources */,
-				4D8D7A3D1D90455A005CF55A /* SparkTableViewCell.m in Sources */,
 				4D8D7A3E1D90455A005CF55A /* SparkUIKitProtocolExtensions.swift in Sources */,
 				4DFE25C91D91B45A007BA1F9 /* SparkButton.swift in Sources */,
+				4D0CD7661D9EEE43009F388F /* SparkTableViewCell.swift in Sources */,
+				4D0CD7641D9EEDC2009F388F /* SparkCollectionViewCell.swift in Sources */,
 				4D8D7A401D90455A005CF55A /* SparkViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

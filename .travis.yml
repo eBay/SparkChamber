@@ -1,0 +1,9 @@
+os: osx
+dist: osx
+language: swift
+osx_image: xcode8
+
+script: ./travis.sh
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -J 'SparkChamber'

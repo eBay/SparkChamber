@@ -99,8 +99,8 @@
 				4DFE25C81D91B45A007BA1F9 /* SparkButton.swift */,
 				4D0CD7631D9EEDC2009F388F /* SparkCollectionViewCell.swift */,
 				4D0CD7651D9EEE43009F388F /* SparkTableViewCell.swift */,
-				4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */,
 				4D0CD7671D9EF4C6009F388F /* SparkViewController.swift */,
+				4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */,
 				4D8D7A4F1D9045DA005CF55A /* Supporting Files */,
 			);
 			path = SparkKit;

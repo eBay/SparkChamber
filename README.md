@@ -1,4 +1,8 @@
 ### Spark Chamber - an event tracking framework for iOS
+
+[![Build Status](https://travis-ci.org/eBay/SparkChamber.svg?branch=master)](https://travis-ci.org/eBay/SparkChamber)
+[![codecov](https://codecov.io/gh/eBay/SparkChamber/branch/master/graph/badge.svg)](https://codecov.io/gh/eBay/SparkChamber)
+
 Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, designed to be used for automating analytics, tracking, and/or logging.
 
 * [Introduction](#introduction "What is Spark Chamber, and what is it useful for?")

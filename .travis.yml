@@ -3,7 +3,12 @@ dist: osx
 language: swift
 osx_image: xcode8
 
-script: ./travis.sh
+script: ./spark-chamber_tests
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -cF spark_chamber
+
+script: ./spark-kit_tests
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -cF spark_kit

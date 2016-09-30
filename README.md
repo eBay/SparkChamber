@@ -27,7 +27,7 @@ Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, de
 Spark Chamber is built as a trigger-action event tracking system. Its purpose is to allow the attachment of event objects to various UI elements and then execute the event's `action` (code) asynchronously when the event's trigger condition is met. The optional value `trace` (String) allows debugging, and the optional value `identifier` (String) allows identification and correlation.
 
 ### Installation
-1. In Xcode, add the SparkChamberAPI-ios .xcodeproj file by selecting your project and choosing 'Add Files to...' from the File menu
+1. In Xcode, add the SparkChamber.xcodeproj file by selecting your project and choosing 'Add Files to...' from the File menu
 2. Next, select your project in Xcode from the project navigator on the left side of the project window
 2. Select the target to which you want to add frameworks in the project settings editor
 3. Select the “Build Phases” tab, and click the small triangle next to “Link Binary With Libraries” to view all of the frameworks in your application
@@ -273,8 +273,8 @@ Selection events are especially useful when the `selected` state of a UIControl 
 Spark Kit ties Spark Chamber's mechanisms to Apple's UIKit and allows UI to automatically notify the Detector portions of the Spark Chamber framework for seamless event processing.
 
 #### SparkKit Installation and Use
-1. In Xcode, add the SparkChamberAPI-ios .xcodeproj file by selecting your project and choosing 'Add Files to...' from the File menu
+1. In Xcode, add the SparkKit.xcodeproj and SparkChamber.xcodeproj files by selecting your project and choosing 'Add Files to...' from the File menu
 2. Next, select your project in Xcode from the project navigator on the left side of the project window
-2. Select the target to which you want to add frameworks in the project settings editor
-3. Select the “Build Phases” tab, and click the small triangle next to “Link Binary With Libraries” to view all of the frameworks in your application
-4. To add the SparkKit framework, click the “+” below the list of frameworks
+3. Select the target to which you want to add frameworks in the project settings editor
+4. Select the “Build Phases” tab, and click the small triangle next to “Link Binary With Libraries” to view all of the frameworks in your application
+5. To add the SparkKit framework, click the “+” below the list of frameworks

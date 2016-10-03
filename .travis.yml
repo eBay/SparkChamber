@@ -3,12 +3,8 @@ dist: osx
 language: swift
 osx_image: xcode8
 
-install: ./spark-chamber_tests.sh
-
-before_script:
+script:
+  - ./spark-chamber_tests.sh
   - bash <(curl -s https://codecov.io/bash) -cF spark_chamber
-
-script: ./spark-kit_tests.sh
-
-after_script:
+  - ./spark-kit_tests.sh
   - bash <(curl -s https://codecov.io/bash) -cF spark_kit

@@ -5,6 +5,6 @@ osx_image: xcode8
 
 script:
   - ./spark-chamber_tests.sh
-  - bash <(curl -s https://codecov.io/bash) -cF spark_chamber
+  - bash <(curl -s https://codecov.io/bash) -cF spark_chamber -J SparkChamber
   - ./spark-kit_tests.sh
-  - bash <(curl -s https://codecov.io/bash) -cF spark_kit
+  - bash <(curl -s https://codecov.io/bash) -cF spark_kit -J SparkKit

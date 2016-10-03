@@ -3,7 +3,7 @@
 which -s xcpretty
 XCPRETTY_INSTALLED=$?
 
-SPARKKIT_TEST_CMD="xcodebuild -workspace SparkWorkspace.xcworkspace -scheme SparkKit -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=9.3' build test"
+SPARKKIT_TEST_CMD="xcodebuild -workspace SparkWorkspace.xcworkspace -scheme SparkKit -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=10.0' clean build test"
 
 if [[ $TRAVIS || $XCPRETTY_INSTALLED == 0 ]]; then
   eval "${SPARKKIT_TEST_CMD} | xcpretty"

@@ -47,7 +47,6 @@
 		4D8D7A1F1D904508005CF55A /* SparkKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SparkKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8D7A261D904508005CF55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkUIKitProtocolExtensions.swift; sourceTree = "<group>"; };
-		4D8D7A411D90456B005CF55A /* SparkKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SparkKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		4D8D7A451D90456C005CF55A /* SparkKitTestsMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkKitTestsMocks.swift; sourceTree = "<group>"; };
 		4D8D7A471D90456C005CF55A /* SparkUIKitProtocolExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkUIKitProtocolExtensionsTests.swift; sourceTree = "<group>"; };
 		4D8D7A8A1D905033005CF55A /* SparkChamber.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SparkChamber.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SparkChamber-effkcsumbebacagtlwsgkhgcptmv/Build/Products/Debug-iPhone-iphonesimulator/SparkChamber.framework"; sourceTree = SOURCE_ROOT; };
@@ -132,7 +131,6 @@
 		4D8D7A501D9045EF005CF55A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4D8D7A411D90456B005CF55A /* SparkKitTests-Bridging-Header.h */,
 				4D8D7A261D904508005CF55A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -425,7 +423,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ebay.SparkKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SparkKitTests/SparkKitTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 			};
@@ -439,7 +436,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ebay.SparkKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SparkKitTests/SparkKitTests-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};
 			name = "Release-iPhone";

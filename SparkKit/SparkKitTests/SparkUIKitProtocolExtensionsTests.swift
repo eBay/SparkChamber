@@ -24,15 +24,6 @@ import SparkChamber
 
 
 class SparkUIKitProtocolExtensionsTests: XCTestCase {
-	override func setUp() {
-		super.setUp()
-		
-	}
-	
-	override func tearDown() {
-		super.tearDown()
-	}
-
 	func testSparkKitUIApplicationTouchesEnded() {
 		guard UIApplicationExtensionSupport.enabled else {
 			return

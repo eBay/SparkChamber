@@ -43,4 +43,3 @@ class SparkTableViewCellTests: XCTestCase {
 		waitForExpectationsWithTimeout(3.0, handler: nil)
 	}
 }
-

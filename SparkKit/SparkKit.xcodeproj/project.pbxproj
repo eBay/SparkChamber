@@ -11,15 +11,15 @@
 		4D0CD7661D9EEE43009F388F /* SparkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CD7651D9EEE43009F388F /* SparkTableViewCell.swift */; };
 		4D0CD7681D9EF4C6009F388F /* SparkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0CD7671D9EF4C6009F388F /* SparkViewController.swift */; };
 		4D6ACAA01D905DA4006DBD99 /* SparkChamber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8D7A8A1D905033005CF55A /* SparkChamber.framework */; };
+		4D8526631DA5A6B70061359A /* SparkButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8526621DA5A6B70061359A /* SparkButtonTests.swift */; };
+		4D8526651DA5AFCE0061359A /* SparkCollectionViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8526641DA5AFCE0061359A /* SparkCollectionViewCellTests.swift */; };
+		4D8526671DA5B0E30061359A /* SparkTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8526661DA5B0E30061359A /* SparkTableViewCellTests.swift */; };
+		4D8526691DA5B6490061359A /* SparkViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8526681DA5B6490061359A /* SparkViewControllerTests.swift */; };
 		4D8D7A191D904508005CF55A /* SparkKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D8D7A181D904508005CF55A /* SparkKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D8D7A201D904508005CF55A /* SparkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8D7A151D904508005CF55A /* SparkKit.framework */; };
 		4D8D7A3E1D90455A005CF55A /* SparkUIKitProtocolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */; };
-		4D8D7A491D90456C005CF55A /* SparkButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A421D90456C005CF55A /* SparkButtonTests.m */; };
-		4D8D7A4A1D90456C005CF55A /* SparkCollectionViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A431D90456C005CF55A /* SparkCollectionViewCellTests.m */; };
 		4D8D7A4B1D90456C005CF55A /* SparkKitTestsMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A451D90456C005CF55A /* SparkKitTestsMocks.swift */; };
-		4D8D7A4C1D90456C005CF55A /* SparkTableViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A461D90456C005CF55A /* SparkTableViewCellTests.m */; };
 		4D8D7A4D1D90456C005CF55A /* SparkUIKitProtocolExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A471D90456C005CF55A /* SparkUIKitProtocolExtensionsTests.swift */; };
-		4D8D7A4E1D90456C005CF55A /* SparkViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D7A481D90456C005CF55A /* SparkViewControllerTests.m */; };
 		4DFE25C91D91B45A007BA1F9 /* SparkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE25C81D91B45A007BA1F9 /* SparkButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +37,10 @@
 		4D0CD7631D9EEDC2009F388F /* SparkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkCollectionViewCell.swift; sourceTree = "<group>"; };
 		4D0CD7651D9EEE43009F388F /* SparkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkTableViewCell.swift; sourceTree = "<group>"; };
 		4D0CD7671D9EF4C6009F388F /* SparkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkViewController.swift; sourceTree = "<group>"; };
+		4D8526621DA5A6B70061359A /* SparkButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkButtonTests.swift; sourceTree = "<group>"; };
+		4D8526641DA5AFCE0061359A /* SparkCollectionViewCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkCollectionViewCellTests.swift; sourceTree = "<group>"; };
+		4D8526661DA5B0E30061359A /* SparkTableViewCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkTableViewCellTests.swift; sourceTree = "<group>"; };
+		4D8526681DA5B6490061359A /* SparkViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkViewControllerTests.swift; sourceTree = "<group>"; };
 		4D8D7A151D904508005CF55A /* SparkKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SparkKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8D7A181D904508005CF55A /* SparkKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SparkKit.h; sourceTree = "<group>"; };
 		4D8D7A1A1D904508005CF55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,12 +48,8 @@
 		4D8D7A261D904508005CF55A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkUIKitProtocolExtensions.swift; sourceTree = "<group>"; };
 		4D8D7A411D90456B005CF55A /* SparkKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SparkKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		4D8D7A421D90456C005CF55A /* SparkButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkButtonTests.m; sourceTree = "<group>"; };
-		4D8D7A431D90456C005CF55A /* SparkCollectionViewCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkCollectionViewCellTests.m; sourceTree = "<group>"; };
 		4D8D7A451D90456C005CF55A /* SparkKitTestsMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkKitTestsMocks.swift; sourceTree = "<group>"; };
-		4D8D7A461D90456C005CF55A /* SparkTableViewCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkTableViewCellTests.m; sourceTree = "<group>"; };
 		4D8D7A471D90456C005CF55A /* SparkUIKitProtocolExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkUIKitProtocolExtensionsTests.swift; sourceTree = "<group>"; };
-		4D8D7A481D90456C005CF55A /* SparkViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkViewControllerTests.m; sourceTree = "<group>"; };
 		4D8D7A8A1D905033005CF55A /* SparkChamber.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SparkChamber.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SparkChamber-effkcsumbebacagtlwsgkhgcptmv/Build/Products/Debug-iPhone-iphonesimulator/SparkChamber.framework"; sourceTree = SOURCE_ROOT; };
 		4DFE25C81D91B45A007BA1F9 /* SparkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,11 +110,11 @@
 			isa = PBXGroup;
 			children = (
 				4D8D7A451D90456C005CF55A /* SparkKitTestsMocks.swift */,
-				4D8D7A421D90456C005CF55A /* SparkButtonTests.m */,
-				4D8D7A431D90456C005CF55A /* SparkCollectionViewCellTests.m */,
-				4D8D7A461D90456C005CF55A /* SparkTableViewCellTests.m */,
+				4D8526621DA5A6B70061359A /* SparkButtonTests.swift */,
+				4D8526641DA5AFCE0061359A /* SparkCollectionViewCellTests.swift */,
+				4D8526661DA5B0E30061359A /* SparkTableViewCellTests.swift */,
+				4D8526681DA5B6490061359A /* SparkViewControllerTests.swift */,
 				4D8D7A471D90456C005CF55A /* SparkUIKitProtocolExtensionsTests.swift */,
-				4D8D7A481D90456C005CF55A /* SparkViewControllerTests.m */,
 				4D8D7A501D9045EF005CF55A /* Supporting Files */,
 			);
 			path = SparkKitTests;
@@ -271,10 +271,10 @@
 			files = (
 				4D8D7A4B1D90456C005CF55A /* SparkKitTestsMocks.swift in Sources */,
 				4D8D7A4D1D90456C005CF55A /* SparkUIKitProtocolExtensionsTests.swift in Sources */,
-				4D8D7A4A1D90456C005CF55A /* SparkCollectionViewCellTests.m in Sources */,
-				4D8D7A491D90456C005CF55A /* SparkButtonTests.m in Sources */,
-				4D8D7A4E1D90456C005CF55A /* SparkViewControllerTests.m in Sources */,
-				4D8D7A4C1D90456C005CF55A /* SparkTableViewCellTests.m in Sources */,
+				4D8526691DA5B6490061359A /* SparkViewControllerTests.swift in Sources */,
+				4D8526631DA5A6B70061359A /* SparkButtonTests.swift in Sources */,
+				4D8526651DA5AFCE0061359A /* SparkCollectionViewCellTests.swift in Sources */,
+				4D8526671DA5B0E30061359A /* SparkTableViewCellTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

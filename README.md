@@ -1,7 +1,6 @@
-### Spark Chamber - an event tracking framework for iOS
+## Spark Chamber - an event tracking framework for iOS
 
-[![Build Status](https://travis-ci.org/eBay/SparkChamber.svg?branch=master)](https://travis-ci.org/eBay/SparkChamber)
-[![codecov](https://codecov.io/gh/eBay/SparkChamber/branch/master/graph/badge.svg)](https://codecov.io/gh/eBay/SparkChamber)
+[![Build Status](https://travis-ci.org/eBay/SparkChamber.svg?branch=master)](https://travis-ci.org/eBay/SparkChamber) [![codecov](https://codecov.io/gh/eBay/SparkChamber/branch/master/graph/badge.svg)](https://codecov.io/gh/eBay/SparkChamber)
 
 Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, designed to be used for automating analytics, tracking, and/or logging.
 
@@ -26,6 +25,8 @@ Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, de
 * [SparkKit](#sparkkit)
 	* [SparkKit Introduction](#sparkkit-introduction "What is SparkKit, and why/when will you need it?")
 	* [SparkKit Installation and Use](#sparkkit-installation-and-use "How to install and setup the SparkKit framework in your project")
+	* [Classes available](#classes-available "What SparkKit classes are available, and what triggers do they support?")
+	* [Enabling UIApplication-level touch tracking support](#enabling-uiapplication-level-touch-tracking-support "How to enable UIApplication-level touch tracking support")
 
 ### Introduction
 Spark Chamber is built as a trigger-action event tracking system. Its purpose is to allow the attachment of event objects to various UI elements and then execute the event's `action` (code) asynchronously when the event's trigger condition is met. The optional value `trace` (String) allows debugging, and the optional value `identifier` (String) allows identification and correlation.
@@ -282,3 +283,16 @@ Spark Kit ties Spark Chamber's mechanisms to Apple's UIKit and allows UI to auto
 3. Select the target to which you want to add frameworks in the project settings editor
 4. Select the “Build Phases” tab, and click the small triangle next to “Link Binary With Libraries” to view all of the frameworks in your application
 5. To add the SparkKit framework, click the “+” below the list of frameworks
+
+#### Classes available
+| Class Name | Root Class Name | Spark Event Support | Spark Detector Integration |
+| ------------- | ------------- | ------------- | ------------- |
+| `SparkButton` | `UIButton`  | `DidEndTouch` | `trackEndedTouches()` |
+| `SparkCollectionViewCell` | `UICollectionViewCell`  | `DidEndTouch`, `DidAppear`, `DidDisappear` | `trackEndedTouches()`, `trackDisplayViews()`, `trackEndDisplayingViews()` |
+| `SparkTableViewCell` | `UITableViewCell`  | `DidEndTouch`, `DidAppear`, `DidDisappear` | `trackEndedTouches()`, `trackDisplayViews()`, `trackEndDisplayingViews()` |
+| `SparkViewController` | `UIViewController`  | `DidAppear`, `DidDisappear` | `trackDisplayViews()`, `trackEndDisplayingViews()` |
+
+#### Enabling UIApplication-level touch tracking support
+If desired, UIApplication-level touch support can be enabled in SparkKit for processing of most touches app-wide. Some responders don't forward touch events, so this support can be unpredictable at times.
+
+To enable this feature: select the SparkKit project in Xcode, choose the SparkKit (framework) target, then in the Build Settings tab find the 'Swift Compiler - Custom Flags' section and add this value to the 'Other Swift Flags' key: `-DUIAPPLICATION_EXTENSION_ENABLED`

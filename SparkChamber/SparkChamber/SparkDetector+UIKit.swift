@@ -38,8 +38,8 @@ extension SparkDetector {
 	- parameter views: An Array of UIViews to process
 	- returns: A boolean flag indicating if any supplied views successfully triggered an DidAppear event
 	*/
-	public class func trackDisplayViews(views: NSArray?) -> Bool {
-		return trackViews(views, trigger: SparkTriggerType.DidAppear)
+	public class func trackDisplay(views: NSArray?) -> Bool {
+		return track(views: views, trigger: SparkTriggerType.didAppear)
 	}
 	
 	/**
@@ -48,8 +48,8 @@ extension SparkDetector {
 	- parameter views: An Array of UIViews to process
 	- returns: A boolean flag indicating if any supplied views successfully triggered a DidDisappear event
 	*/
-	public class func trackEndDisplayingViews(views: NSArray?) -> Bool {
-		return trackViews(views, trigger: SparkTriggerType.DidDisappear)
+	public class func trackEndDisplaying(views: NSArray?) -> Bool {
+		return track(views: views, trigger: SparkTriggerType.didDisappear)
 	}
 	
 	/**
@@ -58,8 +58,8 @@ extension SparkDetector {
 	- parameter views: A UIScrollView to process
 	- returns: A boolean flag indicating if the supplied view successfully triggered a DidBeginScroll event
 	*/
-	public class func trackBeganScrollingView(view: UIScrollView?) -> Bool {
-		return trackScrolling(view, trigger: SparkTriggerType.DidBeginScroll)
+	public class func trackBeganScrolling(scrollView: UIScrollView?) -> Bool {
+		return track(scrollView: scrollView, trigger: SparkTriggerType.didBeginScroll)
 	}
 	
 	/**
@@ -68,8 +68,8 @@ extension SparkDetector {
 	- parameter touches: An NSSet of UITouch objects to process
 	- returns: A boolean flag indicating if any supplied touches successfully triggered a DidEndTouch event
 	*/
-	public class func trackEndedTouches(touches: NSSet?) -> Bool {
-		return trackTouches(touches, phase: UITouchPhase.Ended)
+	public class func trackEnded(touches: NSSet?) -> Bool {
+		return track(touches: touches, phase: UITouchPhase.ended)
 	}
 	
 	/**
@@ -78,8 +78,8 @@ extension SparkDetector {
 	- parameter view: A UIView to process
 	- returns: A boolean flag indicating if the supplied view successfully triggered a TargetAction event
 	*/
-	public class func trackTargetAction(view: UIView?) -> Bool {
-		return track(view, trigger: SparkTriggerType.TargetAction)
+	public class func trackTargetAction(for view: UIView?) -> Bool {
+		return track(view: view, trigger: SparkTriggerType.targetAction)
 	}
 	
 	/**
@@ -88,8 +88,8 @@ extension SparkDetector {
 	- parameter view: A UIControl to process
 	- returns: A boolean flag indicating if the supplied control successfully triggered a DidSelect event
 	*/
-	public class func trackDidSelectControl(control: UIControl?) -> Bool {
-		return track(control, trigger: SparkTriggerType.DidSelect)
+	public class func trackDidSelect(control: UIControl?) -> Bool {
+		return track(view: control, trigger: SparkTriggerType.didSelect)
 	}
 	
 	/**
@@ -98,13 +98,13 @@ extension SparkDetector {
 	- parameter view: A UIControl to process
 	- returns: A boolean flag indicating if the supplied control successfully triggered a DidDeselect event
 	*/
-	public class func trackDidDeselectControl(control: UIControl?) -> Bool {
-		return track(control, trigger: SparkTriggerType.DidDeselect)
+	public class func trackDidDeselect(control: UIControl?) -> Bool {
+		return track(view: control, trigger: SparkTriggerType.didDeselect)
 	}
 	
 	// MARK: - Private
 	
-	private class func trackViews(views: NSArray?, trigger: SparkTriggerType) -> Bool {
+	fileprivate class func track(views: NSArray?, trigger: SparkTriggerType) -> Bool {
 		guard let views = views as? Array<UIView> else {
 			return false
 		}
@@ -112,7 +112,7 @@ extension SparkDetector {
 		var result = false
 		
 		for view in views {
-			let success = track(view, trigger: trigger)
+			let success = track(view: view, trigger: trigger)
 			if success {
 				result = success
 			}
@@ -121,35 +121,35 @@ extension SparkDetector {
 		return result
 	}
 	
-	private class func trackTouches(touches: NSSet?, phase: UITouchPhase) -> Bool {
-		guard let touch = touches?.anyObject() as? UITouch where touch.phase == phase,
-			  let view = touch.view where view.userInteractionEnabled else {
+	fileprivate class func track(touches: NSSet?, phase: UITouchPhase) -> Bool {
+		guard let touch = touches?.anyObject() as? UITouch , touch.phase == phase,
+			  let view = touch.view , view.isUserInteractionEnabled else {
 				return false
 		}
 		
 		if let control = view as? UIControl {
-			guard control.touchInside else {
+			guard control.isTouchInside else {
 				return false
 			}
 		} else {
-			guard view.pointInside(touch.locationInView(view), withEvent: nil) else {
+			guard view.point(inside: touch.location(in: view), with: nil) else {
 				return false
 			}
 		}
 		
-		return track(view, trigger: SparkTriggerType.DidEndTouch)
+		return track(view: view, trigger: SparkTriggerType.didEndTouch)
 	}
 	
-	private class func trackScrolling(view: UIScrollView?, trigger: SparkTriggerType) -> Bool {
-		guard let scrollView = view as UIScrollView? where scrollView.tracking else {
+	fileprivate class func track(scrollView: UIScrollView?, trigger: SparkTriggerType) -> Bool {
+		guard let scrollView = scrollView as UIScrollView? , scrollView.isTracking else {
 			return false
 		}
 		
-		return track(scrollView, trigger: trigger)
+		return track(view: scrollView, trigger: trigger)
 	}
 	
-	private class func track(view: UIView?, trigger: SparkTriggerType = SparkTriggerType.None) -> Bool {
-		guard let events = view?.sparkEvents(trigger) else {
+	fileprivate class func track(view: UIView?, trigger: SparkTriggerType = SparkTriggerType.none) -> Bool {
+		guard let events = view?.sparkEvents(for: trigger) else {
 			return false
 		}
 		
@@ -166,8 +166,8 @@ private extension UIView {
 	- parameter trigger: A SparkTriggerType that will be used to filter the view's SparkEvents Array
 	- returns: An Array of Spark Events for the view matched to the supplied trigger
 	*/
-	private func sparkEvents(trigger: SparkTriggerType) -> [SparkEvent]? {
-		func matchingTrigger(event: SparkEvent) -> Bool {
+	func sparkEvents(for trigger: SparkTriggerType) -> [SparkEvent]? {
+		func matchingTrigger(_ event: SparkEvent) -> Bool {
 			return trigger == event.trigger
 		}
 		
@@ -187,14 +187,14 @@ private extension UIView {
 		func events() -> [SparkEvent]? {
 			if let viewEvents = sparkEvents {
 				return viewEvents.filter(matchingTrigger)
-			} else if trigger == SparkTriggerType.DidEndTouch {
+			} else if trigger == SparkTriggerType.didEndTouch {
 				// UITableViewCells often generate events from views embedded within the cell.
 				return findSuperviewCell()?.sparkEvents?.filter(matchingTrigger)
 			}
 			return nil
 		}
 		
-		guard let result = events() where !result.isEmpty else {
+		guard let result = events() , !result.isEmpty else {
 			return nil
 		}
 		

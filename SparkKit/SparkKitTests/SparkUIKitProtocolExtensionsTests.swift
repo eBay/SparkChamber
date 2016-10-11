@@ -31,8 +31,8 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		
 		let view = PointInsideViewMock()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "UIApplication touch event") {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "UIApplication touch event") {
 			_ in
 			expectation.fulfill()
 		}
@@ -42,66 +42,66 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		touch.view = view
 		let fakeTouches: Set<UITouch> = [touch]
 		
-		UIApplication.sharedApplication().keyWindow?.addSubview(view)
+		UIApplication.shared.keyWindow?.addSubview(view)
 		
-		UIApplication.sharedApplication().touchesEnded(fakeTouches, withEvent:nil)
+		UIApplication.shared.touchesEnded(fakeTouches, with:nil)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitTableViewWillDisplayCell() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
 		tableView.delegate = viewController
 		viewController.view = tableView
 		let cell = UITableViewCell()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
 		cell.sparkEvents = [sparkEvent]
 		
-		viewController.tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: NSIndexPath(forRow: 1, inSection: 0))
+		viewController.tableView(tableView, willDisplay: cell, forRowAt: IndexPath(row: 1, section: 0))
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitTableViewDidEndDisplayingCell() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
 		tableView.delegate = viewController
 		viewController.view = tableView
 		let cell = UITableViewCell()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
 		cell.sparkEvents = [sparkEvent]
 		
-		viewController.tableView(tableView, didEndDisplayingCell: cell, forRowAtIndexPath: NSIndexPath(forRow: 1, inSection: 0))
+		viewController.tableView(tableView, didEndDisplaying: cell, forRowAt: IndexPath(row: 1, section: 0))
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitTableViewWillDisplayHeaderView() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
 		tableView.delegate = viewController
 		viewController.view = tableView
 		let headerView = UIView()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
@@ -109,20 +109,20 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		
 		viewController.tableView(tableView, willDisplayHeaderView: headerView, forSection: 0)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitTableViewDidEndDisplayingHeaderView() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
 		tableView.delegate = viewController
 		viewController.view = tableView
 		let headerView = UIView()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
@@ -130,20 +130,20 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		
 		viewController.tableView(tableView, didEndDisplayingHeaderView: headerView, forSection: 0)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitTableViewWillDisplayFooterView() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
 		tableView.delegate = viewController
 		viewController.view = tableView
 		let footerView = UIView()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
@@ -151,20 +151,20 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		
 		viewController.tableView(tableView, willDisplayFooterView: footerView, forSection: 0)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitTableViewDidEndDisplayingFooterView() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
 		tableView.delegate = viewController
 		viewController.view = tableView
 		let footerView = UIView()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
@@ -172,99 +172,99 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		
 		viewController.tableView(tableView, didEndDisplayingFooterView: footerView, forSection: 0)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitCollectionViewWillDisplayCell() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSizeMake(100, 100)
-		let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+		layout.itemSize = CGSize(width: 100, height: 100)
+		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
 		collectionView.delegate = viewController
 		viewController.view = collectionView
 		let cell = UICollectionViewCell()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
 		cell.sparkEvents = [sparkEvent]
 		
-		viewController.collectionView(collectionView, willDisplayCell: cell, forItemAtIndexPath: NSIndexPath(forRow: 1, inSection: 0))
+		viewController.collectionView(collectionView, willDisplay: cell, forItemAt: IndexPath(row: 1, section: 0))
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitCollectionViewDidEndDisplayingCell() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSizeMake(100, 100)
-		let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+		layout.itemSize = CGSize(width: 100, height: 100)
+		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
 		collectionView.delegate = viewController
 		viewController.view = collectionView
 		let cell = UICollectionViewCell()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
 		cell.sparkEvents = [sparkEvent]
 		
-		viewController.collectionView(collectionView, didEndDisplayingCell: cell, forItemAtIndexPath: NSIndexPath(forRow: 1, inSection: 0))
+		viewController.collectionView(collectionView, didEndDisplaying: cell, forItemAt: IndexPath(row: 1, section: 0))
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitCollectionViewWillDisplaySupplementaryView() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSizeMake(100, 100)
-		let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+		layout.itemSize = CGSize(width: 100, height: 100)
+		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
 		collectionView.delegate = viewController
 		viewController.view = collectionView
 		let supplementaryView = UICollectionReusableView()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
 		supplementaryView.sparkEvents = [sparkEvent]
 		
 		
-		viewController.collectionView(collectionView, willDisplaySupplementaryView: supplementaryView, forElementKind: "foo", atIndexPath: NSIndexPath(forRow: 1, inSection: 0))
+		viewController.collectionView(collectionView, willDisplaySupplementaryView: supplementaryView, forElementKind: "foo", at: IndexPath(row: 1, section: 0))
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitCollectionViewDidEndDisplayingSupplementaryView() {
 		let viewController = SparkViewController()
-		UIApplication.sharedApplication().keyWindow?.rootViewController = viewController
+		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSizeMake(100, 100)
-		let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+		layout.itemSize = CGSize(width: 100, height: 100)
+		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
 		collectionView.delegate = viewController
 		viewController.view = collectionView
 		let supplementaryView = UICollectionReusableView()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A Spark Event's action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear, trace: nil) {
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
 		supplementaryView.sparkEvents = [sparkEvent]
 		
-		viewController.collectionView(collectionView, didEndDisplayingSupplementaryView: supplementaryView, forElementKind: "foo", atIndexPath: NSIndexPath(forRow: 1, inSection: 0))
+		viewController.collectionView(collectionView, didEndDisplayingSupplementaryView: supplementaryView, forElementKind: "foo", atIndexPath: IndexPath(row: 1, section: 0))
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 }

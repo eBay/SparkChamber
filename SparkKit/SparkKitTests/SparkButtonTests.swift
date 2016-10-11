@@ -27,8 +27,8 @@ class SparkButtonTests: XCTestCase {
 	func testSparkButtonTouchesEnded() {
 		let button = TouchInsideSparkButtonMock()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A SparkButton's touch event action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "button touched") {
+		let expectation: XCTestExpectation = self.expectation(description: "A SparkButton's touch event action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "button touched") {
 			_ in
 			expectation.fulfill()
 		}
@@ -38,8 +38,8 @@ class SparkButtonTests: XCTestCase {
 		touch.view = button
 		let fakeTouches: Set<UITouch> = [touch]
 		
-		button.touchesEnded(fakeTouches, withEvent:nil)
+		button.touchesEnded(fakeTouches, with:nil)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 }

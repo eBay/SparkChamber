@@ -42,7 +42,7 @@ class SparkTraceTests: XCTestCase {
 
 	func testSparkTraceDelegate() {
 		class SparkTraceDelegateMock: SparkTraceDelegate {
-			@objc func print(trace: String) {
+			@objc func print(_ trace: String) {
 				// Nothing to do here for this test.
 			}
 		}
@@ -65,10 +65,10 @@ class SparkTraceTests: XCTestCase {
 	}
 	
 	func testSparkTracePrintWithDelegate() {
-		SparkTraceTests.expectation = expectationWithDescription("A Spark Trace with a single item failed to make it to its delegate.")
+		SparkTraceTests.expectation = self.expectation(description: "A Spark Trace with a single item failed to make it to its delegate.")
 		
 		class SparkTraceDelegateMock: SparkTraceDelegate {
-			@objc func print(trace: String) {
+			@objc func print(_ trace: String) {
 				XCTAssert(trace == "foo", "A Spark Trace with a single item failed to print correctly.")
 				SparkTraceTests.expectation.fulfill()
 			}
@@ -77,22 +77,22 @@ class SparkTraceTests: XCTestCase {
 		sparkTrace.delegate = SparkTraceDelegateMock()
 		SparkTrace.print("foo")
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkTracePrintMultiWithDelegate() {
 		class SparkTraceDelegateMock: SparkTraceDelegate {
-			@objc func print(trace: String) {
+			@objc func print(_ trace: String) {
 				XCTAssert(trace == "foo bar", "A Spark Trace with a multiple items failed to print correctly.")
 				SparkTraceTests.expectation.fulfill()
 			}
 		}
 		
-		SparkTraceTests.expectation = expectationWithDescription("A Spark Trace with multiple items failed to make it to its delegate.")
+		SparkTraceTests.expectation = self.expectation(description: "A Spark Trace with multiple items failed to make it to its delegate.")
 		
 		sparkTrace.delegate = SparkTraceDelegateMock()
 		SparkTrace.print("foo", "bar")
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 }

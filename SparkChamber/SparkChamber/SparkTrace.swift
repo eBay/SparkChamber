@@ -27,7 +27,7 @@ import Foundation
 A protocol that defines the necessary function required for a delegate to print/process traces.
 */
 @objc public protocol SparkTraceDelegate {
-	func print(trace: String)
+	func print(_ trace: String)
 }
 
 // MARK: - Classes
@@ -60,18 +60,18 @@ Spark Trace is the engine that enables the printing of Spark Event traces to the
 	
 	- note: To print without a trailing newline, pass terminator: ""
 	*/
-	class func print(items: Any..., separator: String = " ", terminator: String = "\n") {
+	class func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
 		SparkTrace.sharedInstance.print(items, separator: separator, terminator: terminator)
 	}
 	
 	// MARK: - Private
 	
-	override private init() {} // Prevent initialization of our class to guarantee the singleton's singularity.
+	override fileprivate init() {} // Prevent initialization of our class to guarantee the singleton's singularity.
 	
-	private func print(items: [Any], separator: String, terminator: String) {
+	fileprivate func print(_ items: [Any], separator: String, terminator: String) {
 		var output: String = ""
-		for (index, item) in items.enumerate() {
-			output += String(item)
+		for (index, item) in items.enumerated() {
+			output += String(describing: item)
 			if (index + 1 < items.endIndex) {
 				output += separator
 			}

@@ -23,7 +23,7 @@ import XCTest
 
 
 private class UITouchMock : UITouch {
-	var _phase: UITouchPhase = UITouchPhase.Ended
+	var _phase: UITouchPhase = UITouchPhase.ended
 	var _view: UIView = UIView()
 	
 	override var phase: UITouchPhase {
@@ -48,7 +48,7 @@ private class UITouchMock : UITouch {
 }
 
 private class TouchInsideButtonMock: UIButton {
-	override var touchInside: Bool {
+	override var isTouchInside: Bool {
 		get {
 			return true
 		}
@@ -56,19 +56,19 @@ private class TouchInsideButtonMock: UIButton {
 }
 
 private class PointInsideViewMock: UIView {
-	override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 		return true
 	}
 }
 
 private class PointInsideTableViewCellMock: UITableViewCell {
-	override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 		return true
 	}
 }
 
 private class UIScrollViewTrackingMock: UIScrollView {
-	override var tracking: Bool {
+	override var isTracking: Bool {
 		get {
 			return true
 		}
@@ -87,7 +87,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	func testSparkDetectorUIControlOutOfBoundTouchesReceived() {
 		let button = UIButton()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
@@ -95,23 +95,23 @@ class SparkDetectorUIKitTests: XCTestCase {
 		
 		let touch = UITouchMock()
 		touch.view = button
-		let fakeTouches: Set<UITouch> = [touch]
+		let fakeTouches: NSSet = [touch]
 		
-		let result = SparkDetector.trackEndedTouches(fakeTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
 	
 	func testSparkDetectorUIControlTouchesReceived() {
 		let button = TouchInsideButtonMock()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo", action: nil)
 		button.sparkEvents = [sparkEvent]
 		
 		let touch = UITouchMock()
 		touch.view = button
-		let fakeTouches: Set<UITouch> = [touch]
+		let fakeTouches: NSSet = [touch]
 		
-		let result = SparkDetector.trackEndedTouches(fakeTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertTrue(result, "A Spark Event failed to be tracked.")
 	}
 
@@ -120,118 +120,118 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let cell = UITableViewCell()
 		tableView.addSubview(cell)
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo", action: nil)
 		cell.sparkEvents = [sparkEvent]
 		
 		let touch = UITouchMock()
 		touch.view = cell.contentView
-		let fakeTouches: Set<UITouch> = [touch]
+		let fakeTouches: NSSet = [touch]
 		
-		let result = SparkDetector.trackEndedTouches(fakeTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertTrue(result, "A Spark Event failed to be tracked.")
 	}
 
 	func testSparkDetectorUIKitTrackTouches() {
 		let touch = UITouchMock()
-		let fakeTouches: Set<UITouch> = [touch]
+		let fakeTouches: NSSet = [touch]
 		
 		touch.view = PointInsideViewMock()
-		touch.view.userInteractionEnabled = true
+		touch.view.isUserInteractionEnabled = true
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo", action: nil)
 		touch.view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackEndedTouches(fakeTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertTrue(result, "A Spark Event failed to be tracked.")
 	}
 	
 	func testSparkDetectorUIKitTrackTouchesOutOfBound() {
 		let touch = UITouchMock()
-		let fakeTouches: Set<UITouch> = [touch]
+		let fakeTouches: NSSet = [touch]
 		
-		touch.view.userInteractionEnabled = true
-		touch.view.bounds = CGRectZero
+		touch.view.isUserInteractionEnabled = true
+		touch.view.bounds = CGRect.zero
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
 		touch.view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackEndedTouches(fakeTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
 	
 	func testSparkDetectorUIKitTrackEmptyTouches() {
-		let result = SparkDetector.trackEndedTouches(Set<UITouch>())
+		let result = SparkDetector.trackEnded(touches: NSSet())
 		XCTAssertFalse(result, "The Detector tracked touches when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackNonTouches() {
-		let nonTouches: Set<String> = ["foo"]
+		let fakeTouches: NSSet = ["foo"]
 		
-		let result = SparkDetector.trackEndedTouches(nonTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertFalse(result, "The Detector tracked touches when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackTouchesWithUserInteractionDisabled() {
 		let touch = UITouchMock()
-		let fakeTouches: Set<UITouch> = [touch]
+		let fakeTouches: NSSet = [touch]
 		
 		touch.view = PointInsideViewMock()
-		touch.view.userInteractionEnabled = false
+		touch.view.isUserInteractionEnabled = false
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
 		touch.view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackEndedTouches(fakeTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
 	
 	func testSparkDetectorUIKitTrackTouchesUnsupportedPhase() {
 		let touch = UITouchMock()
-		let fakeTouches: Set<UITouch> = [touch]
+		let fakeTouches: NSSet = [touch]
 		
 		touch.view = PointInsideViewMock()
-		touch.view.userInteractionEnabled = true
-		touch.phase = UITouchPhase.Began
+		touch.view.isUserInteractionEnabled = true
+		touch.phase = UITouchPhase.began
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
 		touch.view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackEndedTouches(fakeTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
 	
 	func testSparkDetectorUIKitTrackTouchesWithEmptyViewStructure() {
 		let touch = UITouchMock()
-		let fakeTouches: Set<UITouch> = [touch]
+		let fakeTouches: NSSet = [touch]
 		
 		touch.view = PointInsideViewMock()
-		touch.view.userInteractionEnabled = true
+		touch.view.isUserInteractionEnabled = true
 		
-		let result = SparkDetector.trackEndedTouches(fakeTouches)
+		let result = SparkDetector.trackEnded(touches: fakeTouches)
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
 	
 	func testSparkDetectorUIKitTrackTargetActionForView() {
 		let view = UIView()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.TargetAction, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.targetAction, trace: "foo", action: nil)
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackTargetAction(view)
+		let result = SparkDetector.trackTargetAction(for: view)
 		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
 	}
 	
 	func testSparkDetectorUIKitTrackTargetActionForViewNil() {
-		let result = SparkDetector.trackTargetAction(nil)
+		let result = SparkDetector.trackTargetAction(for: nil)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -239,7 +239,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let view = UIView()
 		view.sparkEvents = []
 		
-		let result = SparkDetector.trackTargetAction(view)
+		let result = SparkDetector.trackTargetAction(for: view)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -247,41 +247,41 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let view = UIView()
 		view.sparkEvents = nil
 		
-		let result = SparkDetector.trackTargetAction(view)
+		let result = SparkDetector.trackTargetAction(for: view)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackDisplayForViews() {
 		let view = UIView()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackDisplayViews([view])
+		let result = SparkDetector.trackDisplay(views: [view])
 		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
 	}
 	
 	func testSparkDetectorUIKitTrackDisplayForViewsEmpty() {
-		let result = SparkDetector.trackDisplayViews([])
+		let result = SparkDetector.trackDisplay(views: [])
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackDisplayForViewsNil() {
-		let result = SparkDetector.trackDisplayViews(nil)
+		let result = SparkDetector.trackDisplay(views: nil)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackDisplayForNonViews() {
-		let result = SparkDetector.trackDisplayViews(["foo"])
+		let result = SparkDetector.trackDisplay(views: ["foo"])
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackDisplayForView() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackDisplayViews([view])
+		let result = SparkDetector.trackDisplay(views: [view])
 		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
 	}
 	
@@ -289,7 +289,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let view = UIView()
 		view.sparkEvents = []
 		
-		let result = SparkDetector.trackDisplayViews([view])
+		let result = SparkDetector.trackDisplay(views: [view])
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -297,52 +297,52 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let view = UIView()
 		view.sparkEvents = nil
 		
-		let result = SparkDetector.trackDisplayViews([view])
+		let result = SparkDetector.trackDisplay(views: [view])
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackDisplayForViewIgnored() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackDisplayViews([view])
+		let result = SparkDetector.trackDisplay(views: [view])
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
 	
 	func testSparkDetectorUIKitTrackEndDisplayingViews() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: "foo", action: nil)
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackEndDisplayingViews([view])
+		let result = SparkDetector.trackEndDisplaying(views: [view])
 		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
 	}
 	
 	func testSparkDetectorUIKitTrackEndDisplayingViewsEmpty() {
-		let result = SparkDetector.trackEndDisplayingViews([])
+		let result = SparkDetector.trackEndDisplaying(views: [])
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackEndDisplayingViewsNil() {
-		let result = SparkDetector.trackEndDisplayingViews(nil)
+		let result = SparkDetector.trackEndDisplaying(views: nil)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackEndDisplayingNonViews() {
-		let result = SparkDetector.trackEndDisplayingViews(["foo"])
+		let result = SparkDetector.trackEndDisplaying(views: ["foo"])
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackEndDisplayingView() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: "foo", action: nil)
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackEndDisplayingViews([view])
+		let result = SparkDetector.trackEndDisplaying(views: [view])
 		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
 	}
 	
@@ -350,34 +350,34 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let view = UIView()
 		view.sparkEvents = []
 		
-		let result = SparkDetector.trackDisplayViews([view])
+		let result = SparkDetector.trackDisplay(views: [view])
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackEndDisplayingViewIgnored() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackEndDisplayingViews([view])
+		let result = SparkDetector.trackEndDisplaying(views: [view])
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
 	
 	func testSparkDetectorUIKitTrackBeganScrollingView() {
 		let view = UIScrollViewTrackingMock()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidBeginScroll, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll, trace: "foo", action: nil)
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackBeganScrollingView(view)
+		let result = SparkDetector.trackBeganScrolling(scrollView: view)
 		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
 	}
 	
 	func testSparkDetectorUIKitTrackBeganScrollingViewNil() {
-		let result = SparkDetector.trackBeganScrollingView(nil)
+		let result = SparkDetector.trackBeganScrolling(scrollView: nil)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -385,7 +385,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let view = UIScrollViewTrackingMock()
 		view.sparkEvents = []
 		
-		let result = SparkDetector.trackBeganScrollingView(view)
+		let result = SparkDetector.trackBeganScrolling(scrollView: view)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -393,34 +393,34 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let view = UIScrollViewTrackingMock()
 		view.sparkEvents = nil
 		
-		let result = SparkDetector.trackBeganScrollingView(view)
+		let result = SparkDetector.trackBeganScrolling(scrollView: view)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackBeganScrollingViewIgnored() {
 		let view = UIScrollView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidBeginScroll, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll, trace: "foo") {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
 		view.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackBeganScrollingView(view)
+		let result = SparkDetector.trackBeganScrolling(scrollView: view)
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
 	
 	func testSparkDetectorUIKitTrackDidSelectControl() {
 		let control = UIControl()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidSelect, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didSelect, trace: "foo", action: nil)
 		control.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackDidSelectControl(control)
+		let result = SparkDetector.trackDidSelect(control: control)
 		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
 	}
 	
 	func testSparkDetectorUIKitTrackDidSelectControlNil() {
-		let result = SparkDetector.trackDidSelectControl(nil)
+		let result = SparkDetector.trackDidSelect(control: nil)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -428,7 +428,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let control = UIControl()
 		control.sparkEvents = []
 		
-		let result = SparkDetector.trackDidSelectControl(control)
+		let result = SparkDetector.trackDidSelect(control: control)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -436,22 +436,22 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let control = UIControl()
 		control.sparkEvents = nil
 		
-		let result = SparkDetector.trackDidSelectControl(control)
+		let result = SparkDetector.trackDidSelect(control: control)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
 	func testSparkDetectorUIKitTrackDidDeselectControl() {
 		let control = UIControl()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDeselect, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDeselect, trace: "foo", action: nil)
 		control.sparkEvents = [sparkEvent]
 		
-		let result = SparkDetector.trackDidDeselectControl(control)
+		let result = SparkDetector.trackDidDeselect(control: control)
 		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
 	}
 	
 	func testSparkDetectorUIKitTrackDidDeselectControlNil() {
-		let result = SparkDetector.trackDidDeselectControl(nil)
+		let result = SparkDetector.trackDidDeselect(control: nil)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -459,7 +459,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let control = UIControl()
 		control.sparkEvents = []
 		
-		let result = SparkDetector.trackDidDeselectControl(control)
+		let result = SparkDetector.trackDidDeselect(control: control)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 	
@@ -467,7 +467,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let control = UIControl()
 		control.sparkEvents = nil
 		
-		let result = SparkDetector.trackDidDeselectControl(control)
+		let result = SparkDetector.trackDidDeselect(control: control)
 		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
 	}
 }

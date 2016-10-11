@@ -23,16 +23,18 @@ import UIKit
 import SparkChamber
 
 
-public class SparkViewController : UIViewController {
-	override public func viewDidAppear(animated: Bool) {
+open class SparkViewController : UIViewController {
+	override open func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		SparkDetector.trackDisplayViews([self.view] + self.view.subviews)
+		let views: Array = self.view.subviews + [self.view]
+		let _ = SparkDetector.trackDisplay(views: views as NSArray)
 	}
 	
-	override public func viewDidDisappear(animated: Bool) {
+	override open func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
-		SparkDetector.trackEndDisplayingViews([self.view] + self.view.subviews)
+		let views: Array = self.view.subviews + [self.view]
+		let _ = SparkDetector.trackEndDisplaying(views: views as NSArray)
 	}
 }

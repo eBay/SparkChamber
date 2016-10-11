@@ -23,10 +23,10 @@ import UIKit
 import SparkChamber
 
 
-public class SparkButton : UIButton {
-	override public func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		SparkDetector.trackEndedTouches(touches)
+open class SparkButton : UIButton {
+	override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+		let _ = SparkDetector.trackEnded(touches: touches as NSSet?)
 		
-		super.touchesEnded(touches, withEvent: event)
+		super.touchesEnded(touches, with: event)
 	}
 }

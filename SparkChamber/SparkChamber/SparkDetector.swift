@@ -37,7 +37,7 @@ The basic implementation of this class provides shared functionality. Extensions
 	- parameter events: An Array of SparkEvents to send
 	- returns: A boolean flag if any incoming event successfully sends
 	*/
-	class func send(events: [SparkEvent]) -> Bool {
+	class func send(_ events: [SparkEvent]) -> Bool {
 		var result = false
 
 		for event in events {

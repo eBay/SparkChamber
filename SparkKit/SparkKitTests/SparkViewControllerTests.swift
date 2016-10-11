@@ -29,8 +29,8 @@ class SparkViewControllerTests: XCTestCase {
 		let view = UIView()
 		viewController.view.addSubview(view)
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A SparkViewController's appear action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: "view displayed") {
+		let expectation: XCTestExpectation = self.expectation(description: "A SparkViewController's appear action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "view displayed") {
 			_ in
 			expectation.fulfill()
 		}
@@ -38,7 +38,7 @@ class SparkViewControllerTests: XCTestCase {
 		
 		viewController.viewDidAppear(false)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkViewControllerViewDidDisppear() {
@@ -46,8 +46,8 @@ class SparkViewControllerTests: XCTestCase {
 		let view = UIView()
 		viewController.view.addSubview(view)
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A SparkViewController's disappear action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear, trace: "view disappeared") {
+		let expectation: XCTestExpectation = self.expectation(description: "A SparkViewController's disappear action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: "view disappeared") {
 			_ in
 			expectation.fulfill()
 		}
@@ -55,6 +55,6 @@ class SparkViewControllerTests: XCTestCase {
 		
 		viewController.viewDidDisappear(false)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 }

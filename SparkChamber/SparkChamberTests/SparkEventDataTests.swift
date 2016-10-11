@@ -36,7 +36,7 @@ class SparkEventDataTests: XCTestCase {
 	}
 	
 	func testSparkEvents() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
 		object.sparkEvents = [sparkEvent]
 		
 		let events = object.sparkEvents
@@ -50,7 +50,7 @@ class SparkEventDataTests: XCTestCase {
 		objc_setAssociatedObject(object, &fooKey, foo, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
 		
 		// Second, set the spark events for the object
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
 		object.sparkEvents = [sparkEvent]
 		
 		let events = object.sparkEvents
@@ -62,7 +62,7 @@ class SparkEventDataTests: XCTestCase {
 	
 	func testNilSparkEvents() {
 		// First, set the spark events for the object
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
 		object.sparkEvents = [sparkEvent]
 		
 		// Then, nil it out
@@ -79,7 +79,7 @@ class SparkEventDataTests: XCTestCase {
 		objc_setAssociatedObject(object, &fooKey, foo, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
 
 		// Second, set the spark events for the object
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidAppear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
 		object.sparkEvents = [sparkEvent]
 		
 		// Then, nil out the spark events

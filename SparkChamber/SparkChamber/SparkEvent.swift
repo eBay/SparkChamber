@@ -35,25 +35,25 @@ An event's trigger type.
 
 */
 @objc public enum SparkTriggerType: Int {
-	case None
-	case DidAppear
-	case DidDisappear
-	case DidEndTouch
-	case TargetAction
-	case DidBeginScroll
-	case DidSelect
-	case DidDeselect
+	case none
+	case didAppear
+	case didDisappear
+	case didEndTouch
+	case targetAction
+	case didBeginScroll
+	case didSelect
+	case didDeselect
 	
 	public var description: String {
 		switch self {
-		case .None: return "None"
-		case .DidAppear: return "DidAppear"
-		case .DidDisappear: return "DidDisappear"
-		case .DidEndTouch: return "DidEndTouch"
-		case .DidBeginScroll: return "DidBeginScroll"
-		case .TargetAction: return "TargetAction"
-		case .DidSelect: return "DidSelect"
-		case .DidDeselect: return "DidDeselect"
+		case .none: return "none"
+		case .didAppear: return "didAppear"
+		case .didDisappear: return "didDisappear"
+		case .didEndTouch: return "didEndTouch"
+		case .didBeginScroll: return "didBeginScroll"
+		case .targetAction: return "targetAction"
+		case .didSelect: return "didSelect"
+		case .didDeselect: return "didDeselect"
 		}
 	}
 }
@@ -63,7 +63,7 @@ An event's action closure/block type definition.
 
 - returns: A NSDate-based timestamp when the action was executed
 */
-public typealias SparkEventActionBlock = @convention(block) (timestamp: NSDate) -> Void
+public typealias SparkEventActionBlock = @convention(block) (_ timestamp: Date) -> Void
 
 
 // MARK: - Classes
@@ -71,13 +71,13 @@ public typealias SparkEventActionBlock = @convention(block) (timestamp: NSDate) 
 /**
 A Spark Event model object, composed of a trigger (enum), action (closure), trace (string), and identifier (string).
 */
-@objc public class SparkEvent: NSObject, NSCopying {
+@objc open class SparkEvent: NSObject, NSCopying {
 	// MARK: - Public
 	
 	/**
 	The event's trigger, represented as a SparkTriggerType.
 	*/
-	final public var trigger: SparkTriggerType = SparkTriggerType.None
+	final public var trigger: SparkTriggerType = SparkTriggerType.none
 	
 	/**
 	A completion closure/block that will execute when the event's trigger condition has been met.
@@ -90,9 +90,10 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	final public var trace: String?
 	
 	/**
-	The event's identifier, assignable for identification purposes.
+	The event's identifier, assignable for identification purposes. 
+	Returns a unique identifier string if none has been assigned.
 	*/
-	final public var identifier: String?
+	final public var identifier: String? = UUID().uuidString
 	
 	// Designated initializer
 	
@@ -142,13 +143,13 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	
 	// CustomStringConvertible protocol
 	
-	override public var description: String {
+	override open var description: String {
 		return("\(super.description)\n   trigger = \(trigger.description)\n   trace = \(trace ?? "nil")\n   identifier = \(identifier ?? "nil")\n   action = \(action)")
 	}
 	
 	// NSCopying protocol
 	
-	public func copyWithZone(zone: NSZone) -> AnyObject {
+	open func copy(with zone: NSZone?) -> Any {
 		let event = SparkEvent(trigger: trigger, trace: trace, identifier: identifier, action: action)
 
 		return event
@@ -156,7 +157,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	
 	// Equivalence
 	
-	override public func isEqual(object: AnyObject?) -> Bool {
+	override open func isEqual(_ object: Any?) -> Bool {
 		if let rhs = object as? SparkEvent {
 			guard trigger == rhs.trigger else {
 				return false
@@ -178,7 +179,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 				return false
 			}
 			
-			return unsafeBitCast(lhsAction as SparkEventActionBlock, AnyObject.self) === unsafeBitCast(rhsAction as SparkEventActionBlock, AnyObject.self)
+			return unsafeBitCast(lhsAction as SparkEventActionBlock, to: AnyObject.self) === unsafeBitCast(rhsAction as SparkEventActionBlock, to: AnyObject.self)
 		}
 		
 		return false
@@ -192,7 +193,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	- returns: A boolean flag indicating successful execution of the function
 	*/
 	final func send() -> Bool {
-		action?(timestamp: NSDate())
+		action?(Date())
 		
 		if trace != nil {
 			SparkTrace.print("Traced event:", self.description)

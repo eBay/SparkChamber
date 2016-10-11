@@ -23,7 +23,7 @@ import SparkKit
 
 
 class UITouchMock : UITouch {
-	var _phase: UITouchPhase = UITouchPhase.Ended
+	var _phase: UITouchPhase = UITouchPhase.ended
 	var _view: UIView = UIView()
 	
 	override var phase: UITouchPhase {
@@ -48,13 +48,13 @@ class UITouchMock : UITouch {
 }
 
 class PointInsideViewMock: UIView {
-	override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 		return true
 	}
 }
 
 class TouchInsideSparkButtonMock: SparkButton {
-	override var touchInside: Bool {
+	override var isTouchInside: Bool {
 		get {
 			return true
 		}
@@ -62,13 +62,13 @@ class TouchInsideSparkButtonMock: SparkButton {
 }
 
 class PointInsideSparkCollectionViewCellMock: SparkCollectionViewCell {
-	override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 		return true
 	}
 }
 
 class PointInsideSparkTableViewCellMock: SparkTableViewCell {
-	override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+	override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 		return true
 	}
 }

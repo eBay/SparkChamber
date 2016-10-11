@@ -55,7 +55,7 @@ extension NSObject: SparkEventData {
 	
 	// MARK: - Private
 	
-	private struct SparkKeys {
+	fileprivate struct SparkKeys {
 		static var sparkEventsKey = "sparkEvents"
 	}
 }

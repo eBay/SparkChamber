@@ -27,8 +27,8 @@ class SparkCollectionViewCellTests: XCTestCase {
 	func testSparkCollectionViewCellTouchesEnded() {
 		let cell = PointInsideSparkCollectionViewCellMock()
 		
-		let expectation: XCTestExpectation = expectationWithDescription("A SparkCollectionViewCell's touch event action failed to execute.")
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch, trace: "collection view cell touched") {
+		let expectation: XCTestExpectation = self.expectation(description: "A SparkCollectionViewCell's touch event action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "collection view cell touched") {
 			_ in
 			expectation.fulfill()
 		}
@@ -38,8 +38,8 @@ class SparkCollectionViewCellTests: XCTestCase {
 		touch.view = cell
 		let fakeTouches: Set<UITouch> = [touch]
 		
-		cell.touchesEnded(fakeTouches, withEvent:nil)
+		cell.touchesEnded(fakeTouches, with:nil)
 		
-		waitForExpectationsWithTimeout(3.0, handler: nil)
+		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 }

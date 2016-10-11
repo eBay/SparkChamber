@@ -40,7 +40,7 @@ Spark Chamber is built as a trigger-action event tracking system. Its purpose is
 
 ### Adding Events
 #### Spark Events
-At the heart of the system is a Spark Event, composed of a `trigger` and an `action`. Events can be set to trigger under the following conditions: `DidAppear`, `DidDisappear`, `DidEndTouch`, `DidBeginScroll`, `TargetAction`, `DidSelect`, and `DidDeselect`.
+At the heart of the system is a Spark Event, composed of a `trigger` and an `action`. Events can be set to trigger under the following conditions: `didAppear`, `didDisappear`, `didEndTouch`, `didBeginScroll`, `targetAction`, `didSelect`, and `didDeselect`.
 
 Spark Events can optionally include a `trace` (String) for debugging purposes, and a `identifier` (String) to allow for identification and correlation.
 
@@ -55,21 +55,21 @@ Events are triggered using the `trigger` property, a `SparkTriggerType` enum whi
 
 | enum Value | Object Class | Description |
 | ------------- | ------------- | ------------- |
-| `None` | `NSObject` | The event has no trigger |
-| `DidAppear` | `UIView` | Triggered when the UI element receives a 'didAppear' or 'willDisplay' message, as appropriate |
-| `DidDisappear` | `UIView` | Triggered when the UI element receives a 'didDisappear' or 'didEndDisplaying' message, as appropriate |
-| `DidEndTouch` | `UIView` | Triggered when attached to a responder that has received a touch event with phase 'Ended' |
-| `DidBeginScroll` | `UIScrollView` | Triggered when attached to a scroll view after scrolling has begun |
-| `TargetAction` | `UIView` | Triggered when attached to a responder that has an event action tied to the Detector |
-| `DidSelect` | `UIControl` | Triggered when attached to a control that has been selected |
-| `DidDeselect` | `UIControl` | Triggered when attached to a control that has been deselected |
+| `none` | `NSObject` | The event has no trigger |
+| `didAppear` | `UIView` | Triggered when the UI element receives a 'didAppear' or 'willDisplay' message, as appropriate |
+| `didDisappear` | `UIView` | Triggered when the UI element receives a 'didDisappear' or 'didEndDisplaying' message, as appropriate |
+| `didEndTouch` | `UIView` | Triggered when attached to a responder that has received a touch event with phase 'Ended' |
+| `didBeginScroll` | `UIScrollView` | Triggered when attached to a scroll view after scrolling has begun |
+| `targetAction` | `UIView` | Triggered when attached to a responder that has an event action tied to the Detector |
+| `didSelect` | `UIControl` | Triggered when attached to a control that has been selected |
+| `didDeselect` | `UIControl` | Triggered when attached to a control that has been deselected |
 
 ### Event Examples
 #### Attaching a single event
 ```swift
 // Swift
-let event = SparkEvent(trigger: SparkTriggerType.DidAppear) {
-	timestamp in
+let event = SparkEvent(trigger: SparkTriggerType.didAppear) {
+	_ in
 	// Your code to send data to a tracking/analytics solution goes here.
 }
 
@@ -89,13 +89,13 @@ view.sparkEvents = @[event];
 #### Attaching multiple events
 ```swift
 // Swift
-let appearEvent = SparkEvent(trigger: SparkTriggerType.DidAppear) {
-	timestamp in
+let appearEvent = SparkEvent(trigger: SparkTriggerType.didAppear) {
+	_ in
 	// Your code to send data to a tracking/analytics solution for the view event goes here.
 }
 		
-let touchEvent = SparkEvent(trigger: SparkTriggerType.DidEndTouch) {
-	timestamp in
+let touchEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
+	_ in
 	// Your code to send data to a tracking/analytics solution for the touch event goes here.
 }
 
@@ -122,9 +122,9 @@ view.sparkEvents = @[appearEvent, touchEvent];
 If your event's UI element has a long object lifecycle, then the following code will construct an event that only triggers once:
 ```swift
 // Swift
-let event = SparkEvent(trigger: SparkTriggerType.DidAppear) {
+let event = SparkEvent(trigger: SparkTriggerType.didAppear) {
 	_ in
-	event.trigger = SparkTriggerType.None
+	event.trigger = SparkTriggerType.none
 }
 
 view.sparkEvents = [event]
@@ -146,16 +146,16 @@ If your event's UI element has a short object lifecycle (collection & table view
 Creating a pair of events that track a UI element's time on screen is achieved by utilizing the `Appear` and `Disappear` triggers in tandem:
 ```swift
 // Swift
-var startTime: NSDate
+var startTime: Date = Date()
 		
-let appearEvent = SparkEvent(trigger: SparkTriggerType.DidAppear) {
+let appearEvent = SparkEvent(trigger: SparkTriggerType.didAppear) {
 	timestamp in
 	startTime = timestamp
 }
 		
-let disappearEvent = SparkEvent(trigger: SparkTriggerType.DidDisappear) {
+let disappearEvent = SparkEvent(trigger: SparkTriggerType.didDisappear) {
 	timestamp in
-	print("Time on screen:", timestamp.timeIntervalSinceDate(startTime))
+	print("Time on screen:", timestamp.timeIntervalSince(startTime))
 }
 
 view.sparkEvents = [appearEvent, disappearEvent]
@@ -189,7 +189,7 @@ While Spark Events define the trigger-action-trace events for the system, the Sp
 Appearance events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackDisplayViews(views: NSArray?) -> Bool
+class func trackDisplay(views: NSArray?) -> Bool
 ```
 ```obj-c
 // Objective-C
@@ -202,7 +202,7 @@ This method accepts an optional NSArray of UIViews and returns a boolean value o
 Disappearance events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackEndDisplayingViews(views: NSArray?) -> Bool
+class func trackEndDisplaying(views: NSArray?) -> Bool
 ```
 ```obj-c
 // Objective-C
@@ -215,44 +215,44 @@ This method accepts an optional NSArray of UIViews and returns a boolean value o
 Disappearance events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackEndedTouches(touches: NSSet?) -> Bool
+class func trackEnded(touches: NSSet?) -> Bool
 ```
 ```obj-c
 // Objective-C
 + (BOOL)trackEndedTouches: (NSSet*) touches
 ```
 
-This method accepts an optional NSSet and returns a boolean value of true if any of the touches in the set  triggers a `DidEndTouch` event.
+This method accepts an optional NSSet and returns a boolean value of true if any of the touches in the set  triggers a `didEndTouch` event.
 
-A `DidEndTouch` event will be triggered if supplied`UITouch` objects with a phase of `UITouchPhase.Ended` are attached to a view with the `userInteractionEnabled` property set to true when the touch registers either as a `touchInside` a `UIControl`, or as a `pointInside` a `UIView`.
+A `didEndTouch` event will be triggered if supplied`UITouch` objects with a phase of `UITouchPhase.Ended` are attached to a view with the `userInteractionEnabled` property set to true when the touch registers either as a `touchInside` a `UIControl`, or as a `pointInside` a `UIView`.
 
 #### Scrolling events
 Scrolling events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackBeganScrollingView(view: UIScrollView?) -> Bool 
+class func trackBeganScrolling(scrollView: UIScrollView?) -> Bool 
 ```
 ```obj-c
 // Objective-C
-+ (BOOL)trackBeganScrollingView: (UIScrollView*) view
++ (BOOL)trackBeganScrollingScrollView: (UIScrollView*) view
 ```
 
-This method accepts an optional UIScrollView and returns a boolean value of true if the supplied scroll view triggers a `DidBeginScroll` event.
+This method accepts an optional UIScrollView and returns a boolean value of true if the supplied scroll view triggers a `didBeginScroll` event.
 
-A `DidBeginScroll` event will be triggered if the supplied UIScrollView's `tracking` property is true when this method is called.
+A `didBeginScroll` event will be triggered if the supplied UIScrollView's `tracking` property is true when this method is called.
 
 #### Target Action events
 Target Action events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackTargetAction(view: UIView?) -> Bool 
+class func trackTargetAction(for view: UIView?) -> Bool 
 ```
 ```obj-c
 // Objective-C
-+ (BOOL)trackTargetAction: (UIView*) view
++ (BOOL)trackTargetActionForView: (UIView*) view
 ```
 
-This method accepts an optional UIView and returns a boolean value of true if the supplied view triggers a `TargetAction` event through the Detector.
+This method accepts an optional UIView and returns a boolean value of true if the supplied view triggers a `targetAction` event through the Detector.
 
 Target Action events are especially useful to tie in to a control's target-action mechanism.
 
@@ -260,8 +260,8 @@ Target Action events are especially useful to tie in to a control's target-actio
 Selection events come in two flavors, select and deselect. They are triggered by calling Spark Detector's class methods: 
 ```swift
 // Swift
-class func trackDidSelectControl(control: UIControl?) -> Bool 
-class func trackDidDeselectControl(control: UIControl?) -> Bool 
+class func trackDidSelect(control: UIControl?) -> Bool 
+class func trackDidDeselect(control: UIControl?) -> Bool 
 ```
 ```obj-c
 // Objective-C
@@ -269,7 +269,7 @@ class func trackDidDeselectControl(control: UIControl?) -> Bool
 + (BOOL)trackDidDeselectControl: (UIControl*) control
 ```
 
-This method accepts an optional UIControl and returns a boolean value of true if the supplied control triggers an appropriate `DidSelect` or `DidDeselect` event.
+This method accepts an optional UIControl and returns a boolean value of true if the supplied control triggers an appropriate `didSelect` or `didDeselect` event.
 
 Selection events are especially useful when the `selected` state of a UIControl needs to be measured.
 
@@ -287,10 +287,10 @@ Spark Kit ties Spark Chamber's mechanisms to Apple's UIKit and allows UI to auto
 #### Classes available
 | Class Name | Root Class Name | Spark Event Support | Spark Detector Integration |
 | ------------- | ------------- | ------------- | ------------- |
-| `SparkButton` | `UIButton`  | `DidEndTouch` | `trackEndedTouches()` |
-| `SparkCollectionViewCell` | `UICollectionViewCell`  | `DidEndTouch`, `DidAppear`, `DidDisappear` | `trackEndedTouches()`, `trackDisplayViews()`, `trackEndDisplayingViews()` |
-| `SparkTableViewCell` | `UITableViewCell`  | `DidEndTouch`, `DidAppear`, `DidDisappear` | `trackEndedTouches()`, `trackDisplayViews()`, `trackEndDisplayingViews()` |
-| `SparkViewController` | `UIViewController`  | `DidAppear`, `DidDisappear` | `trackDisplayViews()`, `trackEndDisplayingViews()` |
+| `SparkButton` | `UIButton`  | `didEndTouch` | `trackEnded(touches:)` |
+| `SparkCollectionViewCell` | `UICollectionViewCell`  | `didEndTouch`, `didAppear`, `didDisappear` | `trackEnded(touches:)`, `trackDisplay(views:)`, `trackEndDisplaying(views:)` |
+| `SparkTableViewCell` | `UITableViewCell`  | `didEndTouch`, `didAppear`, `didDisappear` | `trackEnded(touches:)`, `trackDisplay(views:)`, `trackEndDisplaying(views:)` |
+| `SparkViewController` | `UIViewController`  | `didAppear`, `didDisappear` | `trackDisplay(views:)`, `trackEndDisplaying(views:)` |
 
 #### Enabling UIApplication-level touch tracking support
 If desired, UIApplication-level touch support can be enabled in SparkKit for processing of most touches app-wide. Some responders don't forward touch events, so this support can be unpredictable at times.

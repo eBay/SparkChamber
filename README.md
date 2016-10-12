@@ -189,11 +189,11 @@ While Spark Events define the trigger-action-trace events for the system, the Sp
 Appearance events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackDisplay(views: NSArray?) -> Bool
+class func trackDisplay(forViews views: NSArray?) -> Bool
 ```
 ```obj-c
 // Objective-C
-+ (BOOL)trackDisplayViews: (NSArray<__kindof UIView *>*) views
++ (BOOL)trackDisplayForViews: (NSArray<__kindof UIView *>*) views
 ```
 
 This method accepts an optional NSArray of UIViews and returns a boolean value of true if any supplied view triggers an `Appear` event.
@@ -202,11 +202,11 @@ This method accepts an optional NSArray of UIViews and returns a boolean value o
 Disappearance events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackEndDisplaying(views: NSArray?) -> Bool
+class func trackEndDisplaying(forViews views: NSArray?) -> Bool
 ```
 ```obj-c
 // Objective-C
-+ (BOOL)trackEndDisplayingViews: (NSArray<__kindof UIView *>*) views
++ (BOOL)trackEndDisplayingForViews: (NSArray<__kindof UIView *>*) views
 ```
 
 This method accepts an optional NSArray of UIViews and returns a boolean value of true if any supplied view triggers a `Disappear` event.
@@ -215,11 +215,11 @@ This method accepts an optional NSArray of UIViews and returns a boolean value o
 Disappearance events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackEnded(touches: NSSet?) -> Bool
+class func trackEnded(withTouches touches: NSSet?) -> Bool
 ```
 ```obj-c
 // Objective-C
-+ (BOOL)trackEndedTouches: (NSSet*) touches
++ (BOOL)trackEndedWithTouches: (NSSet*) touches
 ```
 
 This method accepts an optional NSSet and returns a boolean value of true if any of the touches in the set  triggers a `didEndTouch` event.
@@ -230,11 +230,11 @@ A `didEndTouch` event will be triggered if supplied`UITouch` objects with a phas
 Scrolling events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackBeganScrolling(scrollView: UIScrollView?) -> Bool 
+class func trackBeganScrolling(forScrollView scrollView: UIScrollView?) -> Bool 
 ```
 ```obj-c
 // Objective-C
-+ (BOOL)trackBeganScrollingScrollView: (UIScrollView*) view
++ (BOOL)trackBeganScrollingForScrollView: (UIScrollView*) view
 ```
 
 This method accepts an optional UIScrollView and returns a boolean value of true if the supplied scroll view triggers a `didBeginScroll` event.
@@ -245,7 +245,7 @@ A `didBeginScroll` event will be triggered if the supplied UIScrollView's `track
 Target Action events are triggered by calling Spark Detector's class method: 
 ```swift
 // Swift
-class func trackTargetAction(for view: UIView?) -> Bool 
+class func trackTargetAction(forView view: UIView?) -> Bool 
 ```
 ```obj-c
 // Objective-C
@@ -260,13 +260,13 @@ Target Action events are especially useful to tie in to a control's target-actio
 Selection events come in two flavors, select and deselect. They are triggered by calling Spark Detector's class methods: 
 ```swift
 // Swift
-class func trackDidSelect(control: UIControl?) -> Bool 
-class func trackDidDeselect(control: UIControl?) -> Bool 
+class func trackDidSelect(forControl control: UIControl?) -> Bool 
+class func trackDidDeselect(forControl control: UIControl?) -> Bool 
 ```
 ```obj-c
 // Objective-C
-+ (BOOL)trackDidSelectControl: (UIControl*) control
-+ (BOOL)trackDidDeselectControl: (UIControl*) control
++ (BOOL)trackDidSelectForControl: (UIControl*) control
++ (BOOL)trackDidDeselectForControl: (UIControl*) control
 ```
 
 This method accepts an optional UIControl and returns a boolean value of true if the supplied control triggers an appropriate `didSelect` or `didDeselect` event.

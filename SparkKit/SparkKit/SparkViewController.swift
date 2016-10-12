@@ -28,13 +28,13 @@ open class SparkViewController : UIViewController {
 		super.viewDidAppear(animated)
 		
 		let views: Array = self.view.subviews + [self.view]
-		let _ = SparkDetector.trackDisplay(views: views as NSArray)
+		let _ = SparkDetector.trackDisplay(forViews: views as NSArray)
 	}
 	
 	override open func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
 		let views: Array = self.view.subviews + [self.view]
-		let _ = SparkDetector.trackEndDisplaying(views: views as NSArray)
+		let _ = SparkDetector.trackEndDisplaying(forViews: views as NSArray)
 	}
 }

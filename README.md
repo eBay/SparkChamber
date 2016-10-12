@@ -196,7 +196,7 @@ class func trackDisplay(forViews views: NSArray?) -> Bool
 + (BOOL)trackDisplayForViews: (NSArray<__kindof UIView *>*) views
 ```
 
-This method accepts an optional NSArray of UIViews and returns a boolean value of true if any supplied view triggers an `Appear` event.
+This method accepts an optional NSArray of UIViews and returns a boolean value of true if any supplied view triggers a `didAppear` event.
 
 #### Disappearance events
 Disappearance events are triggered by calling Spark Detector's class method: 
@@ -209,7 +209,7 @@ class func trackEndDisplaying(forViews views: NSArray?) -> Bool
 + (BOOL)trackEndDisplayingForViews: (NSArray<__kindof UIView *>*) views
 ```
 
-This method accepts an optional NSArray of UIViews and returns a boolean value of true if any supplied view triggers a `Disappear` event.
+This method accepts an optional NSArray of UIViews and returns a boolean value of true if any supplied view triggers a `didDisappear` event.
 
 #### Touch events
 Disappearance events are triggered by calling Spark Detector's class method: 
@@ -287,10 +287,10 @@ Spark Kit ties Spark Chamber's mechanisms to Apple's UIKit and allows UI to auto
 #### Classes available
 | Class Name | Root Class Name | Spark Event Support | Spark Detector Integration |
 | ------------- | ------------- | ------------- | ------------- |
-| `SparkButton` | `UIButton`  | `didEndTouch` | `trackEnded(touches:)` |
-| `SparkCollectionViewCell` | `UICollectionViewCell`  | `didEndTouch`, `didAppear`, `didDisappear` | `trackEnded(touches:)`, `trackDisplay(views:)`, `trackEndDisplaying(views:)` |
-| `SparkTableViewCell` | `UITableViewCell`  | `didEndTouch`, `didAppear`, `didDisappear` | `trackEnded(touches:)`, `trackDisplay(views:)`, `trackEndDisplaying(views:)` |
-| `SparkViewController` | `UIViewController`  | `didAppear`, `didDisappear` | `trackDisplay(views:)`, `trackEndDisplaying(views:)` |
+| `SparkButton` | `UIButton`  | `didEndTouch` | `trackEnded(withTouches:)` |
+| `SparkCollectionViewCell` | `UICollectionViewCell`  | `didEndTouch`, `didAppear`, `didDisappear` | `trackEnded(withTouches:)`, `trackDisplay(forViews:)`, `trackEndDisplaying(forViews:)` |
+| `SparkTableViewCell` | `UITableViewCell`  | `didEndTouch`, `didAppear`, `didDisappear` | `trackEnded(withTouches:)`, `trackDisplay(forViews:)`, `trackEndDisplaying(forViews:)` |
+| `SparkViewController` | `UIViewController`  | `didAppear`, `didDisappear` | `trackDisplay(forViews:)`, `trackEndDisplaying(forViews:)` |
 
 #### Enabling UIApplication-level touch tracking support
 If desired, UIApplication-level touch support can be enabled in SparkKit for processing of most touches app-wide. Some responders don't forward touch events, so this support can be unpredictable at times.

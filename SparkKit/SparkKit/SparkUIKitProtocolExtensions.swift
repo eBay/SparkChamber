@@ -47,29 +47,29 @@ extension SparkViewController: UITableViewDelegate {
 	// Will display: cells, header and footer views
 	
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackDisplay(views: [cell])
+		let _ = SparkDetector.trackDisplay(forViews: [cell])
 	}
 	
 	public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-		let _ = SparkDetector.trackDisplay(views: [view])
+		let _ = SparkDetector.trackDisplay(forViews: [view])
 	}
 	
 	public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-		let _ = SparkDetector.trackDisplay(views: [view])
+		let _ = SparkDetector.trackDisplay(forViews: [view])
 	}
 
 	// Did end displaying: cells, header and footer views
 	
 	public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackEndDisplaying(views: [cell])
+		let _ = SparkDetector.trackEndDisplaying(forViews: [cell])
 	}
 	
 	public func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-		let _ = SparkDetector.trackEndDisplaying(views: [view])
+		let _ = SparkDetector.trackEndDisplaying(forViews: [view])
 	}
 	
 	public func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-		let _ = SparkDetector.trackEndDisplaying(views: [view])
+		let _ = SparkDetector.trackEndDisplaying(forViews: [view])
 	}
 }
 
@@ -77,20 +77,20 @@ extension SparkViewController: UICollectionViewDelegate {
 	// Will display: cells and supplementary views
 
 	public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackDisplay(views: [cell])
+		let _ = SparkDetector.trackDisplay(forViews: [cell])
 	}
 	
 	public func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-		let _ = SparkDetector.trackDisplay(views: [view])
+		let _ = SparkDetector.trackDisplay(forViews: [view])
 	}
 	
 	// Did end displaying: cells and supplementary views
 
 	public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackEndDisplaying(views: [cell])
+		let _ = SparkDetector.trackEndDisplaying(forViews: [cell])
 	}
 	
 	public func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, atIndexPath indexPath: IndexPath) {
-		let _ = SparkDetector.trackEndDisplaying(views: [view])
+		let _ = SparkDetector.trackEndDisplaying(forViews: [view])
 	}
 }

@@ -239,7 +239,6 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		}
 		supplementaryView.sparkEvents = [sparkEvent]
 		
-		
 		viewController.collectionView(collectionView, willDisplaySupplementaryView: supplementaryView, forElementKind: "foo", at: IndexPath(row: 1, section: 0))
 		
 		waitForExpectations(timeout: 3.0, handler: nil)

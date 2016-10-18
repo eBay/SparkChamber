@@ -22,6 +22,36 @@ import XCTest
 import SparkChamber
 @testable import SparkKit
 
+var tableViewCell = SparkTableViewCell()
+var collectionViewCell = SparkCollectionViewCell()
+
+// MARK: Mocked view controllers
+
+class SparkTableViewController: SparkViewController, UITableViewDelegate, UITableViewDataSource {
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 1
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		return tableViewCell
+	}
+}
+
+class SparkCollectionViewController: SparkViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return 1
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		return collectionViewCell
+	}
+}
+
+// MARK: Tests
 
 class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	func testSparkKitUIApplicationTouchesEnded() {
@@ -50,7 +80,7 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	}
 	
 	func testSparkKitTableViewWillDisplayCell() {
-		let viewController = SparkViewController()
+		let viewController = SparkTableViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
@@ -65,13 +95,13 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		}
 		cell.sparkEvents = [sparkEvent]
 		
-		viewController.tableView(tableView, willDisplay: cell, forRowAt: IndexPath(row: 1, section: 0))
+		viewController.tableView(tableView, willDisplay: cell, forRowAt: IndexPath(row: 0, section: 0))
 		
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitTableViewDidEndDisplayingCell() {
-		let viewController = SparkViewController()
+		let viewController = SparkTableViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
@@ -86,13 +116,13 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		}
 		cell.sparkEvents = [sparkEvent]
 		
-		viewController.tableView(tableView, didEndDisplaying: cell, forRowAt: IndexPath(row: 1, section: 0))
+		viewController.tableView(tableView, didEndDisplaying: cell, forRowAt: IndexPath(row: 0, section: 0))
 		
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitTableViewWillDisplayHeaderView() {
-		let viewController = SparkViewController()
+		let viewController = SparkTableViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
@@ -113,7 +143,7 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	}
 	
 	func testSparkKitTableViewDidEndDisplayingHeaderView() {
-		let viewController = SparkViewController()
+		let viewController = SparkTableViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
@@ -134,7 +164,7 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	}
 	
 	func testSparkKitTableViewWillDisplayFooterView() {
-		let viewController = SparkViewController()
+		let viewController = SparkTableViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
@@ -155,7 +185,7 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	}
 	
 	func testSparkKitTableViewDidEndDisplayingFooterView() {
-		let viewController = SparkViewController()
+		let viewController = SparkTableViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let tableView = UITableView()
@@ -175,8 +205,31 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
+	func testSparkKitTableViewCellTargetAction() {
+		let viewController = SparkTableViewController()
+		UIApplication.shared.keyWindow?.rootViewController = viewController
+		
+		let tableView = UITableView()
+		tableView.delegate = viewController
+		tableView.dataSource = viewController
+		viewController.view = tableView
+		
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.targetAction, trace: nil) {
+			_ in
+			expectation.fulfill()
+		}
+		tableViewCell.sparkEvents = [sparkEvent]
+		
+		tableView.reloadData()
+		
+		viewController.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+		
+		waitForExpectations(timeout: 3.0, handler: nil)
+	}
+	
 	func testSparkKitCollectionViewWillDisplayCell() {
-		let viewController = SparkViewController()
+		let viewController = SparkCollectionViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let layout = UICollectionViewFlowLayout()
@@ -193,13 +246,13 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		}
 		cell.sparkEvents = [sparkEvent]
 		
-		viewController.collectionView(collectionView, willDisplay: cell, forItemAt: IndexPath(row: 1, section: 0))
+		viewController.collectionView(collectionView, willDisplay: cell, forItemAt: IndexPath(row: 0, section: 0))
 		
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitCollectionViewDidEndDisplayingCell() {
-		let viewController = SparkViewController()
+		let viewController = SparkCollectionViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let layout = UICollectionViewFlowLayout()
@@ -216,13 +269,13 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		}
 		cell.sparkEvents = [sparkEvent]
 		
-		viewController.collectionView(collectionView, didEndDisplaying: cell, forItemAt: IndexPath(row: 1, section: 0))
+		viewController.collectionView(collectionView, didEndDisplaying: cell, forItemAt: IndexPath(row: 0, section: 0))
 		
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitCollectionViewWillDisplaySupplementaryView() {
-		let viewController = SparkViewController()
+		let viewController = SparkCollectionViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let layout = UICollectionViewFlowLayout()
@@ -239,13 +292,13 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		}
 		supplementaryView.sparkEvents = [sparkEvent]
 		
-		viewController.collectionView(collectionView, willDisplaySupplementaryView: supplementaryView, forElementKind: "foo", at: IndexPath(row: 1, section: 0))
+		viewController.collectionView(collectionView, willDisplaySupplementaryView: supplementaryView, forElementKind: "foo", at: IndexPath(row: 0, section: 0))
 		
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 	
 	func testSparkKitCollectionViewDidEndDisplayingSupplementaryView() {
-		let viewController = SparkViewController()
+		let viewController = SparkCollectionViewController()
 		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
 		let layout = UICollectionViewFlowLayout()
@@ -262,8 +315,38 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		}
 		supplementaryView.sparkEvents = [sparkEvent]
 		
-		viewController.collectionView(collectionView, didEndDisplayingSupplementaryView: supplementaryView, forElementKind: "foo", atIndexPath: IndexPath(row: 1, section: 0))
+		viewController.collectionView(collectionView, didEndDisplayingSupplementaryView: supplementaryView, forElementOfKind: "foo", at: IndexPath(row: 0, section: 0))
 		
 		waitForExpectations(timeout: 3.0, handler: nil)
+	}
+	
+	func testSparkKitCollectionViewCellTargetAction() {
+		let viewController = SparkCollectionViewController()
+		UIApplication.shared.keyWindow?.rootViewController = viewController
+		
+		let layout = UICollectionViewFlowLayout()
+		layout.itemSize = CGSize(width: 10, height: 10)
+		let collectionView = UICollectionView(frame: CGRect(x: 0.0, y: 0.0, width: 400.0, height: 400.0), collectionViewLayout: layout)
+		collectionView.contentSize = CGSize(width: 200.0, height: 200.0)
+		collectionView.delegate = viewController
+		collectionView.dataSource = viewController
+		viewController.view = collectionView
+		
+		/*
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.targetAction, trace: nil) {
+			_ in
+			expectation.fulfill()
+		}
+		collectionViewCell.sparkEvents = [sparkEvent]
+		*/
+		
+		collectionView.reloadData()
+		
+		viewController.collectionView(collectionView, didSelectItemAt: IndexPath(row: 0, section: 0))
+		
+		/*
+		waitForExpectations(timeout: 3.0, handler: nil)
+		*/
 	}
 }

@@ -25,7 +25,7 @@ import SparkChamber
 var tableViewCell = SparkTableViewCell()
 var collectionViewCell = SparkCollectionViewCell()
 
-// MARK: Mocked view controllers
+// MARK: Mocked view controllers and views
 
 class SparkTableViewController: SparkViewController, UITableViewDelegate, UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -41,12 +41,10 @@ class SparkTableViewController: SparkViewController, UITableViewDelegate, UITabl
 	}
 }
 
-class SparkCollectionViewController: SparkViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 1
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+class SparkCollectionViewController: SparkViewController, UICollectionViewDelegate { }
+
+class SparkCollectionView: UICollectionView {
+	override func cellForItem(at indexPath: IndexPath) -> UICollectionViewCell? {
 		return collectionViewCell
 	}
 }
@@ -230,11 +228,8 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	
 	func testSparkKitCollectionViewWillDisplayCell() {
 		let viewController = SparkCollectionViewController()
-		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
-		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSize(width: 100, height: 100)
-		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 		collectionView.delegate = viewController
 		viewController.view = collectionView
 		let cell = UICollectionViewCell()
@@ -253,11 +248,8 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	
 	func testSparkKitCollectionViewDidEndDisplayingCell() {
 		let viewController = SparkCollectionViewController()
-		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
-		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSize(width: 100, height: 100)
-		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 		collectionView.delegate = viewController
 		viewController.view = collectionView
 		let cell = UICollectionViewCell()
@@ -276,11 +268,8 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	
 	func testSparkKitCollectionViewWillDisplaySupplementaryView() {
 		let viewController = SparkCollectionViewController()
-		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
-		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSize(width: 100, height: 100)
-		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 		collectionView.delegate = viewController
 		viewController.view = collectionView
 		let supplementaryView = UICollectionReusableView()
@@ -299,11 +288,8 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	
 	func testSparkKitCollectionViewDidEndDisplayingSupplementaryView() {
 		let viewController = SparkCollectionViewController()
-		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
-		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSize(width: 100, height: 100)
-		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+		let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 		collectionView.delegate = viewController
 		viewController.view = collectionView
 		let supplementaryView = UICollectionReusableView()
@@ -322,31 +308,20 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 	
 	func testSparkKitCollectionViewCellTargetAction() {
 		let viewController = SparkCollectionViewController()
-		UIApplication.shared.keyWindow?.rootViewController = viewController
 		
-		let layout = UICollectionViewFlowLayout()
-		layout.itemSize = CGSize(width: 10, height: 10)
-		let collectionView = UICollectionView(frame: CGRect(x: 0.0, y: 0.0, width: 400.0, height: 400.0), collectionViewLayout: layout)
-		collectionView.contentSize = CGSize(width: 200.0, height: 200.0)
+		let collectionView = SparkCollectionView(frame: CGRect(x: 0.0, y: 0.0, width: 200.0, height: 400.0), collectionViewLayout: UICollectionViewFlowLayout())
 		collectionView.delegate = viewController
-		collectionView.dataSource = viewController
 		viewController.view = collectionView
 		
-		/*
 		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
 		let sparkEvent = SparkEvent(trigger: SparkTriggerType.targetAction, trace: nil) {
 			_ in
 			expectation.fulfill()
 		}
 		collectionViewCell.sparkEvents = [sparkEvent]
-		*/
-		
-		collectionView.reloadData()
 		
 		viewController.collectionView(collectionView, didSelectItemAt: IndexPath(row: 0, section: 0))
 		
-		/*
 		waitForExpectations(timeout: 3.0, handler: nil)
-		*/
 	}
 }

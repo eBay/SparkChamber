@@ -7,4 +7,7 @@
    <FileRef
       location = "group:SparkKit/SparkKit.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:SparkKit/../SparkPlayground/SparkPlayground.playground">
+   </FileRef>
 </Workspace>

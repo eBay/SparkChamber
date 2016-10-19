@@ -1,7 +1,6 @@
 //: # Spark Playground
 //:
 //: Here is a playground that demonstrates Spark Events in action using table and collection views. Be sure to have the Assistant Editor visible to show the view, and make sure the console is visible to see the logging of the various events.
-
 import SparkChamber
 import SparkKit
 

@@ -122,7 +122,8 @@ view.sparkEvents = @[appearEvent, touchEvent];
 If your event's UI element has a long object lifecycle, then the following code will construct an event that only triggers once:
 ```swift
 // Swift
-let event = SparkEvent(trigger: SparkTriggerType.didAppear) {
+let event = SparkEvent(trigger: SparkTriggerType.didAppear, action: nil)
+event.action = {
 	_ in
 	event.trigger = SparkTriggerType.none
 }
@@ -140,7 +141,7 @@ __block SparkEvent* event = [[SparkEvent alloc] initWithTrigger: SparkTriggerTyp
 view.sparkEvents = @[event];
 ```
 
-If your event's UI element has a short object lifecycle (collection & table view cells, for instance) then in the action block you'd instead want to invalidate the event, possibly by utilizing a lookup table or a long-lived model object. This could then be referenced to prevent the re-creation of the event when the appropriate UI element is being re-constructed.
+If your event's UI element has a short object lifecycle (collection & table view cells, for instance) then in the action block you'd instead want to invalidate the event's data, possibly by utilizing a lookup table or a long-lived model object. This could then be referenced to prevent the re-creation of the event when the appropriate UI element is being reconstructed.
 
 #### Tracking on-screen viewing time
 Creating a pair of events that track a UI element's time on screen is achieved by utilizing the `Appear` and `Disappear` triggers in tandem:
@@ -183,7 +184,7 @@ view.sparkEvents = @[appearEvent, disappearEvent];
 #### Spark Detector
 While Spark Events define the trigger-action-trace events for the system, the Spark Detector is the engine that acts as a discriminator and executor for appropriate event actions. The Spark detector is either invoked from your app's UIKit subclasses to process events, or through the [SparkKit](#sparkkit) framework.
 
-**Note:** When using subclasses of UI components from SparkKit - the appearance, disappearance, and touch method calls will automatically be invoked by the superclass or protocol extension provided in SparkKit. You're not required to manually implement the code in the following three sections unless your UI component requires unique support.
+**Note:** When using subclasses of UI components from SparkKit - the appearance, disappearance, touch, and target action methods will automatically be invoked by the superclass or protocol extension provided in SparkKit _(scrolling and selection event support available soon)_. You're not required to manually implement the code in the following sections unless your UI component requires unique support.
 
 #### Appearance events
 Appearance events are triggered by calling Spark Detector's class method: 

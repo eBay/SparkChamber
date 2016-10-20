@@ -77,7 +77,7 @@ public class MainScene {
 }
 
 open class TableViewController: SparkViewController, UITableViewDelegate, UITableViewDataSource {
-	public let tableViewData = ["Apple", "Banana", "Peach", "Grape", "Strawberry", "Watermelon", "Lemon", "Lime", "Orange", "Pineapple", "Mango", "Kiwi", "Apricot"]
+	public let tableViewData = ["Apple", "Apricot", "Banana", "Blackberry", "Blueberry", "Clementine", "Fig", "Grape", "Grapefruit", "Kiwi", "Lemon", "Lime", "Mango", "Marionberry", "Orange", "Papaya", "Peach", "Pear", "Pineapple", "Plum", "Pomegranate", "Raspberry", "Strawberry", "Tangerine", "Tomato", "Watermelon"]
 	public var tableView: UITableView?
 	
 	override open func viewDidLoad() {

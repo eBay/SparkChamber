@@ -4,6 +4,7 @@
 
 Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, designed to be used for automating analytics, tracking, and/or logging.
 
+* [Quick Start](#quick-start "For the interested, and the impatient")
 * [Introduction](#introduction "What is Spark Chamber, and what is it useful for?")
 * [Installation](#installation "How to install and setup the SparkChamber framework in your project")
 * [Adding Events](#adding-events)
@@ -27,6 +28,17 @@ Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, de
 	* [SparkKit Installation and Use](#sparkkit-installation-and-use "How to install and setup the SparkKit framework in your project")
 	* [Classes available](#classes-available "What SparkKit classes are available, and what triggers do they support?")
 	* [Enabling UIApplication-level touch tracking support](#enabling-uiapplication-level-touch-tracking-support "How to enable UIApplication-level touch tracking support")
+
+### Quick Start
+If you'd like to see Spark Chamber in action without delay, please follow these steps:
+
+0. Install [Xcode 8](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) on your system
+1. Download and unzip the [current release of the project](https://github.com/eBay/SparkChamber/releases)
+2. Open the package SparkWorkspace.xcworkspace in Xcode
+3. Build the SparkChamber and SparkKit targets in Xcode
+4. Open Xcode's Assistant Editor and the Debug Area
+5. Select the Spark Playground in Xcode's Project Navigator
+6. Manipulate the Playground's simulation and observe events' output in the debug area
 
 ### Introduction
 Spark Chamber is built as a trigger-action event tracking system. Its purpose is to allow the attachment of event objects to various UI elements and then execute the event's `action` (code) asynchronously when the event's trigger condition is met. The optional value `trace` (String) allows debugging, and the optional value `identifier` (String) allows identification and correlation.

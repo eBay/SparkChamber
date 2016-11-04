@@ -52,35 +52,35 @@ extension SparkTableViewDelegate {
 	// Will display: cells, header and footer views
 	
 	@objc(tableView:willDisplayCell:forRowAtIndexPath:) open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackDisplay(forViews: [cell])
+		SparkDetector.trackDisplay(forViews: [cell])
 	}
 	
 	@objc(tableView:willDisplayHeaderView:forSection:) open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-		let _ = SparkDetector.trackDisplay(forViews: [view])
+		SparkDetector.trackDisplay(forViews: [view])
 	}
 	
 	@objc(tableView:willDisplayFooterView:forSection:) open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-		let _ = SparkDetector.trackDisplay(forViews: [view])
+		SparkDetector.trackDisplay(forViews: [view])
 	}
 
 	// Did end displaying: cells, header and footer views
 	
 	@objc(tableView:didEndDisplayingCell:forRowAtIndexPath:) open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackEndDisplaying(forViews: [cell])
+		SparkDetector.trackEndDisplaying(forViews: [cell])
 	}
 	
 	@objc(tableView:didEndDisplayingHeaderView:forSection:) open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-		let _ = SparkDetector.trackEndDisplaying(forViews: [view])
+		SparkDetector.trackEndDisplaying(forViews: [view])
 	}
 	
 	@objc(tableView:didEndDisplayingFooterView:forSection:) open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-		let _ = SparkDetector.trackEndDisplaying(forViews: [view])
+		SparkDetector.trackEndDisplaying(forViews: [view])
 	}
 	
 	// Did select: cells
 	
 	@objc(tableView:didSelectRowAtIndexPath:) open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackTargetAction(forView: tableView.cellForRow(at: indexPath))
+		SparkDetector.trackTargetAction(forView: tableView.cellForRow(at: indexPath))
 	}
 }
 
@@ -91,26 +91,26 @@ extension SparkCollectionViewDelegate {
 	// Will display: cells and supplementary views
 
 	@objc(collectionView:willDisplayCell:forItemAtIndexPath:) open func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackDisplay(forViews: [cell])
+		SparkDetector.trackDisplay(forViews: [cell])
 	}
 	
 	@objc(collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:) open func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-		let _ = SparkDetector.trackDisplay(forViews: [view])
+		SparkDetector.trackDisplay(forViews: [view])
 	}
 	
 	// Did end displaying: cells and supplementary views
 
 	@objc(collectionView:didEndDisplayingCell:forItemAtIndexPath:) open func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackEndDisplaying(forViews: [cell])
+		SparkDetector.trackEndDisplaying(forViews: [cell])
 	}
 	
 	@objc(collectionView:didEndDisplayingSupplementaryView:forElementOfKind:atIndexPath:) open func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-		let _ = SparkDetector.trackEndDisplaying(forViews: [view])
+		SparkDetector.trackEndDisplaying(forViews: [view])
 	}
 	
 	// Did select: cells
 	
 	@objc(collectionView:didSelectItemAtIndexPath:) open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let _ = SparkDetector.trackTargetAction(forView: collectionView.cellForItem(at: indexPath))
+		SparkDetector.trackTargetAction(forView: collectionView.cellForItem(at: indexPath))
 	}
 }

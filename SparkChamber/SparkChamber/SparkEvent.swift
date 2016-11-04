@@ -192,7 +192,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	
 	- returns: A boolean flag indicating successful execution of the function
 	*/
-	final func send() -> Bool {
+	@discardableResult final func send() -> Bool {
 		action?(Date())
 		
 		if trace != nil {

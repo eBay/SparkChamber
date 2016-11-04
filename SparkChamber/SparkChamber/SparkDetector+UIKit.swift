@@ -38,7 +38,7 @@ extension SparkDetector {
 	- parameter views: An Array of UIViews to process
 	- returns: A boolean flag indicating if any supplied views successfully triggered an DidAppear event
 	*/
-	public class func trackDisplay(forViews views: NSArray?) -> Bool {
+	@discardableResult public class func trackDisplay(forViews views: NSArray?) -> Bool {
 		return track(views: views, trigger: SparkTriggerType.didAppear)
 	}
 	
@@ -48,7 +48,7 @@ extension SparkDetector {
 	- parameter views: An Array of UIViews to process
 	- returns: A boolean flag indicating if any supplied views successfully triggered a DidDisappear event
 	*/
-	public class func trackEndDisplaying(forViews views: NSArray?) -> Bool {
+	@discardableResult public class func trackEndDisplaying(forViews views: NSArray?) -> Bool {
 		return track(views: views, trigger: SparkTriggerType.didDisappear)
 	}
 	
@@ -58,7 +58,7 @@ extension SparkDetector {
 	- parameter views: A UIScrollView to process
 	- returns: A boolean flag indicating if the supplied view successfully triggered a DidBeginScroll event
 	*/
-	public class func trackBeganScrolling(forScrollView scrollView: UIScrollView?) -> Bool {
+	@discardableResult public class func trackBeganScrolling(forScrollView scrollView: UIScrollView?) -> Bool {
 		return track(scrollView: scrollView, trigger: SparkTriggerType.didBeginScroll)
 	}
 	
@@ -68,7 +68,7 @@ extension SparkDetector {
 	- parameter touches: An NSSet of UITouch objects to process
 	- returns: A boolean flag indicating if any supplied touches successfully triggered a DidEndTouch event
 	*/
-	public class func trackEnded(withTouches touches: NSSet?) -> Bool {
+	@discardableResult public class func trackEnded(withTouches touches: NSSet?) -> Bool {
 		return track(touches: touches, phase: UITouchPhase.ended)
 	}
 	
@@ -78,7 +78,7 @@ extension SparkDetector {
 	- parameter view: A UIView to process
 	- returns: A boolean flag indicating if the supplied view successfully triggered a TargetAction event
 	*/
-	public class func trackTargetAction(forView view: UIView?) -> Bool {
+	@discardableResult public class func trackTargetAction(forView view: UIView?) -> Bool {
 		return track(view: view, trigger: SparkTriggerType.targetAction)
 	}
 	
@@ -88,7 +88,7 @@ extension SparkDetector {
 	- parameter view: A UIControl to process
 	- returns: A boolean flag indicating if the supplied control successfully triggered a DidSelect event
 	*/
-	public class func trackDidSelect(forControl control: UIControl?) -> Bool {
+	@discardableResult public class func trackDidSelect(forControl control: UIControl?) -> Bool {
 		return track(view: control, trigger: SparkTriggerType.didSelect)
 	}
 	
@@ -98,7 +98,7 @@ extension SparkDetector {
 	- parameter view: A UIControl to process
 	- returns: A boolean flag indicating if the supplied control successfully triggered a DidDeselect event
 	*/
-	public class func trackDidDeselect(forControl control: UIControl?) -> Bool {
+	@discardableResult public class func trackDidDeselect(forControl control: UIControl?) -> Bool {
 		return track(view: control, trigger: SparkTriggerType.didDeselect)
 	}
 	

@@ -214,7 +214,7 @@ class SparkEventTests: XCTestCase {
 			expectation.fulfill()
 		}
 		
-		let _ = sparkEvent.send()
+		sparkEvent.send()
 		
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}
@@ -231,7 +231,7 @@ class SparkEventTests: XCTestCase {
 		SparkTrace.sharedInstance.delegate = SparkTraceDelegateMock()
 		
 		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", action: nil)
-		let _ = sparkEvent.send()
+		sparkEvent.send()
 		
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}

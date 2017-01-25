@@ -144,7 +144,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	// CustomStringConvertible protocol
 	
 	override open var description: String {
-		return("\(super.description)\n   trigger = \(trigger.description)\n   trace = \(trace ?? "nil")\n   identifier = \(identifier ?? "nil")\n   action = \(action)")
+		return("\(super.description)\n   trigger = \(trigger.description)\n   trace = \(trace ?? "nil")\n   identifier = \(identifier ?? "nil")\n   action = \(String(describing: action))")
 	}
 	
 	// NSCopying protocol

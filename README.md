@@ -137,6 +137,8 @@ If your event's UI element has a long object lifecycle, then the following code 
 let event = SparkEvent(trigger: SparkTriggerType.didAppear, action: nil)
 event.action = {
 	_ in
+	// Your code to send data to a tracking/analytics solution for the touch event goes here.
+	
 	event.trigger = SparkTriggerType.none
 }
 
@@ -145,9 +147,14 @@ view.sparkEvents = [event]
 ```obj-c
 // Objective-C
 __block SparkEvent* event = [[SparkEvent alloc] initWithTrigger: SparkTriggerTypeDidAppear
-														 action: ^(NSDate* _Nonnull timestamp)
+														 action: nil];
+
+__weak SparkEvent* weakEvent = event;														 
+event.action = ^(NSDate* _Nonnull timestamp)
 {
-	event.trigger = SparkTriggerTypeNone;
+	// Your code to send data to a tracking/analytics solution for the touch event goes here.
+	
+	weakEvent.trigger = SparkTriggerTypeNone;
 };
 
 view.sparkEvents = @[event];

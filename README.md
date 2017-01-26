@@ -108,7 +108,7 @@ let appearEvent = SparkEvent(trigger: SparkTriggerType.didAppear) {
 		
 let touchEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
 	_ in
-	// Your code to send data to a tracking/analytics solution for the touch event goes here.
+	// Your code to send data to a tracking/analytics solution for the appear event goes here.
 }
 
 view.sparkEvents = [appearEvent, touchEvent]
@@ -124,7 +124,7 @@ SparkEvent* appearEvent = [[SparkEvent alloc] initWithTrigger: SparkTriggerTypeD
 SparkEvent* touchEvent = [[SparkEvent alloc] initWithTrigger: SparkTriggerTypeDidEndTouch
 													  action: ^(NSDate* _Nonnull timestamp)
 {
-	// Your code to send data to a tracking/analytics solution for the touch event goes here.
+	// Your code to send data to a tracking/analytics solution for the appear event goes here.
 };
 
 view.sparkEvents = @[appearEvent, touchEvent];

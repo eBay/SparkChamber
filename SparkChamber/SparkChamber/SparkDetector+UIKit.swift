@@ -141,7 +141,7 @@ extension SparkDetector {
 	}
 	
 	fileprivate class func track(scrollView: UIScrollView?, trigger: SparkTriggerType) -> Bool {
-		guard let scrollView = scrollView as UIScrollView? , scrollView.isTracking else {
+		guard let scrollView = scrollView as UIScrollView?, scrollView.isTracking else {
 			return false
 		}
 		

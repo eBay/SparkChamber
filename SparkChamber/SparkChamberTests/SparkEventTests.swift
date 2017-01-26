@@ -163,7 +163,7 @@ class SparkEventTests: XCTestCase {
 		}
 		
 		let description = sparkEvent.description
-		let expectedDescription = "trigger = \(sparkEvent.trigger.description)\n   trace = \(sparkEvent.trace ?? "nil")\n   identifier = \(sparkEvent.identifier ?? "nil")\n   action = \(sparkEvent.action)"
+		let expectedDescription = "trigger = \(sparkEvent.trigger.description)\n   trace = \(sparkEvent.trace ?? "nil")\n   identifier = \(sparkEvent.identifier ?? "nil")\n   action = \(String(describing: sparkEvent.action))"
 		
 		XCTAssert(description.contains(expectedDescription), "A Spark Event didn't return its description correctly.")
 	}
@@ -175,7 +175,7 @@ class SparkEventTests: XCTestCase {
 		}
 
 		let description = sparkEvent.description
-		let expectedDescription = "trigger = \(sparkEvent.trigger.description)\n   trace = \(sparkEvent.trace ?? "nil")\n   identifier = \(sparkEvent.identifier ?? "nil")\n   action = \(sparkEvent.action)"
+		let expectedDescription = "trigger = \(sparkEvent.trigger.description)\n   trace = \(sparkEvent.trace ?? "nil")\n   identifier = \(sparkEvent.identifier ?? "nil")\n   action = \(String(describing: sparkEvent.action))"
 		
 		XCTAssert(description.contains(expectedDescription), "A Spark Event didn't return its description correctly.")
 	}

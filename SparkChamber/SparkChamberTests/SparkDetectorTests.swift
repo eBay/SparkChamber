@@ -37,7 +37,7 @@ class SparkDetectorTests: XCTestCase {
 	}
 	
 	func testSparkDetectorSendEvents() {
-		let event: SparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
+		let event: SparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, action: nil)
 		
 		let result = SparkDetector.send([event])
 		XCTAssertTrue(result, "A Spark Event failed to be tracked.")

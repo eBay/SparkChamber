@@ -87,7 +87,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	func testSparkDetectorUIControlOutOfBoundTouchesReceived() {
 		let button = UIButton()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
@@ -104,7 +104,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	func testSparkDetectorUIControlTouchesReceived() {
 		let button = TouchInsideButtonMock()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, action: nil)
 		button.sparkEvents = [sparkEvent]
 		
 		let touch = UITouchMock()
@@ -120,7 +120,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let cell = UITableViewCell()
 		tableView.addSubview(cell)
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, action: nil)
 		cell.sparkEvents = [sparkEvent]
 		
 		let touch = UITouchMock()
@@ -138,7 +138,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		touch.view = PointInsideViewMock()
 		touch.view.isUserInteractionEnabled = true
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, action: nil)
 		touch.view.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackEnded(withTouches: fakeTouches)
@@ -152,7 +152,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		touch.view.isUserInteractionEnabled = true
 		touch.view.bounds = CGRect.zero
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
@@ -181,7 +181,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		touch.view = PointInsideViewMock()
 		touch.view.isUserInteractionEnabled = false
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
@@ -199,7 +199,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		touch.view.isUserInteractionEnabled = true
 		touch.phase = UITouchPhase.began
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
@@ -223,7 +223,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	func testSparkDetectorUIKitTrackTargetActionForView() {
 		let view = UIView()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.targetAction, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.targetAction, action: nil)
 		view.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackTargetAction(forView: view)
@@ -254,7 +254,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	func testSparkDetectorUIKitTrackDisplayForViews() {
 		let view = UIView()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, action: nil)
 		view.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackDisplay(forViews: [view])
@@ -278,7 +278,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	
 	func testSparkDetectorUIKitTrackDisplayForView() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didAppear, action: nil)
 		view.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackDisplay(forViews: [view])
@@ -303,7 +303,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	
 	func testSparkDetectorUIKitTrackDisplayForViewIgnored() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
@@ -315,7 +315,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	
 	func testSparkDetectorUIKitTrackEndDisplayingViews() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, action: nil)
 		view.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackEndDisplaying(forViews: [view])
@@ -339,7 +339,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	
 	func testSparkDetectorUIKitTrackEndDisplayingView() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDisappear, action: nil)
 		view.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackEndDisplaying(forViews: [view])
@@ -356,7 +356,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	
 	func testSparkDetectorUIKitTrackEndDisplayingViewIgnored() {
 		let view = UIView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
@@ -369,7 +369,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	func testSparkDetectorUIKitTrackBeganScrollingView() {
 		let view = UIScrollViewTrackingMock()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll, action: nil)
 		view.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackBeganScrolling(forScrollView: view)
@@ -399,7 +399,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	
 	func testSparkDetectorUIKitTrackBeganScrollingViewIgnored() {
 		let view = UIScrollView()
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll, trace: "foo") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll) {
 			_ in
 			XCTFail("A Spark Event's action block was triggered when it shouldn't have been.")
 		}
@@ -412,7 +412,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	func testSparkDetectorUIKitTrackDidSelectControl() {
 		let control = UIControl()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didSelect, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didSelect, action: nil)
 		control.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackDidSelect(forControl: control)
@@ -443,7 +443,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 	func testSparkDetectorUIKitTrackDidDeselectControl() {
 		let control = UIControl()
 		
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDeselect, trace: "foo", action: nil)
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didDeselect, action: nil)
 		control.sparkEvents = [sparkEvent]
 		
 		let result = SparkDetector.trackDidDeselect(forControl: control)

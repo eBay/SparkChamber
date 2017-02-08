@@ -26,12 +26,14 @@ import Foundation
 /**
 An event's trigger type.
 
-- None: The event has no trigger
-- DidAppear: The event's action will trigger if attached to a view that has appeared
-- DidDisappear: The event's action will trigger if attached to a view that has disappeared
-- DidEndTouch: The event's action will trigger if attached to a responder that has received a touch event with phase 'Ended'
-- DidBeginScroll: The event's action will trigger if attached to a scroll view after scrolling has begun
-- TargetAction: The event's action will trigger if attached to a responder that has an event action tied to the Detector
+- none: The event has no trigger
+- didAppear: The event's action will trigger if attached to a view that has appeared
+- didDisappear: The event's action will trigger if attached to a view that has disappeared
+- didEndTouch: The event's action will trigger if attached to a responder that has received a touch event with phase 'Ended'
+- targetAction: The event's action will trigger if attached to a responder that has an event action tied to the Detector
+- didBeginScroll: The event's action will trigger if attached to a scroll view after scrolling has begun
+- didSelect: The event's action will trigger if attached to a UIControl after it has been selected
+- didDeselect: The event's action will trigger if attached to a UIControl after it has been deselected
 
 */
 @objc public enum SparkTriggerType: Int {
@@ -93,7 +95,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	The event's identifier, assignable for identification purposes. 
 	Returns a unique identifier string if none has been assigned.
 	*/
-	final public var identifier: String? = UUID().uuidString
+	final public var identifier: UUID? = UUID()
 	
 	// Designated initializer
 	
@@ -102,15 +104,13 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	
 	- parameter trigger: The event's trigger, supplied as a SparkTriggerType
 	- parameter trace: An optional String that will print to the console after the event's action has executed
-	- parameter identifier: An optional String that may be assigned to allow the event to be uniquely identified
 	- parameter action: An optional completion closure/block that will execute when the event's trigger conditions have been met
 	
 	- returns: An initialized object, or nil if an object could not be created
 	*/
-	public init(trigger: SparkTriggerType, trace: String?, identifier: String?, action: SparkEventActionBlock?) {
+	public init(trigger: SparkTriggerType, trace: String?, action: SparkEventActionBlock?) {
 		self.trigger = trigger
 		self.trace = trace
-		self.identifier = identifier
 		self.action = action
 		
 		super.init()
@@ -121,12 +121,15 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	
 	- parameter trigger: The event's trigger, supplied as a SparkTriggerType
 	- parameter trace: An optional String that will print to the console after the event's action has executed
+	- parameter identifier: An optional UUID that may be assigned to allow the event to be uniquely identified
 	- parameter action: An optional completion closure/block that will execute when the event's trigger conditions have been met
 	
 	- returns: An initialized object, or nil if an object could not be created
 	*/
-	public convenience init(trigger: SparkTriggerType, trace: String?, action: SparkEventActionBlock?) {
-		self.init(trigger: trigger, trace: trace, identifier: nil, action: action)
+	public convenience init(trigger: SparkTriggerType, trace: String?, identifier: UUID?, action: SparkEventActionBlock?) {
+		self.init(trigger: trigger, trace: trace, action: action)
+		
+		self.identifier = identifier;
 	}
 	
 	/**
@@ -138,13 +141,13 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	- returns: An initialized object, or nil if an object could not be created
 	*/
 	public convenience init(trigger: SparkTriggerType, action: SparkEventActionBlock?) {
-		self.init(trigger: trigger, trace: nil, identifier: nil, action: action)
+		self.init(trigger: trigger, trace: nil, action: action)
 	}
 	
 	// CustomStringConvertible protocol
 	
 	override open var description: String {
-		return("\(super.description)\n   trigger = \(trigger.description)\n   trace = \(trace ?? "nil")\n   identifier = \(identifier ?? "nil")\n   action = \(String(describing: action))")
+		return("\(super.description)\n   trigger = \(trigger.description)\n   trace = \(trace ?? "nil")\n   identifier = \(identifier?.uuidString ?? "nil")\n   action = \(String(describing: action))")
 	}
 	
 	// NSCopying protocol
@@ -163,11 +166,11 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 				return false
 			}
 			
-			guard trace == rhs.trace else {
+			guard identifier == rhs.identifier else {
 				return false
 			}
 			
-			guard identifier == rhs.identifier else {
+			guard trace == rhs.trace else {
 				return false
 			}
 			

@@ -33,41 +33,95 @@ class SparkEventTests: XCTestCase {
 		super.tearDown()
 	}
 	
-	func testSparkEventConvenienceInitWithTriggerAndAction() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, action: nil)
-		
-		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned when using the convenience initializer.")
-	}
-	
-	func testSparkEventConvenienceInitWithTriggerActionAndTrace() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: nil, action: nil)
-		
-		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned when using the convenience initializer.")
-	}
-	
-	func testSparkEventInitWithoutTrace() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: nil, action: nil)
-		
-		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned after having been set without a trace.")
-	}
-	
-	func testSparkEventInitWithoutClosure() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: nil, action: nil)
-		
-		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned after having been set without a closure.")
-	}
-	
-	func testSparkEventInitWithParams() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar") {
+	func testSparkEventDefaultInit() {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo") {
 			_ in
 			print("success") // This is only here to make sure a non-empty action closure is present for the event.
 		}
 		
-		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned after having been set with parameters.")
+		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned after having been set using the default initializer.")
+		XCTAssertNotNil(sparkEvent.trigger, "A Spark Event's trigger wasn't returned after having been set using the default initializer.")
+		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using the default initializer.")
+		XCTAssertNotNil(sparkEvent.trace, "A Spark Event's trace wasn't returned after having been set using the default initializer.")
+		XCTAssert(sparkEvent.trace == "foo", "A Spark Event's trace didn't match what was set using the default initializer.")
+		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using the default initializer.")
+		XCTAssertNotNil(sparkEvent.action, "A Spark Event's action wasn't returned after having been set using the default initializer.")
+	}
+	
+	func testSparkEventConvenienceInitWithTriggerTraceIdentifierAndAction() {
+		let identifier = UUID()
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: identifier) {
+			_ in
+			print("success") // This is only here to make sure a non-empty action closure is present for the event.
+		}
+		
+		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned when using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.trigger, "A Spark Event's trigger wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.trace, "A Spark Event's trace wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.trace == "foo", "A Spark Event's trace didn't match what was set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's identifier wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.identifier == identifier, "A Spark Event's identifier didn't match what was set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.action, "A Spark Event's action wasn't returned after having been set using a convenience initializer.")
+	}
+	
+	func testSparkEventConvenienceInitWithTriggerAndAction() {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none) {
+			_ in
+			print("success") // This is only here to make sure a non-empty action closure is present for the event.
+		}
+
+		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned when using the convenience initializer.")
+		XCTAssertNotNil(sparkEvent.trigger, "A Spark Event's trigger wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using a convenience initializer.")
+		XCTAssertNil(sparkEvent.trace, "A Spark Event's trace didn't return nil after having been set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using  a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.action, "A Spark Event's action wasn't returned after having been set using a convenience initializer.")
+	}
+	
+	func testSparkEventInitWithNilTrace() {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: nil) {
+			_ in
+			print("success") // This is only here to make sure a non-empty action closure is present for the event.
+		}
+		
+		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned after having been set without a trace.")
+		XCTAssertNotNil(sparkEvent.trigger, "A Spark Event's trigger wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using a convenience initializer.")
+		XCTAssertNil(sparkEvent.trace, "A Spark Event's trace didn't return nil after having been set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using  a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.action, "A Spark Event's action wasn't returned after having been set using a convenience initializer.")
+	}
+	
+	func testSparkEventInitWithNilIdentifier() {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: nil) {
+			_ in
+			print("success") // This is only here to make sure a non-empty action closure is present for the event.
+		}
+		
+		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned after having been set without a trace.")
+		XCTAssertNotNil(sparkEvent.trigger, "A Spark Event's trigger wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.trace, "A Spark Event's trace wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.trace == "foo", "A Spark Event's trace didn't match what was set using a convenience initializer.")
+		XCTAssertNil(sparkEvent.identifier, "A Spark Event's identifier didn't return nil after having been set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.action, "A Spark Event's action wasn't returned after having been set using a convenience initializer.")
+	}
+	
+	func testSparkEventInitWithNilAction() {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", action: nil)
+		
+		XCTAssertNotNil(sparkEvent, "A Spark Event wasn't returned after having been set without a closure.")
+		XCTAssertNotNil(sparkEvent.trigger, "A Spark Event's trigger wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.trace, "A Spark Event's trace wasn't returned after having been set using a convenience initializer.")
+		XCTAssert(sparkEvent.trace == "foo", "A Spark Event's trace didn't match what was set using a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using  a convenience initializer.")
+		XCTAssertNil(sparkEvent.action, "A Spark Event's action didn't return nil after having been set using a convenience initializer.")
 	}
 	
 	func testSparkEventCopyWithZone() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo") {
 			_ in
 			print("success") // This is only here to make sure a non-empty action closure is present for the event.
 		}
@@ -82,27 +136,30 @@ class SparkEventTests: XCTestCase {
 			print("success") // This is only here to make sure a non-empty action closure is present for the event.
 		}
 
-		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: sparkAction)
-		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: sparkAction)
+		let identifier = UUID()
+		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: identifier, action: sparkAction)
+		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: identifier, action: sparkAction)
 		
 		XCTAssert(sparkEventOne == sparkEventTwo, "Two Spark Events with the same data didn't prove equivalent using ==, and should have.")
 		XCTAssert(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with the same data didn't prove equivalent using isEqual(), and should have.")
 	}
 	
 	func testSparkEventTriggerIsNotEqual() {
-		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", identifier: "bar", action: nil)
-		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: nil)
+		let identifier = UUID()
+		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.didAppear, trace: "foo", identifier: identifier, action: nil)
+		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none,  trace: "foo", identifier: identifier, action: nil)
 		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
 		XCTAssertFalse(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with dissimilar data didn't fail equivalence using isEqual(), and should have.")
 	}
 	
 	func testSparkEventRightActionIsNil() {
-		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar")  {
+		let identifier = UUID()
+		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier) {
 			_ in
 			print("success") // This is only here to make sure a non-empty action closure is present for the event.
 		}
-		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: nil)
+		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier, action: nil)
 
 		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
@@ -110,8 +167,9 @@ class SparkEventTests: XCTestCase {
 	}
 	
 	func testSparkEventLeftActionIsNil() {
-		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: nil)
-		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar") {
+		let identifier = UUID()
+		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier, action: nil)
+		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier) {
 			_ in
 			print("success") // This is only here to make sure a non-empty action closure is present for the event.
 		}
@@ -121,31 +179,42 @@ class SparkEventTests: XCTestCase {
 	}
 	
 	func testSparkEventBothActionsAreNil() {
-		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: nil)
-		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: nil)
+		let identifier = UUID()
+		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier, action: nil)
+		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier, action: nil)
 		
 		XCTAssert(sparkEventOne == sparkEventTwo, "Two Spark Events with the same data didn't prove equivalent using ==, and should have.")
 		XCTAssert(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with the same data didn't prove equivalent using isEqual(), and should have.")
 	}
 	
 	func testSparkEventTraceIsNotEqual() {
-		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: nil)
-		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "oof", identifier: "bar", action: nil)
+		let identifier = UUID()
+		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: identifier, action: nil)
+		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "oof", identifier: identifier, action: nil)
 		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
 		XCTAssertFalse(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with dissimilar data didn't fail equivalence using isEqual(), and should have.")
 	}
 	
+	func testSparkEventIdentifierIsEqual() {
+		let identifier = UUID()
+		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier, action: nil)
+		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier, action: nil)
+		
+		XCTAssert(sparkEventOne == sparkEventTwo, "Two Spark Events with the same data didn't prove equivalent using ==, and should have.")
+		XCTAssert(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with the same data didn't prove equivalent using isEqual(), and should have.")
+	}
+	
 	func testSparkEventIdentifierIsNotEqual() {
-		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "rab", action: nil)
-		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar", action: nil)
+		let sparkEventOne = SparkEvent(trigger: SparkTriggerType.none, action: nil)
+		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, action: nil)
 		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
 		XCTAssertFalse(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with dissimilar data didn't fail equivalence using isEqual(), and should have.")
 	}
 	
 	func testSparkEventIsNotEqualToObject() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo") {
 			_ in
 			print("success") // This is only here to make sure a non-empty action closure is present for the event.
 		}
@@ -157,13 +226,13 @@ class SparkEventTests: XCTestCase {
 	}
 	
 	func testSparkEventDescription() {
-		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo", identifier: "bar") {
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.none, trace: "foo") {
 			_ in
 			print("success") // This is only here to make sure a non-empty action closure is present for the event.
 		}
 		
 		let description = sparkEvent.description
-		let expectedDescription = "trigger = \(sparkEvent.trigger.description)\n   trace = \(sparkEvent.trace ?? "nil")\n   identifier = \(sparkEvent.identifier ?? "nil")\n   action = \(String(describing: sparkEvent.action))"
+		let expectedDescription = "trigger = \(sparkEvent.trigger.description)\n   trace = \(sparkEvent.trace ?? "nil")\n   identifier = \(sparkEvent.identifier?.uuidString ?? "nil")\n   action = \(String(describing: sparkEvent.action))"
 		
 		XCTAssert(description.contains(expectedDescription), "A Spark Event didn't return its description correctly.")
 	}
@@ -175,7 +244,7 @@ class SparkEventTests: XCTestCase {
 		}
 
 		let description = sparkEvent.description
-		let expectedDescription = "trigger = \(sparkEvent.trigger.description)\n   trace = \(sparkEvent.trace ?? "nil")\n   identifier = \(sparkEvent.identifier ?? "nil")\n   action = \(String(describing: sparkEvent.action))"
+		let expectedDescription = "trigger = \(sparkEvent.trigger.description)\n   trace = \(sparkEvent.trace ?? "nil")\n   identifier = \(sparkEvent.identifier?.uuidString ?? "nil")\n   action = \(String(describing: sparkEvent.action))"
 		
 		XCTAssert(description.contains(expectedDescription), "A Spark Event didn't return its description correctly.")
 	}

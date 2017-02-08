@@ -194,7 +194,7 @@ private extension UIView {
 			return nil
 		}
 		
-		guard let result = events() , !result.isEmpty else {
+		guard let result = events(), !result.isEmpty else {
 			return nil
 		}
 		

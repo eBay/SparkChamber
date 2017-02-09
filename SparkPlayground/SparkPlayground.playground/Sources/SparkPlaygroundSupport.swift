@@ -96,7 +96,7 @@ public class MainScene {
 	}
 }
 
-open class TableViewController: SparkViewController, UITableViewDelegate, UITableViewDataSource {
+open class TableViewController: SparkViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 	public let tableViewData = ["Apple", "Apricot", "Banana", "Blackberry", "Blueberry", "Clementine", "Fig", "Grape", "Grapefruit", "Kiwi", "Lemon", "Lime", "Mango", "Marionberry", "Orange", "Papaya", "Peach", "Pear", "Pineapple", "Plum", "Pomegranate", "Raspberry", "Strawberry", "Tangerine", "Tomato", "Watermelon"]
 	public var tableView: UITableView?
 	
@@ -159,7 +159,7 @@ public class SparkCollectionViewCellWithTextLabel: SparkCollectionViewCell {
 	}
 }
 
-open class CollectionViewController: SparkViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+open class CollectionViewController: SparkViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
 	public var collectionView: UICollectionView!
 	
 	override open func viewDidLoad() {

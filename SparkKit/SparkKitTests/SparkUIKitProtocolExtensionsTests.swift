@@ -49,6 +49,14 @@ class SparkCollectionView: UICollectionView {
 	}
 }
 
+class SparkScrollViewController: SparkViewController, UIScrollViewDelegate { }
+
+class SparkScrollView: UIScrollView {
+	override var isTracking: Bool {
+		get { return true }
+	}
+}
+
 // MARK: Tests
 
 class SparkUIKitProtocolExtensionsTests: XCTestCase {
@@ -326,6 +334,26 @@ class SparkUIKitProtocolExtensionsTests: XCTestCase {
 		
 		viewController.collectionView(collectionView, didSelectItemAt: IndexPath(row: 0, section: 0))
 		
+		waitForExpectations(timeout: 3.0, handler: nil)
+	}
+	
+	func testSparkKitScrollViewWillBeginScrolling() {
+		let viewController = SparkScrollViewController()
+		UIApplication.shared.keyWindow?.rootViewController = viewController
+		
+		let scrollView = SparkScrollView(frame: CGRect.zero)
+		scrollView.delegate = viewController
+		viewController.view = scrollView
+		
+		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll, trace: nil) {
+			_ in
+			expectation.fulfill()
+		}
+		scrollView.sparkEvents = [sparkEvent]
+		
+		scrollView.delegate?.scrollViewWillBeginDragging?(scrollView)
+			
 		waitForExpectations(timeout: 3.0, handler: nil)
 	}
 }

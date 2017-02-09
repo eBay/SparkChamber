@@ -11,7 +11,7 @@ import SparkKit
 
 Shown below are methods for table view and collection view cell generation. Changing these will affect the view in the Assistant editor in real-time.
 
-Spark events with the trigger types `didAppear`, `didDisappear`, `didEndTouch`, and `targetAction` are illustrated.
+Spark events with the trigger types `didAppear`, `didDisappear`, `didEndTouch`, `didBeginScroll`, and `targetAction` are illustrated.
 */
 extension PlaygroundTableViewController {
 	override open func viewDidLoad() {

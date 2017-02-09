@@ -203,7 +203,7 @@ view.sparkEvents = @[appearEvent, disappearEvent];
 #### Spark Detector
 While Spark Events define the trigger-action-trace events for the system, the Spark Detector is the engine that acts as a discriminator and executor for appropriate event actions. The Spark detector is either invoked from your app's UIKit subclasses to process events, or through the [SparkKit](#sparkkit) framework.
 
-**Note:** When using subclasses of UI components from SparkKit - the appearance, disappearance, touch, and target action methods will automatically be invoked by the superclass or protocol extension provided in SparkKit _(scrolling and selection event support available soon)_. You're not required to manually implement the code in the following sections unless your UI component requires unique support.
+**Note:** When using subclasses of UI components from SparkKit - the appearance, disappearance, touch, scrolling, and target action methods will automatically be invoked by the superclass or protocol extension provided in SparkKit _(selection event support available soon)_. You're not required to manually implement the code in the following sections unless your UI component requires unique support.
 
 #### Appearance events
 Appearance events are triggered by calling Spark Detector's class method: 
@@ -310,7 +310,7 @@ Spark Kit ties Spark Chamber's mechanisms to Apple's UIKit and allows UI to auto
 | `SparkButton` | `UIButton`  | `didEndTouch` | `trackEnded(withTouches:)` |
 | `SparkCollectionViewCell` | `UICollectionViewCell`  | `didEndTouch`, `didAppear`, `didDisappear` | `trackEnded(withTouches:)`, `trackDisplay(forViews:)`, `trackEndDisplaying(forViews:)` |
 | `SparkTableViewCell` | `UITableViewCell`  | `didEndTouch`, `didAppear`, `didDisappear` | `trackEnded(withTouches:)`, `trackDisplay(forViews:)`, `trackEndDisplaying(forViews:)` |
-| `SparkViewController` | `UIViewController`  | `didAppear`, `didDisappear` | `trackDisplay(forViews:)`, `trackEndDisplaying(forViews:)` |
+| `SparkViewController` | `UIViewController`  | `didAppear`, `didDisappear`, `didBeginScroll` | `trackDisplay(forViews:)`, `trackEndDisplaying(forViews:)`, `trackBeganScrolling(forScrollView:)` |
 
 #### Enabling UIApplication-level touch tracking support
 If desired, UIApplication-level touch support can be enabled in SparkKit for processing of most touches app-wide. Some responders don't forward touch events, so this support can be unpredictable at times.

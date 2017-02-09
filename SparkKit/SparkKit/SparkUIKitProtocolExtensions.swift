@@ -114,3 +114,12 @@ extension SparkCollectionViewDelegate {
 		SparkDetector.trackTargetAction(forView: collectionView.cellForItem(at: indexPath))
 	}
 }
+
+// SparkViewController UIScrollViewDelegate default implementations
+
+typealias SparkScrollViewDelegate = SparkViewController
+extension SparkScrollViewDelegate {
+	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		SparkDetector.trackBeganScrolling(forScrollView: scrollView)
+	}
+}

@@ -11,9 +11,21 @@ import SparkKit
 
 Shown below are methods for table view and collection view cell generation. Changing these will affect the view in the Assistant editor in real-time.
 
-Spark events with the trigger types `didAppear`, `didDisappear`, `didEndTouch`, and `targetAction` are illustrated.
+Spark events with the trigger types `didAppear`, `didDisappear`, `didEndTouch`, `didBeginScroll`, and `targetAction` are illustrated.
 */
 extension PlaygroundTableViewController {
+	override open func viewDidLoad() {
+		super.viewDidLoad()
+		
+		// The didBeginScroll event will be triggered each time the table view begins scrolling
+		let scrollEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll) {
+			timestamp in
+			print("Table view began scrolling")
+		}
+		
+		self.tableView?.sparkEvents = [scrollEvent]
+	}
+	
 	override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! SparkTableViewCell
 		cell.textLabel?.text = tableViewData[indexPath.row]
@@ -50,6 +62,18 @@ extension PlaygroundTableViewController {
 }
 
 extension PlaygroundCollectionViewController {
+	override open func viewDidLoad() {
+		super.viewDidLoad()
+		
+		// The didBeginScroll event will be triggered each time the collection view begins scrolling
+		let scrollEvent = SparkEvent(trigger: SparkTriggerType.didBeginScroll) {
+			timestamp in
+			print("Collection view began scrolling")
+		}
+		
+		self.collectionView.sparkEvents = [scrollEvent]
+	}
+	
 	override open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! SparkCollectionViewCellWithTextLabel
 		cell.textLabel?.text = String(indexPath.row)

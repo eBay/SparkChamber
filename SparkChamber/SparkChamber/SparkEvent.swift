@@ -21,7 +21,7 @@
 import Foundation
 
 
-// MARK: SparkTriggerType enum
+// MARK: SparkTriggerType
 
 /**
 An event's trigger type.
@@ -32,31 +32,75 @@ An event's trigger type.
 - didEndTouch: The event's action will trigger if attached to a responder that has received a touch event with phase 'Ended'
 - targetAction: The event's action will trigger if attached to a responder that has an event action tied to the Detector
 - didBeginScroll: The event's action will trigger if attached to a scroll view after scrolling has begun
-- didSelect: The event's action will trigger if attached to a UIControl after it has been selected
-- didDeselect: The event's action will trigger if attached to a UIControl after it has been deselected
-
 */
-@objc public enum SparkTriggerType: Int {
-	case none
-	case didAppear
-	case didDisappear
-	case didEndTouch
-	case targetAction
-	case didBeginScroll
-	case didSelect
-	case didDeselect
+
+@objc final public class SparkTriggerType: NSObject {
+	public static let none = SparkTrigger("none")
+	public static let didAppear = SparkTrigger("didAppear")
+	public static let didDisappear = SparkTrigger("didDisappear")
+	public static let didEndTouch = SparkTrigger("didEndTouch")
+	public static let didBeginScroll = SparkTrigger("didBeginScroll")
+	public static let targetAction = SparkTrigger("targetAction")
 	
-	public var description: String {
-		switch self {
-		case .none: return "none"
-		case .didAppear: return "didAppear"
-		case .didDisappear: return "didDisappear"
-		case .didEndTouch: return "didEndTouch"
-		case .didBeginScroll: return "didBeginScroll"
-		case .targetAction: return "targetAction"
-		case .didSelect: return "didSelect"
-		case .didDeselect: return "didDeselect"
+	// Private
+
+	override private init() {} // Do not allow initialization via init()
+}
+
+/**
+An event's trigger.
+*/
+@objc final public class SparkTrigger: NSObject {
+	public var rawValue: Int = 0
+
+	override public var description: String {
+		get {
+			return _description
 		}
+		
+		set {
+			_description = newValue
+		}
+	}
+	
+	public convenience init(_ description: String) {
+		self.init()
+
+		self.rawValue = SparkTrigger.getIncrementedValue()
+		self.description = description
+	}
+	
+	// Private
+	
+	private var _description = ""
+	
+	override private init() {} // Do not allow initialization via init()
+}
+
+// Equatable overrides
+
+extension SparkTrigger {
+	override open func isEqual(_ object: Any?) -> Bool {
+		guard let rhs = object as? SparkTrigger else {
+			return false
+		}
+		
+		guard self.rawValue == rhs.rawValue else {
+			return false
+		}
+		
+		return true
+	}
+}
+
+// Internal class methods
+
+extension SparkTrigger {
+	private static var _value = 0
+	
+	fileprivate static func getIncrementedValue() -> Int {
+		SparkTrigger._value += 1
+		return SparkTrigger._value
 	}
 }
 
@@ -79,7 +123,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	/**
 	The event's trigger, represented as a SparkTriggerType.
 	*/
-	final public var trigger: SparkTriggerType = SparkTriggerType.none
+	final public var trigger: SparkTrigger = SparkTriggerType.none
 	
 	/**
 	A completion closure/block that will execute when the event's trigger condition has been met.
@@ -108,7 +152,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	
 	- returns: An initialized object, or nil if an object could not be created
 	*/
-	public init(trigger: SparkTriggerType, trace: String?, action: SparkEventActionBlock?) {
+	public init(trigger: SparkTrigger, trace: String?, action: SparkEventActionBlock?) {
 		self.trigger = trigger
 		self.trace = trace
 		self.action = action
@@ -126,7 +170,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	
 	- returns: An initialized object, or nil if an object could not be created
 	*/
-	public convenience init(trigger: SparkTriggerType, trace: String?, identifier: UUID?, action: SparkEventActionBlock?) {
+	public convenience init(trigger: SparkTrigger, trace: String?, identifier: UUID?, action: SparkEventActionBlock?) {
 		self.init(trigger: trigger, trace: trace, action: action)
 		
 		self.identifier = identifier;
@@ -140,7 +184,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	
 	- returns: An initialized object, or nil if an object could not be created
 	*/
-	public convenience init(trigger: SparkTriggerType, action: SparkEventActionBlock?) {
+	public convenience init(trigger: SparkTrigger, action: SparkEventActionBlock?) {
 		self.init(trigger: trigger, trace: nil, action: action)
 	}
 	

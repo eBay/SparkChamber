@@ -221,8 +221,8 @@ class SparkEventTests: XCTestCase {
 		
 		let object = NSObject()
 		
-		XCTAssertFalse(sparkEvent == object, "A Spark Pulsar Event and an NSObject didn't fail equivalence using ==, and should have.")
-		XCTAssertFalse(sparkEvent.isEqual(object), "A Spark Pulsar Event and an NSObject didn't fail equivalence using isEqual:, and should have.")
+		XCTAssertFalse(sparkEvent == object, "A Spark Event and an NSObject didn't fail equivalence using ==, and should have.")
+		XCTAssertFalse(sparkEvent.isEqual(object), "A Spark Event and an NSObject didn't fail equivalence using isEqual:, and should have.")
 	}
 	
 	func testSparkEventDescription() {
@@ -249,31 +249,39 @@ class SparkEventTests: XCTestCase {
 		XCTAssert(description.contains(expectedDescription), "A Spark Event didn't return its description correctly.")
 	}
 	
-	func testSparkEventTriggerTypeDescription() {
+	func testSparkTriggerDescription() {
 		let eventTypeNone = SparkTriggerType.none.description
-		XCTAssert(eventTypeNone == "none", "The Spark Event's description for the event type '.None' was returned incorrectly.")
+		XCTAssert(eventTypeNone == "none", "The Spark Event's description for the event type '.none' was returned incorrectly.")
 		
 		let eventTypeDidAppear = SparkTriggerType.didAppear.description
-		XCTAssert(eventTypeDidAppear == "didAppear", "The Spark Event's description for the event type '.DidAppear' was returned incorrectly.")
+		XCTAssert(eventTypeDidAppear == "didAppear", "The Spark Event's description for the event type '.didAppear' was returned incorrectly.")
 		
 		let eventTypeDidDisappear = SparkTriggerType.didDisappear.description
-		XCTAssert(eventTypeDidDisappear == "didDisappear", "The Spark Event's description for the event type '.DidDisappear' was returned incorrectly.")
+		XCTAssert(eventTypeDidDisappear == "didDisappear", "The Spark Event's description for the event type '.didDisappear' was returned incorrectly.")
 		
 		let eventTypeDidEndTouch = SparkTriggerType.didEndTouch.description
-		XCTAssert(eventTypeDidEndTouch == "didEndTouch", "The Spark Event's description for the event type '.DidEndTouch' was returned incorrectly.")
+		XCTAssert(eventTypeDidEndTouch == "didEndTouch", "The Spark Event's description for the event type '.didEndTouch' was returned incorrectly.")
 		
 		let eventTypeDidBeginScroll = SparkTriggerType.didBeginScroll.description
-		XCTAssert(eventTypeDidBeginScroll == "didBeginScroll", "The Spark Event's description for the event type '.DidBeginScroll' was returned incorrectly.")
+		XCTAssert(eventTypeDidBeginScroll == "didBeginScroll", "The Spark Event's description for the event type '.didBeginScroll' was returned incorrectly.")
 		
 		let eventTypeTargetAction = SparkTriggerType.targetAction.description
-		XCTAssert(eventTypeTargetAction == "targetAction", "The Spark Event's description for the event type '.TargetAction' was returned incorrectly.")
+		XCTAssert(eventTypeTargetAction == "targetAction", "The Spark Event's description for the event type '.targetAction' was returned incorrectly.")
+	}
+	
+	func testSparkTriggerIsEqual() {
+		let triggerOne = SparkTriggerType.didAppear
+		let triggerTwo = SparkTriggerType.didAppear
 		
-		let eventTypeDidSelect = SparkTriggerType.didSelect.description
-		XCTAssert(eventTypeDidSelect == "didSelect", "The Spark Event's description for the event type '.DidSelect' was returned incorrectly.")
+		XCTAssertTrue(triggerOne == triggerTwo, "Two of the same Spark Triggers didn't prove equivalent using ==, and should have.")
+	}
+	
+	func testSparkTriggerIsNotEqualToObject() {
+		let trigger = SparkTriggerType.didAppear
+		let object = NSObject()
 		
-		let eventTypeDidDeselect = SparkTriggerType.didDeselect.description
-		XCTAssert(eventTypeDidDeselect == "didDeselect", "The Spark Event's description for the event type '.DidDeselect' was returned incorrectly.")
-}
+		XCTAssertFalse(trigger == object, "A Spark Trigger and an NSObject didn't fail equivalence using ==, and should have.")
+	}
 	
 	func testSparkEventSendWithAction() {
 		let expectation: XCTestExpectation = self.expectation(description: "A Spark Event's action failed to execute.")

@@ -82,29 +82,9 @@ extension SparkDetector {
 		return track(view: view, trigger: SparkTriggerType.targetAction)
 	}
 	
-	/**
-	Takes a UIControl-based object and triggers any attached DidSelect events.
-	
-	- parameter view: A UIControl to process
-	- returns: A boolean flag indicating if the supplied control successfully triggered a DidSelect event
-	*/
-	@discardableResult public class func trackDidSelect(forControl control: UIControl?) -> Bool {
-		return track(view: control, trigger: SparkTriggerType.didSelect)
-	}
-	
-	/**
-	Takes a UIControl-based object and triggers any attached DidDeselect events.
-	
-	- parameter view: A UIControl to process
-	- returns: A boolean flag indicating if the supplied control successfully triggered a DidDeselect event
-	*/
-	@discardableResult public class func trackDidDeselect(forControl control: UIControl?) -> Bool {
-		return track(view: control, trigger: SparkTriggerType.didDeselect)
-	}
-	
 	// MARK: - Private
 	
-	fileprivate class func track(views: NSArray?, trigger: SparkTriggerType) -> Bool {
+	fileprivate class func track(views: NSArray?, trigger: SparkTrigger) -> Bool {
 		guard let views = views as? Array<UIView> else {
 			return false
 		}
@@ -140,7 +120,7 @@ extension SparkDetector {
 		return track(view: view, trigger: SparkTriggerType.didEndTouch)
 	}
 	
-	fileprivate class func track(scrollView: UIScrollView?, trigger: SparkTriggerType) -> Bool {
+	fileprivate class func track(scrollView: UIScrollView?, trigger: SparkTrigger) -> Bool {
 		guard let scrollView = scrollView as UIScrollView?, scrollView.isTracking else {
 			return false
 		}
@@ -148,7 +128,7 @@ extension SparkDetector {
 		return track(view: scrollView, trigger: trigger)
 	}
 	
-	fileprivate class func track(view: UIView?, trigger: SparkTriggerType = SparkTriggerType.none) -> Bool {
+	internal class func track(view: UIView?, trigger: SparkTrigger = SparkTriggerType.none) -> Bool {
 		guard let events = view?.sparkEvents(for: trigger) else {
 			return false
 		}
@@ -166,7 +146,7 @@ private extension UIView {
 	- parameter trigger: A SparkTriggerType that will be used to filter the view's SparkEvents Array
 	- returns: An Array of Spark Events for the view matched to the supplied trigger
 	*/
-	func sparkEvents(for trigger: SparkTriggerType) -> [SparkEvent]? {
+	func sparkEvents(for trigger: SparkTrigger) -> [SparkEvent]? {
 		func matchingTrigger(_ event: SparkEvent) -> Bool {
 			return trigger == event.trigger
 		}

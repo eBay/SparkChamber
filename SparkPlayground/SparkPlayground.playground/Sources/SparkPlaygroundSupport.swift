@@ -38,14 +38,14 @@ public class MainScene {
 	}
 	
 	public func display() {
-		let tableViewButton = UIButton(type: .system) as UIButton
+		let tableViewButton = SparkButton(type: .system) as SparkButton
 		tableViewButton.setTitle("Present table view", for: UIControlState.normal)
 		tableViewButton.sizeToFit()
 		tableViewButton.center = viewController.view.center
 		tableViewButton.center.y -= 20
 		tableViewButton.addTarget(self, action: #selector(presentTableView(sender:)), for: UIControlEvents.touchUpInside)
 		
-		let collectionViewButton = UIButton(type: .system) as UIButton
+		let collectionViewButton = SparkButton(type: .system) as SparkButton
 		collectionViewButton.setTitle("Present collection view", for: UIControlState.normal)
 		collectionViewButton.sizeToFit()
 		collectionViewButton.center = viewController.view.center
@@ -55,7 +55,7 @@ public class MainScene {
 		let stackView = UIStackView(arrangedSubviews: [tableViewButton, collectionViewButton])
 		stackView.axis = .vertical
 		stackView.distribution = .fillEqually
-		stackView.alignment = .fill
+		stackView.alignment = .center
 		stackView.spacing = 4
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		viewController.view.addSubview(stackView)

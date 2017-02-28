@@ -34,6 +34,15 @@ An event's trigger type.
 - didBeginScroll: The event's action will trigger if attached to a scroll view after scrolling has begun
 */
 
+/* NB: To add custom/additional triggers, please create a new file in your project and use the following pattern:
+
+	public extension SparkTriggerType {
+		public static let myCustomTrigger = SparkTrigger("myCustomTriggerDescription")
+	}
+
+Once a trigger is fully supported by the SparkChamber and SparkKit frameworks and offers an example in SparkPlayground, it can be considered for promotion to the root list.
+*/
+
 @objc final public class SparkTriggerType: NSObject {
 	public static let none = SparkTrigger("none")
 	public static let didAppear = SparkTrigger("didAppear")

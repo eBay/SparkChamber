@@ -22,7 +22,6 @@ Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, de
 	* [Touch events](#touch-events "What are touch events, and how are they triggered?")
 	* [Scrolling events](#scrolling-events "What are scrolling events, and how are they triggered?")
 	* [Target Action events](#target-action-events "What are target action events, and how are they triggered?")
-	* [Selection events](#selection-events "What are selection events, and how are they triggered?")
 * [SparkKit](#sparkkit)
 	* [SparkKit Introduction](#sparkkit-introduction "What is SparkKit, and why/when will you need it?")
 	* [SparkKit Installation and Use](#sparkkit-installation-and-use "How to install and setup the SparkKit framework in your project")
@@ -52,7 +51,7 @@ Spark Chamber is built as a trigger-action event tracking system. Its purpose is
 
 ### Adding Events
 #### Spark Events
-At the heart of the system is a Spark Event, composed of a `trigger` and an `action`. Events can be set to trigger under the following conditions: `didAppear`, `didDisappear`, `didEndTouch`, `didBeginScroll`, `targetAction`, `didSelect`, and `didDeselect`.
+At the heart of the system is a Spark Event, composed of a `trigger` and an `action`. Events can be set to trigger under the following conditions: `didAppear`, `didDisappear`, `didEndTouch`, `didBeginScroll`, and `targetAction`.
 
 Spark Events can optionally include a `trace` (String) for debugging purposes, and a `identifier` (String) to allow for identification and correlation.
 
@@ -73,8 +72,6 @@ Events are triggered using the `trigger` property, a `SparkTriggerType` enum whi
 | `didEndTouch` | `UIView` | Triggered when attached to a responder that has received a touch event with phase 'Ended' |
 | `didBeginScroll` | `UIScrollView` | Triggered when attached to a scroll view after scrolling has begun |
 | `targetAction` | `UIView` | Triggered when attached to a responder that has an event action tied to the Detector |
-| `didSelect` | `UIControl` | Triggered when attached to a control that has been selected |
-| `didDeselect` | `UIControl` | Triggered when attached to a control that has been deselected |
 
 ### Event Examples
 #### Attaching a single event
@@ -203,7 +200,7 @@ view.sparkEvents = @[appearEvent, disappearEvent];
 #### Spark Detector
 While Spark Events define the trigger-action-trace events for the system, the Spark Detector is the engine that acts as a discriminator and executor for appropriate event actions. The Spark detector is either invoked from your app's UIKit subclasses to process events, or through the [SparkKit](#sparkkit) framework.
 
-**Note:** When using subclasses of UI components from SparkKit - the appearance, disappearance, touch, scrolling, and target action methods will automatically be invoked by the superclass or protocol extension provided in SparkKit _(selection event support available soon)_. You're not required to manually implement the code in the following sections unless your UI component requires unique support.
+**Note:** When using subclasses of UI components from SparkKit - the appearance, disappearance, touch, scrolling, and target action methods will automatically be invoked by the superclass or protocol extension provided in SparkKit. You're not required to manually implement the code in the following sections unless your UI component requires unique support.
 
 #### Appearance events
 Appearance events are triggered by calling Spark Detector's class method: 
@@ -275,23 +272,6 @@ class func trackTargetAction(forView view: UIView?) -> Bool
 This method accepts an optional UIView and returns a boolean value of true if the supplied view triggers a `targetAction` event through the Detector.
 
 Target Action events are especially useful to tie in to a control's target-action mechanism.
-
-#### Selection events
-Selection events come in two flavors, select and deselect. They are triggered by calling Spark Detector's class methods: 
-```swift
-// Swift
-class func trackDidSelect(forControl control: UIControl?) -> Bool 
-class func trackDidDeselect(forControl control: UIControl?) -> Bool 
-```
-```obj-c
-// Objective-C
-+ (BOOL)trackDidSelectForControl: (UIControl*) control
-+ (BOOL)trackDidDeselectForControl: (UIControl*) control
-```
-
-This method accepts an optional UIControl and returns a boolean value of true if the supplied control triggers an appropriate `didSelect` or `didDeselect` event.
-
-Selection events are especially useful when the `selected` state of a UIControl needs to be measured.
 
 ### SparkKit
 #### SparkKit Introduction

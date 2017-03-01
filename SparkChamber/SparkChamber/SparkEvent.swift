@@ -30,8 +30,8 @@ An event's trigger type.
 - didAppear: The event's action will trigger if attached to a view that has appeared
 - didDisappear: The event's action will trigger if attached to a view that has disappeared
 - didEndTouch: The event's action will trigger if attached to a responder that has received a touch event with phase 'Ended'
-- targetAction: The event's action will trigger if attached to a responder that has an event action tied to the Detector
 - didBeginScroll: The event's action will trigger if attached to a scroll view after scrolling has begun
+- targetAction: The event's action will trigger if attached to a responder that has an event action tied to the Detector
 */
 
 /* NB: To add custom/additional triggers, please create a new file in your project and use the following pattern:
@@ -43,23 +43,19 @@ An event's trigger type.
 Once a trigger is fully supported by the SparkChamber and SparkKit frameworks and offers an example in SparkPlayground, it can be considered for promotion to the root list.
 */
 
-@objc final public class SparkTriggerType: NSObject {
+@objc final public class SparkTriggerType: SparkTrigger {
 	public static let none = SparkTrigger("none")
 	public static let didAppear = SparkTrigger("didAppear")
 	public static let didDisappear = SparkTrigger("didDisappear")
 	public static let didEndTouch = SparkTrigger("didEndTouch")
 	public static let didBeginScroll = SparkTrigger("didBeginScroll")
 	public static let targetAction = SparkTrigger("targetAction")
-	
-	// Private
-
-	override private init() {} // Do not allow initialization via init()
 }
 
 /**
 An event's trigger.
 */
-@objc final public class SparkTrigger: NSObject {
+@objc public class SparkTrigger: NSObject {
 	public var rawValue: Int = 0
 
 	override public var description: String {
@@ -72,7 +68,7 @@ An event's trigger.
 		}
 	}
 	
-	public convenience init(_ description: String) {
+	internal convenience init(_ description: String) {
 		self.init()
 
 		self.rawValue = SparkTrigger.getIncrementedValue()

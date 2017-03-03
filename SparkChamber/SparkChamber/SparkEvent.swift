@@ -21,7 +21,7 @@
 import Foundation
 
 
-// MARK: SparkTriggerType
+// MARK: SparkTrigger
 
 /**
 An event's trigger type.
@@ -126,7 +126,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	// MARK: - Public
 	
 	/**
-	The event's trigger, represented as a SparkTriggerType.
+	The event's trigger, represented as a SparkTrigger.
 	*/
 	final public var trigger: SparkTrigger = SparkTriggerType.none
 	
@@ -151,7 +151,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	/**
 	Initializes a new SparkEvent object with supplied parameters.
 	
-	- parameter trigger: The event's trigger, supplied as a SparkTriggerType
+	- parameter trigger: The event's trigger, supplied as a SparkTrigger
 	- parameter trace: An optional String that will print to the console after the event's action has executed
 	- parameter action: An optional completion closure/block that will execute when the event's trigger conditions have been met
 	
@@ -168,7 +168,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	/**
 	Initializer that creates a new SparkEvent object with supplied parameters.
 	
-	- parameter trigger: The event's trigger, supplied as a SparkTriggerType
+	- parameter trigger: The event's trigger, supplied as a SparkTrigger
 	- parameter trace: An optional String that will print to the console after the event's action has executed
 	- parameter identifier: An optional UUID that may be assigned to allow the event to be uniquely identified
 	- parameter action: An optional completion closure/block that will execute when the event's trigger conditions have been met
@@ -184,7 +184,7 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 	/**
 	Initializer that creates a new SparkEvent object with supplied parameters.
 	
-	- parameter trigger: The event's trigger, supplied as a SparkTriggerType
+	- parameter trigger: The event's trigger, supplied as a SparkTrigger
 	- parameter action: An optional completion closure/block that will execute when the event's trigger conditions have been met
 	
 	- returns: An initialized object, or nil if an object could not be created

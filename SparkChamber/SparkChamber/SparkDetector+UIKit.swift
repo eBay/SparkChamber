@@ -26,7 +26,7 @@ import UIKit
 /**
 These Spark Detector iOS client (UIKit) extensions provide functionality based on UIKit objects.
 
-Functions allow the tracking of a view's appearance, disappearance, touches (ended), scrolling (began), target action, selection, and deselection.
+Functions allow the tracking of a view's appearance, disappearance, touches (ended), scrolling (began), and target action.
 */
 #if os(iOS)
 extension SparkDetector {

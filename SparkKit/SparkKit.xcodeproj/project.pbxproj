@@ -49,7 +49,7 @@
 		4D8D7A351D90455A005CF55A /* SparkUIKitProtocolExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkUIKitProtocolExtensions.swift; sourceTree = "<group>"; };
 		4D8D7A451D90456C005CF55A /* SparkKitTestsMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkKitTestsMocks.swift; sourceTree = "<group>"; };
 		4D8D7A471D90456C005CF55A /* SparkUIKitProtocolExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkUIKitProtocolExtensionsTests.swift; sourceTree = "<group>"; };
-		4D8D7A8A1D905033005CF55A /* SparkChamber.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SparkChamber.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SparkChamber-effkcsumbebacagtlwsgkhgcptmv/Build/Products/Debug-iPhone-iphonesimulator/SparkChamber.framework"; sourceTree = SOURCE_ROOT; };
+		4D8D7A8A1D905033005CF55A /* SparkChamber.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SparkChamber.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SparkChamber-effkcsumbebacagtlwsgkhgcptmv/Build/Products/Debug-iphonesimulator/SparkChamber.framework"; sourceTree = SOURCE_ROOT; };
 		4DFE25C81D91B45A007BA1F9 /* SparkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,7 +287,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4D8D7A271D904508005CF55A /* Debug-iPhone */ = {
+		4D8D7A271D904508005CF55A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -336,9 +336,9 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Debug-iPhone";
+			name = "Debug";
 		};
-		4D8D7A281D904508005CF55A /* Release-iPhone */ = {
+		4D8D7A281D904508005CF55A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -381,9 +381,9 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Release-iPhone";
+			name = "Release";
 		};
-		4D8D7A2A1D904508005CF55A /* Debug-iPhone */ = {
+		4D8D7A2A1D904508005CF55A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -401,9 +401,9 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Debug-iPhone";
+			name = "Debug";
 		};
-		4D8D7A2B1D904508005CF55A /* Release-iPhone */ = {
+		4D8D7A2B1D904508005CF55A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -420,9 +420,9 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Release-iPhone";
+			name = "Release";
 		};
-		4D8D7A2D1D904508005CF55A /* Debug-iPhone */ = {
+		4D8D7A2D1D904508005CF55A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -433,9 +433,9 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Debug-iPhone";
+			name = "Debug";
 		};
-		4D8D7A2E1D904508005CF55A /* Release-iPhone */ = {
+		4D8D7A2E1D904508005CF55A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -445,7 +445,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Release-iPhone";
+			name = "Release";
 		};
 /* End XCBuildConfiguration section */
 
@@ -453,29 +453,29 @@
 		4D8D7A0F1D904508005CF55A /* Build configuration list for PBXProject "SparkKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D8D7A271D904508005CF55A /* Debug-iPhone */,
-				4D8D7A281D904508005CF55A /* Release-iPhone */,
+				4D8D7A271D904508005CF55A /* Debug */,
+				4D8D7A281D904508005CF55A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug-iPhone";
+			defaultConfigurationName = "Debug";
 		};
 		4D8D7A291D904508005CF55A /* Build configuration list for PBXNativeTarget "SparkKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D8D7A2A1D904508005CF55A /* Debug-iPhone */,
-				4D8D7A2B1D904508005CF55A /* Release-iPhone */,
+				4D8D7A2A1D904508005CF55A /* Debug */,
+				4D8D7A2B1D904508005CF55A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug-iPhone";
+			defaultConfigurationName = "Debug";
 		};
 		4D8D7A2C1D904508005CF55A /* Build configuration list for PBXNativeTarget "SparkKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D8D7A2D1D904508005CF55A /* Debug-iPhone */,
-				4D8D7A2E1D904508005CF55A /* Release-iPhone */,
+				4D8D7A2D1D904508005CF55A /* Debug */,
+				4D8D7A2E1D904508005CF55A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug-iPhone";
+			defaultConfigurationName = "Debug";
 		};
 /* End XCConfigurationList section */
 	};

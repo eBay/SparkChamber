@@ -33,50 +33,70 @@ extension SparkDetector {
 	// MARK: - Public
 	
 	/**
-	Takes a collection of UIView-based objects and triggers any attached DidAppear events.
+	Takes a collection of UIView-based objects and triggers any attached didAppear events.
 	
 	- parameter views: An Array of UIViews to process
-	- returns: A boolean flag indicating if any supplied views successfully triggered an DidAppear event
+	- returns: A boolean flag indicating if any supplied views successfully triggered a didAppear event
 	*/
 	@discardableResult public class func trackDisplay(forViews views: NSArray?) -> Bool {
 		return track(views: views, trigger: SparkTriggerType.didAppear)
 	}
 	
 	/**
-	Takes a collection of UIView-based objects and triggers any attached DidDisappear events.
+	Takes a collection of UIView-based objects and triggers any attached didDisappear events.
 	
 	- parameter views: An Array of UIViews to process
-	- returns: A boolean flag indicating if any supplied views successfully triggered a DidDisappear event
+	- returns: A boolean flag indicating if any supplied views successfully triggered a didDisappear event
 	*/
 	@discardableResult public class func trackEndDisplaying(forViews views: NSArray?) -> Bool {
 		return track(views: views, trigger: SparkTriggerType.didDisappear)
 	}
 	
 	/**
-	Takes a UIScrollView-based object and triggers any attached DidBeginScroll events.
+	Takes a UIScrollView-based object and triggers any attached didBeginScroll events.
 	
 	- parameter views: A UIScrollView to process
-	- returns: A boolean flag indicating if the supplied view successfully triggered a DidBeginScroll event
+	- returns: A boolean flag indicating if the supplied view successfully triggered a didBeginScroll event
 	*/
 	@discardableResult public class func trackBeganScrolling(forScrollView scrollView: UIScrollView?) -> Bool {
 		return track(scrollView: scrollView, trigger: SparkTriggerType.didBeginScroll)
 	}
 	
 	/**
-	Takes a collection of touches, finds their associated views, and triggers any attached DidEndTouch events.
+	Takes a collection of touches, finds their associated views, and triggers any attached didEndTouch events.
 	
 	- parameter touches: An NSSet of UITouch objects to process
-	- returns: A boolean flag indicating if any supplied touches successfully triggered a DidEndTouch event
+	- returns: A boolean flag indicating if any supplied touches successfully triggered a didEndTouch event
 	*/
 	@discardableResult public class func trackEnded(withTouches touches: NSSet?) -> Bool {
 		return track(touches: touches, phase: UITouchPhase.ended)
 	}
 	
 	/**
-	Takes a UIView-based object and triggers any attached TargetAction events.
+	Takes a UIView-based object and triggers any attached didBecomeFirstResponder events.
 	
 	- parameter view: A UIView to process
-	- returns: A boolean flag indicating if the supplied view successfully triggered a TargetAction event
+	- returns: A boolean flag indicating if the supplied view successfully triggered a didBecomeFirstResponder event
+	*/
+	@discardableResult public class func trackBecameFirstResponder(forView view: UIView?) -> Bool {
+		return track(view: view, trigger: SparkTriggerType.didBecomeFirstResponder)
+	}
+	
+	/**
+	Takes a UIView-based object and triggers any attached didResignFirstResponder events.
+	
+	- parameter view: A UIView to process
+	- returns: A boolean flag indicating if the supplied view successfully triggered a didResignFirstResponder event
+	*/
+	@discardableResult public class func trackResignedFirstResponder(forView view: UIView?) -> Bool {
+		return track(view: view, trigger: SparkTriggerType.didResignFirstResponder)
+	}
+	
+	/**
+	Takes a UIView-based object and triggers any attached targetAction events.
+	
+	- parameter view: A UIView to process
+	- returns: A boolean flag indicating if the supplied view successfully triggered a targetAction event
 	*/
 	@discardableResult public class func trackTargetAction(forView view: UIView?) -> Bool {
 		return track(view: view, trigger: SparkTriggerType.targetAction)

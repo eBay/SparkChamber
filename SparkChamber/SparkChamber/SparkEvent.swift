@@ -31,6 +31,8 @@ An event's trigger type.
 - didDisappear: The event's action will trigger if attached to a view that has disappeared
 - didEndTouch: The event's action will trigger if attached to a responder that has received a touch event with phase 'Ended'
 - didBeginScroll: The event's action will trigger if attached to a scroll view after scrolling has begun
+- didBecomeFirstResponder: The event's action will trigger if attached to a view that has become a first responder
+- didResignFirstResponder: The event's action will trigger if attached to a view that has resigned its status as a first responder
 - targetAction: The event's action will trigger if attached to a responder that has an event action tied to the Detector
 */
 
@@ -49,6 +51,8 @@ Once a trigger is fully supported by the SparkChamber and SparkKit frameworks an
 	public static let didDisappear = SparkTrigger("didDisappear")
 	public static let didEndTouch = SparkTrigger("didEndTouch")
 	public static let didBeginScroll = SparkTrigger("didBeginScroll")
+	public static let didBecomeFirstResponder = SparkTrigger("didBecomeFirstResponder")
+	public static let didResignFirstResponder = SparkTrigger("didResignFirstResponder")
 	public static let targetAction = SparkTrigger("targetAction")
 }
 

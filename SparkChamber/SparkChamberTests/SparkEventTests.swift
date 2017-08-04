@@ -265,6 +265,12 @@ class SparkEventTests: XCTestCase {
 		let eventTypeDidBeginScroll = SparkTriggerType.didBeginScroll.description
 		XCTAssert(eventTypeDidBeginScroll == "didBeginScroll", "The Spark Event's description for the event type '.didBeginScroll' was returned incorrectly.")
 		
+		let eventTypeDidBecomeFirstResponder = SparkTriggerType.didBecomeFirstResponder.description
+		XCTAssert(eventTypeDidBecomeFirstResponder == "didBecomeFirstResponder", "The Spark Event's description for the event type '.didBecomeFirstResponder' was returned incorrectly.")
+
+		let eventTypeDidResignFirstResponder = SparkTriggerType.didResignFirstResponder.description
+		XCTAssert(eventTypeDidResignFirstResponder == "didResignFirstResponder", "The Spark Event's description for the event type '.didResignFirstResponder' was returned incorrectly.")
+		
 		let eventTypeTargetAction = SparkTriggerType.targetAction.description
 		XCTAssert(eventTypeTargetAction == "targetAction", "The Spark Event's description for the event type '.targetAction' was returned incorrectly.")
 	}

@@ -408,4 +408,66 @@ class SparkDetectorUIKitTests: XCTestCase {
 		let result = SparkDetector.trackBeganScrolling(forScrollView: view)
 		XCTAssertFalse(result, "A Spark Event was tracked when it should have been ignored.")
 	}
+	
+	func testSparkDetectorUIKitTrackBecameFirstResponderForView() {
+		let view = UIView()
+		
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didBecomeFirstResponder, action: nil)
+		view.sparkEvents = [sparkEvent]
+		
+		let result = SparkDetector.trackBecameFirstResponder(forView: view)
+		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
+	}
+	
+	func testSparkDetectorUIKitTrackBecameFirstResponderForViewNil() {
+		let result = SparkDetector.trackBecameFirstResponder(forView: nil)
+		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
+	}
+	
+	func testSparkDetectorUIKitTrackBecameFirstResponderForViewWithEmptyEvents() {
+		let view = UIView()
+		view.sparkEvents = []
+		
+		let result = SparkDetector.trackBecameFirstResponder(forView: view)
+		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
+	}
+	
+	func testSparkDetectorUIKitTrackBecameFirstResponderForViewWithNilEvents() {
+		let view = UIView()
+		view.sparkEvents = nil
+		
+		let result = SparkDetector.trackBecameFirstResponder(forView: view)
+		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
+	}
+	
+	func testSparkDetectorUIKitTrackResignedFirstResponderForView() {
+		let view = UIView()
+		
+		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didResignFirstResponder, action: nil)
+		view.sparkEvents = [sparkEvent]
+		
+		let result = SparkDetector.trackResignedFirstResponder(forView: view)
+		XCTAssertTrue(result, "A Spark Event failed to make a trip through the chamber.")
+	}
+	
+	func testSparkDetectorUIKitTrackResignedFirstResponderForViewNil() {
+		let result = SparkDetector.trackResignedFirstResponder(forView: nil)
+		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
+	}
+	
+	func testSparkDetectorUIKitTrackResignedFirstResponderForViewWithEmptyEvents() {
+		let view = UIView()
+		view.sparkEvents = []
+		
+		let result = SparkDetector.trackResignedFirstResponder(forView: view)
+		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
+	}
+	
+	func testSparkDetectorUIKitTrackResignedFirstResponderForViewWithNilEvents() {
+		let view = UIView()
+		view.sparkEvents = nil
+		
+		let result = SparkDetector.trackResignedFirstResponder(forView: view)
+		XCTAssertFalse(result, "A Spark Event was detected when none were present.")
+	}
 }

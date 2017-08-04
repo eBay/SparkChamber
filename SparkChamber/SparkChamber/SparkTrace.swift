@@ -58,6 +58,10 @@ Spark Trace is the engine that enables the printing of Spark Event traces to the
 	
 	The textual representations are obtained for each item via the expression String(item).
 	
+	- parameter items: Zero or more items to print
+	- parameter separator: A string to print between each item - the default is a single space (" ")
+	- parameter terminator: The string to print after all items have been printed - the default is a newline ("\n")
+	
 	- note: To print without a trailing newline, pass terminator: ""
 	*/
 	class func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {

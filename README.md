@@ -21,6 +21,7 @@ Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, de
 	* [Disappearance events](#disappearance-events "What are disappearance events, and how are they triggered?")
 	* [Touch events](#touch-events "What are touch events, and how are they triggered?")
 	* [Scrolling events](#scrolling-events "What are scrolling events, and how are they triggered?")
+	* [Responder events](#responder-events "What are responder-based events, and how are they triggered?")
 	* [Target Action events](#target-action-events "What are target action events, and how are they triggered?")
 * [SparkKit](#sparkkit)
 	* [SparkKit Introduction](#sparkkit-introduction "What is SparkKit, and why/when will you need it?")
@@ -40,7 +41,7 @@ If you'd like to see Spark Chamber in action without delay, please follow these 
 6. Manipulate the Playground's simulation and observe events' output in the debug area
 
 ### Introduction
-Spark Chamber is built as a trigger-action event tracking system. Its purpose is to allow the attachment of event objects to various UI elements and then execute the event's `action` (code) asynchronously when the event's trigger condition is met. The optional value `trace` (String) allows debugging, and the optional value `identifier` (String) allows identification and correlation.
+Spark Chamber is built as a trigger-action event tracking system. Its purpose is to allow the attachment of event objects to various UI elements and then execute the event's `action` (code) asynchronously when the event's trigger condition is met. The optional value `trace` (String) allows debugging, and the optional value `identifier` (UUID) allows identification and correlation.
 
 ### Installation
 1. In Xcode, add the SparkChamber.xcodeproj file by selecting your project and choosing 'Add Files to...' from the File menu
@@ -51,9 +52,9 @@ Spark Chamber is built as a trigger-action event tracking system. Its purpose is
 
 ### Adding Events
 #### Spark Events
-At the heart of the system is a Spark Event, composed of a `trigger` and an `action`. Events can be set to trigger under the following conditions: `didAppear`, `didDisappear`, `didEndTouch`, `didBeginScroll`, and `targetAction`.
+At the heart of the system is a Spark Event, composed of a `trigger` and an `action`. Events can be set to trigger under the following conditions: `didAppear`, `didDisappear`, `didEndTouch`, `didBeginScroll`, `didBecomeFirstResponder`, `didResignFirstResponder`, and `targetAction`.
 
-Spark Events can optionally include a `trace` (String) for debugging purposes, and a `identifier` (String) to allow for identification and correlation.
+Spark Events can optionally include a `trace` (String) for debugging purposes, and a `identifier` (UUID) to allow for identification and correlation.
 
 Events are attached to any subclass of NSObject using the `sparkEvents` property, which stores an Array/NSArray composed of Spark Event objects. Multiple independent events may be attached to any given UI component to allow for the construction of complex tracking behaviors. 
 
@@ -71,6 +72,8 @@ Events are triggered using the `trigger` property, a `SparkTriggerType` enum whi
 | `didDisappear` | `UIView` | Triggered when the UI element receives a 'didDisappear' or 'didEndDisplaying' message, as appropriate |
 | `didEndTouch` | `UIView` | Triggered when attached to a responder that has received a touch event with phase 'Ended' |
 | `didBeginScroll` | `UIScrollView` | Triggered when attached to a scroll view after scrolling has begun |
+| `didBecomeFirstResponder` | `UIView` | Triggered when attached to a responder that has become a first responder |
+| `didResignFirstResponder` | `UIView` | Triggered when attached to a responder that has resigned its status as a first responder |
 | `targetAction` | `UIView` | Triggered when attached to a responder that has an event action tied to the Detector |
 
 ### Event Examples
@@ -258,6 +261,30 @@ This method accepts an optional UIScrollView and returns a boolean value of true
 
 A `didBeginScroll` event will be triggered if the supplied UIScrollView's `tracking` property is true when this method is called.
 
+#### Responder events
+Responder events are triggered by calling one of two of Spark Detector's class methods, as below.
+To track when a view has become a first responder:
+```swift
+// Swift
+class func trackBecameFirstResponder(forView view: UIView?) -> Bool 
+```
+```obj-c
+// Objective-C
++ (BOOL)trackBecameFirstResponderForView: (UIView*) view
+```
+
+To track when a view has resigned its first responder status:
+```swift
+// Swift
+class func trackResignedFirstResponder(forView view: UIView?) -> Bool 
+```
+```obj-c
+// Objective-C
++ (BOOL)trackResignedFirstResponderForView: (UIView*) view
+```
+
+This method accepts an optional UIView and returns a boolean value of true if the supplied view triggers either a `didBecomeFirstResponder` or a `didResignFirstResponder` event through the Detector, as appropriate.
+
 #### Target Action events
 Target Action events are triggered by calling Spark Detector's class method: 
 ```swift
@@ -271,7 +298,7 @@ class func trackTargetAction(forView view: UIView?) -> Bool
 
 This method accepts an optional UIView and returns a boolean value of true if the supplied view triggers a `targetAction` event through the Detector.
 
-Target Action events are especially useful to tie in to a control's target-action mechanism.
+Target Action events are used to tie in to a UIControl's target-action mechanism.
 
 ### SparkKit
 #### SparkKit Introduction

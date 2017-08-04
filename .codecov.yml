@@ -1,3 +1,5 @@
+codecov:
+  token: 05d6054e-c338-4fea-901e-8bdaa31c0a74
 coverage:
  ignore:
  - "SparkChamber/SparkChamberTests/.*"

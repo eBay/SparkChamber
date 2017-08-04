@@ -1,7 +1,7 @@
 os: osx
 dist: osx
 language: swift
-osx_image: xcode8
+osx_image: xcode8.3
 
 script:
   - ./.spark-chamber_tests.sh

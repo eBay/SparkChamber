@@ -332,11 +332,12 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Debug";
+			name = Debug;
 		};
 		4D8D7A281D904508005CF55A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -376,12 +377,13 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Release";
+			name = Release;
 		};
 		4D8D7A2A1D904508005CF55A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -399,9 +401,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
-			name = "Debug";
+			name = Debug;
 		};
 		4D8D7A2B1D904508005CF55A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -418,9 +420,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ebay.SparkKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
-			name = "Release";
+			name = Release;
 		};
 		4D8D7A2D1D904508005CF55A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -433,7 +435,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Debug";
+			name = Debug;
 		};
 		4D8D7A2E1D904508005CF55A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -445,7 +447,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
-			name = "Release";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -457,7 +459,7 @@
 				4D8D7A281D904508005CF55A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug";
+			defaultConfigurationName = Debug;
 		};
 		4D8D7A291D904508005CF55A /* Build configuration list for PBXNativeTarget "SparkKit" */ = {
 			isa = XCConfigurationList;
@@ -466,7 +468,7 @@
 				4D8D7A2B1D904508005CF55A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug";
+			defaultConfigurationName = Debug;
 		};
 		4D8D7A2C1D904508005CF55A /* Build configuration list for PBXNativeTarget "SparkKitTests" */ = {
 			isa = XCConfigurationList;
@@ -475,7 +477,7 @@
 				4D8D7A2E1D904508005CF55A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug";
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

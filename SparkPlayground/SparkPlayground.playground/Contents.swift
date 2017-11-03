@@ -61,7 +61,7 @@ class PlaygroundTableViewController: TableViewController {
 	}
 }
 
-open class PlaygroundCollectionViewController: CollectionViewController {
+class PlaygroundCollectionViewController: CollectionViewController {
 	override open func viewDidLoad() {
 		super.viewDidLoad()
 		

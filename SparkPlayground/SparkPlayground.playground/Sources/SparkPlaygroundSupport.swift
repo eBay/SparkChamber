@@ -27,7 +27,9 @@ import SparkKit
 public class MainScene {
 	public let viewController: UIViewController
 	public let navigationController: UINavigationController
-	
+	public let tableViewButton: SparkButton = SparkButton(type: .system) as SparkButton
+	public let collectionViewButton: SparkButton = SparkButton(type: .system) as SparkButton
+
 	public init() {
 		let viewController = UIViewController()
 		viewController.title = "Spark Chamber Playground"
@@ -38,20 +40,16 @@ public class MainScene {
 	}
 	
 	public func display() {
-		let tableViewButton = SparkButton(type: .system) as SparkButton
 		tableViewButton.setTitle("Present table view", for: UIControlState.normal)
 		tableViewButton.sizeToFit()
 		tableViewButton.center = viewController.view.center
 		tableViewButton.center.y -= 20
-		tableViewButton.addTarget(self, action: #selector(presentTableView(sender:)), for: UIControlEvents.touchUpInside)
-		
-		let collectionViewButton = SparkButton(type: .system) as SparkButton
+
 		collectionViewButton.setTitle("Present collection view", for: UIControlState.normal)
 		collectionViewButton.sizeToFit()
 		collectionViewButton.center = viewController.view.center
 		collectionViewButton.center.y += 20
-		collectionViewButton.addTarget(self, action: #selector(presentCollectionView(sender:)), for: UIControlEvents.touchUpInside)
-		
+
 		let stackView = UIStackView(arrangedSubviews: [tableViewButton, collectionViewButton])
 		stackView.axis = .vertical
 		stackView.distribution = .fillEqually
@@ -59,7 +57,7 @@ public class MainScene {
 		stackView.spacing = 4
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		viewController.view.addSubview(stackView)
-		
+	
 		let viewsDictionary = ["stackView": stackView]
 		let stackView_H = NSLayoutConstraint.constraints(
 			withVisualFormat: "H:|[stackView]|",
@@ -81,18 +79,6 @@ public class MainScene {
 				
 		PlaygroundPage.current.liveView = window
 		PlaygroundPage.current.needsIndefiniteExecution = true
-	}
-	
-	@objc func presentTableView(sender:UIButton) {
-		navigationController.pushViewController(PlaygroundTableViewController(), animated: true)
-	}
-	
-	@objc func presentCollectionView(sender:UIButton) {
-		let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-		layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-		layout.itemSize = CGSize(width: 135, height: 135)
-		
-		navigationController.pushViewController(PlaygroundCollectionViewController(), animated: true)
 	}
 }
 
@@ -135,8 +121,6 @@ open class TableViewController: SparkViewController, UITableViewDelegate, UITabl
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }
-
-open class PlaygroundTableViewController: TableViewController {}
 
 public class SparkCollectionViewCellWithTextLabel: SparkCollectionViewCell {
 	public var textLabel: UILabel?
@@ -196,8 +180,6 @@ open class CollectionViewController: SparkViewController, UICollectionViewDelega
 		return cell
 	}
 }
-
-open class PlaygroundCollectionViewController: CollectionViewController {}
 
 public let screenBounds = CGRect(x: 0, y: 0, width: 320, height: 480)
 public let mainScene = MainScene()

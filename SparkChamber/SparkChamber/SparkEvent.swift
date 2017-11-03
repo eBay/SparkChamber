@@ -59,7 +59,7 @@ Once a trigger is fully supported by the SparkChamber and SparkKit frameworks an
 /**
 An event's trigger.
 */
-@objc public class SparkTrigger: NSObject {
+@objcMembers public class SparkTrigger: NSObject {
 	public var rawValue: Int = 0
 
 	override public var description: String {
@@ -126,7 +126,7 @@ public typealias SparkEventActionBlock = @convention(block) (_ timestamp: Date) 
 /**
 A Spark Event model object, composed of a trigger (enum), action (closure), trace (string), and identifier (string).
 */
-@objc open class SparkEvent: NSObject, NSCopying {
+@objcMembers open class SparkEvent: NSObject, NSCopying {
 	// MARK: - Public
 	
 	/**

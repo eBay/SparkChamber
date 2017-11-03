@@ -13,7 +13,7 @@ Shown below are methods for table view and collection view cell generation. Chan
 
 Spark events with the trigger types `didAppear`, `didDisappear`, `didEndTouch`, `didBeginScroll`, and `targetAction` are illustrated.
 */
-extension PlaygroundTableViewController {
+class PlaygroundTableViewController: TableViewController {
 	override open func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -61,7 +61,7 @@ extension PlaygroundTableViewController {
 	}
 }
 
-extension PlaygroundCollectionViewController {
+class PlaygroundCollectionViewController: CollectionViewController {
 	override open func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -110,3 +110,23 @@ extension PlaygroundCollectionViewController {
 }
 
 mainScene.display()
+mainScene.addButtonTargetActions()
+
+extension MainScene {
+	func addButtonTargetActions() {
+		tableViewButton.addTarget(self, action: #selector(presentTableView(sender:)), for: UIControlEvents.touchUpInside)
+		collectionViewButton.addTarget(self, action: #selector(presentCollectionView(sender:)), for: UIControlEvents.touchUpInside)
+	}
+	
+	@objc func presentTableView(sender:UIButton) {
+		navigationController.pushViewController(PlaygroundTableViewController(), animated: true)
+	}
+	
+	@objc func presentCollectionView(sender:UIButton) {
+		let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+		layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+		layout.itemSize = CGSize(width: 135, height: 135)
+		
+		navigationController.pushViewController(PlaygroundCollectionViewController(), animated: true)
+	}
+}

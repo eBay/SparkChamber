@@ -119,7 +119,7 @@ extension SparkCollectionViewDelegate {
 
 typealias SparkScrollViewDelegate = SparkViewController
 extension SparkScrollViewDelegate {
-	open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+	@objc(scrollViewWillBeginDragging:) open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 		SparkDetector.trackBeganScrolling(forScrollView: scrollView)
 	}
 }

@@ -194,11 +194,11 @@
 				TargetAttributes = {
 					4DDB81441C6E40B6005B0EE2 = {
 						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					CA85AA7B1B3C66A00000FEEF = {
 						CreatedOnToolsVersion = 6.3.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -290,9 +290,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ebay.SparkChamberTests;
 				PRODUCT_NAME = SparkChamberTests;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
-			name = "Debug";
+			name = Debug;
 		};
 		4DDB814F1C6E40B6005B0EE2 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -309,9 +309,9 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ebay.SparkChamberTests;
 				PRODUCT_NAME = SparkChamberTests;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
-			name = "Release";
+			name = Release;
 		};
 		CA85AA901B3C66A00000FEEF /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -393,12 +393,13 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Debug";
+			name = Debug;
 		};
 		CA85AA911B3C66A00000FEEF /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -474,13 +475,14 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Release";
+			name = Release;
 		};
 		CA85AA931B3C66A00000FEEF /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -499,9 +501,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ebay.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SparkChamber;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
-			name = "Debug";
+			name = Debug;
 		};
 		CA85AA941B3C66A00000FEEF /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -519,9 +521,9 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ebay.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SparkChamber;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
-			name = "Release";
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -533,7 +535,7 @@
 				4DDB814F1C6E40B6005B0EE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug";
+			defaultConfigurationName = Debug;
 		};
 		CA85AA761B3C66A00000FEEF /* Build configuration list for PBXProject "SparkChamber" */ = {
 			isa = XCConfigurationList;
@@ -542,7 +544,7 @@
 				CA85AA911B3C66A00000FEEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug";
+			defaultConfigurationName = Debug;
 		};
 		CA85AA921B3C66A00000FEEF /* Build configuration list for PBXNativeTarget "SparkChamber" */ = {
 			isa = XCConfigurationList;
@@ -551,7 +553,7 @@
 				CA85AA941B3C66A00000FEEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "Debug";
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

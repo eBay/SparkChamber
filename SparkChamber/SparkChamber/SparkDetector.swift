@@ -28,7 +28,7 @@ Spark Detector is the engine that acts as a discriminator and executor for appro
 
 The basic implementation of this class provides shared functionality. Extensions provide platform-specific implementations.
 */
-@objc final public class SparkDetector: NSObject {
+@objcMembers final public class SparkDetector: NSObject {
 	// MARK: - Internal
 	
 	/**

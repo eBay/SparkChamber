@@ -282,6 +282,13 @@ class SparkEventTests: XCTestCase {
 		XCTAssertTrue(triggerOne == triggerTwo, "Two of the same Spark Triggers didn't prove equivalent using ==, and should have.")
 	}
 	
+	func testSparkTriggerIsNotEqual() {
+		let triggerOne = SparkTriggerType.didAppear
+		let triggerTwo = SparkTriggerType.none
+		
+		XCTAssertFalse(triggerOne == triggerTwo, "Two different Spark Triggers didn't fail equivalence using ==, and should have.")
+	}
+	
 	func testSparkTriggerIsNotEqualToObject() {
 		let trigger = SparkTriggerType.didAppear
 		let object = NSObject()

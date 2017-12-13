@@ -45,7 +45,7 @@ An event's trigger type.
 Once a trigger is fully supported by the SparkChamber and SparkKit frameworks and offers an example in SparkPlayground, it can be considered for promotion to the root list.
 */
 
-@objc final public class SparkTriggerType: SparkTrigger {
+@objcMembers final public class SparkTriggerType: SparkTrigger {
 	public static let none = SparkTrigger("none")
 	public static let didAppear = SparkTrigger("didAppear")
 	public static let didDisappear = SparkTrigger("didDisappear")
@@ -59,9 +59,9 @@ Once a trigger is fully supported by the SparkChamber and SparkKit frameworks an
 /**
 An event's trigger.
 */
-@objcMembers public class SparkTrigger: NSObject {
-	public var rawValue: Int = 0
-
+@objc public class SparkTrigger: NSObject {
+	private var _description = ""
+	
 	override public var description: String {
 		get {
 			return _description
@@ -75,42 +75,10 @@ An event's trigger.
 	internal convenience init(_ description: String) {
 		self.init()
 
-		self.rawValue = SparkTrigger.getIncrementedValue()
 		self.description = description
 	}
 	
-	// Private
-	
-	private var _description = ""
-	
 	override private init() {} // Do not allow initialization via init()
-}
-
-// Equatable overrides
-
-extension SparkTrigger {
-	override open func isEqual(_ object: Any?) -> Bool {
-		guard let rhs = object as? SparkTrigger else {
-			return false
-		}
-		
-		guard self.rawValue == rhs.rawValue else {
-			return false
-		}
-		
-		return true
-	}
-}
-
-// Internal class methods
-
-extension SparkTrigger {
-	private static var _value = 0
-	
-	fileprivate static func getIncrementedValue() -> Int {
-		SparkTrigger._value += 1
-		return SparkTrigger._value
-	}
 }
 
 /**

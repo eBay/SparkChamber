@@ -75,7 +75,7 @@ class SparkEventTests: XCTestCase {
 		XCTAssertNotNil(sparkEvent.trigger, "A Spark Event's trigger wasn't returned after having been set using a convenience initializer.")
 		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using a convenience initializer.")
 		XCTAssertNil(sparkEvent.trace, "A Spark Event's trace didn't return nil after having been set using a convenience initializer.")
-		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using  a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using a convenience initializer.")
 		XCTAssertNotNil(sparkEvent.action, "A Spark Event's action wasn't returned after having been set using a convenience initializer.")
 	}
 	
@@ -89,7 +89,7 @@ class SparkEventTests: XCTestCase {
 		XCTAssertNotNil(sparkEvent.trigger, "A Spark Event's trigger wasn't returned after having been set using a convenience initializer.")
 		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using a convenience initializer.")
 		XCTAssertNil(sparkEvent.trace, "A Spark Event's trace didn't return nil after having been set using a convenience initializer.")
-		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using  a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using a convenience initializer.")
 		XCTAssertNotNil(sparkEvent.action, "A Spark Event's action wasn't returned after having been set using a convenience initializer.")
 	}
 	
@@ -116,7 +116,7 @@ class SparkEventTests: XCTestCase {
 		XCTAssert(sparkEvent.trigger == SparkTriggerType.none, "A Spark Event's trigger didn't match what was set using a convenience initializer.")
 		XCTAssertNotNil(sparkEvent.trace, "A Spark Event's trace wasn't returned after having been set using a convenience initializer.")
 		XCTAssert(sparkEvent.trace == "foo", "A Spark Event's trace didn't match what was set using a convenience initializer.")
-		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using  a convenience initializer.")
+		XCTAssertNotNil(sparkEvent.identifier, "A Spark Event's default identifier value wasn't returned after having been set using a convenience initializer.")
 		XCTAssertNil(sparkEvent.action, "A Spark Event's action didn't return nil after having been set using a convenience initializer.")
 	}
 	
@@ -142,6 +142,8 @@ class SparkEventTests: XCTestCase {
 		
 		XCTAssert(sparkEventOne == sparkEventTwo, "Two Spark Events with the same data didn't prove equivalent using ==, and should have.")
 		XCTAssert(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with the same data didn't prove equivalent using isEqual(), and should have.")
+		XCTAssert(sparkEventOne.hash == sparkEventTwo.hash, "Two Spark Events with the same data didn't prove equivalent using hash, and should have.")
+		XCTAssert(sparkEventOne.hashValue == sparkEventTwo.hashValue, "Two Spark Events with the same data didn't prove equivalent using hashValue, and should have.")
 	}
 	
 	func testSparkEventTriggerIsNotEqual() {
@@ -151,6 +153,8 @@ class SparkEventTests: XCTestCase {
 		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
 		XCTAssertFalse(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with dissimilar data didn't fail equivalence using isEqual(), and should have.")
+		XCTAssertFalse(sparkEventOne.hash == sparkEventTwo.hash, "Two Spark Events with dissimilar data had the same hash, and shouldn't have.")
+		XCTAssertFalse(sparkEventOne.hashValue == sparkEventTwo.hashValue, "Two Spark Events with dissimilar data had the same hashValue, and shouldn't have.")
 	}
 	
 	func testSparkEventRightActionIsNil() {
@@ -161,9 +165,10 @@ class SparkEventTests: XCTestCase {
 		}
 		let sparkEventTwo = SparkEvent(trigger: SparkTriggerType.none, trace: nil, identifier: identifier, action: nil)
 
-		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
 		XCTAssertFalse(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with dissimilar data didn't fail equivalence using isEqual(), and should have.")
+		XCTAssertFalse(sparkEventOne.hash == sparkEventTwo.hash, "Two Spark Events with dissimilar data had the same hash, and shouldn't have.")
+		XCTAssertFalse(sparkEventOne.hashValue == sparkEventTwo.hashValue, "Two Spark Events with dissimilar data had the same hashValue, and shouldn't have.")
 	}
 	
 	func testSparkEventLeftActionIsNil() {
@@ -176,6 +181,8 @@ class SparkEventTests: XCTestCase {
 		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
 		XCTAssertFalse(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with dissimilar data didn't fail equivalence using isEqual(), and should have.")
+		XCTAssertFalse(sparkEventOne.hash == sparkEventTwo.hash, "Two Spark Events with dissimilar data had the same hash, and shouldn't have.")
+		XCTAssertFalse(sparkEventOne.hashValue == sparkEventTwo.hashValue, "Two Spark Events with dissimilar data had the same hashValue, and shouldn't have.")
 	}
 	
 	func testSparkEventBothActionsAreNil() {
@@ -185,6 +192,8 @@ class SparkEventTests: XCTestCase {
 		
 		XCTAssert(sparkEventOne == sparkEventTwo, "Two Spark Events with the same data didn't prove equivalent using ==, and should have.")
 		XCTAssert(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with the same data didn't prove equivalent using isEqual(), and should have.")
+		XCTAssert(sparkEventOne.hash == sparkEventTwo.hash, "Two Spark Events with the same data didn't prove equivalent using hash, and should have.")
+		XCTAssert(sparkEventOne.hashValue == sparkEventTwo.hashValue, "Two Spark Events with the same data didn't prove equivalent using hashValue, and should have.")
 	}
 	
 	func testSparkEventTraceIsNotEqual() {
@@ -194,6 +203,8 @@ class SparkEventTests: XCTestCase {
 		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
 		XCTAssertFalse(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with dissimilar data didn't fail equivalence using isEqual(), and should have.")
+		XCTAssertFalse(sparkEventOne.hash == sparkEventTwo.hash, "Two Spark Events with dissimilar data had the same hash, and shouldn't have.")
+		XCTAssertFalse(sparkEventOne.hashValue == sparkEventTwo.hashValue, "Two Spark Events with dissimilar data had the same hashValue, and shouldn't have.")
 	}
 	
 	func testSparkEventIdentifierIsEqual() {
@@ -203,6 +214,8 @@ class SparkEventTests: XCTestCase {
 		
 		XCTAssert(sparkEventOne == sparkEventTwo, "Two Spark Events with the same data didn't prove equivalent using ==, and should have.")
 		XCTAssert(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with the same data didn't prove equivalent using isEqual(), and should have.")
+		XCTAssert(sparkEventOne.hash == sparkEventTwo.hash, "Two Spark Events with the same data didn't prove equivalent using hash, and should have.")
+		XCTAssert(sparkEventOne.hashValue == sparkEventTwo.hashValue, "Two Spark Events with the same data didn't prove equivalent using hashValue, and should have.")
 	}
 	
 	func testSparkEventIdentifierIsNotEqual() {
@@ -211,6 +224,8 @@ class SparkEventTests: XCTestCase {
 		
 		XCTAssertFalse(sparkEventOne == sparkEventTwo, "Two Spark Events with dissimilar data didn't fail equivalence using ==, and should have.")
 		XCTAssertFalse(sparkEventOne.isEqual(sparkEventTwo), "Two Spark Events with dissimilar data didn't fail equivalence using isEqual(), and should have.")
+		XCTAssertFalse(sparkEventOne.hash == sparkEventTwo.hash, "Two Spark Events with dissimilar data had the same hash, and shouldn't have.")
+		XCTAssertFalse(sparkEventOne.hashValue == sparkEventTwo.hashValue, "Two Spark Events with dissimilar data had the same hashValue, and shouldn't have.")
 	}
 	
 	func testSparkEventIsNotEqualToObject() {
@@ -222,7 +237,9 @@ class SparkEventTests: XCTestCase {
 		let object = NSObject()
 		
 		XCTAssertFalse(sparkEvent == object, "A Spark Event and an NSObject didn't fail equivalence using ==, and should have.")
-		XCTAssertFalse(sparkEvent.isEqual(object), "A Spark Event and an NSObject didn't fail equivalence using isEqual:, and should have.")
+		XCTAssertFalse(sparkEvent.isEqual(object), "A Spark Event and an NSObject didn't fail equivalence using isEqual:, and shouldn't have.")
+		XCTAssertFalse(sparkEvent.hash == object.hash, "A Spark Event and an NSObject had the same hash, and should have.")
+		XCTAssertFalse(sparkEvent.hashValue == object.hashValue, "A Spark Event and an NSObject had the same hashValue, and shouldn't have.")
 	}
 	
 	func testSparkEventDescription() {

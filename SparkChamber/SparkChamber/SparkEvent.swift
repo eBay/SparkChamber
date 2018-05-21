@@ -92,7 +92,7 @@ public typealias SparkEventActionBlock = @convention(block) (_ timestamp: Date) 
 // MARK: - Classes
 
 /**
-A Spark Event model object, composed of a trigger (enum), action (closure), trace (string), and identifier (string).
+A Spark Event model object, composed of a trigger (enum), action (closure), trace (string), and identifier (UUID).
 */
 @objcMembers open class SparkEvent: NSObject, NSCopying {
 	// MARK: - Public
@@ -207,6 +207,22 @@ A Spark Event model object, composed of a trigger (enum), action (closure), trac
 		}
 		
 		return false
+	}
+	
+	override open var hash: Int {
+		get {
+			var hashValue = trigger.hashValue ^ Int(bitPattern: Unmanaged<AnyObject>.passUnretained(action as AnyObject).toOpaque())
+			
+			if let identifier = identifier {
+				hashValue = hashValue ^ identifier.hashValue
+			}
+
+			if let trace = trace {
+				hashValue = hashValue ^ trace.hashValue
+			}
+
+			return hashValue
+		}
 	}
 	
 	// MARK: - Internal

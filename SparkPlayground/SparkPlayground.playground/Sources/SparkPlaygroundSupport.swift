@@ -28,7 +28,6 @@ public class MainScene {
 	public let viewController: UIViewController
 	public let navigationController: UINavigationController
 	public let tableViewButton: SparkButton = SparkButton(type: .system) as SparkButton
-	public let collectionViewButton: SparkButton = SparkButton(type: .system) as SparkButton
 
 	public init() {
 		let viewController = UIViewController()
@@ -40,19 +39,11 @@ public class MainScene {
 	}
 	
 	public func display() {
-		tableViewButton.setTitle("Present table view", for: UIControlState.normal)
-		tableViewButton.sizeToFit()
-		tableViewButton.center = viewController.view.center
-		tableViewButton.center.y -= 20
+		tableViewButton.setTitle("Present table view", for: UIControl.State.normal)
 
-		collectionViewButton.setTitle("Present collection view", for: UIControlState.normal)
-		collectionViewButton.sizeToFit()
-		collectionViewButton.center = viewController.view.center
-		collectionViewButton.center.y += 20
-
-		let stackView = UIStackView(arrangedSubviews: [tableViewButton, collectionViewButton])
+		let stackView = UIStackView(arrangedSubviews: [tableViewButton])
 		stackView.axis = .vertical
-		stackView.distribution = .fillEqually
+		stackView.distribution = .fillProportionally
 		stackView.alignment = .center
 		stackView.spacing = 4
 		stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,16 +52,18 @@ public class MainScene {
 		let viewsDictionary = ["stackView": stackView]
 		let stackView_H = NSLayoutConstraint.constraints(
 			withVisualFormat: "H:|[stackView]|",
-			options: NSLayoutFormatOptions(rawValue: 0),
+			options: NSLayoutConstraint.FormatOptions(rawValue: 0),
 			metrics: nil,
 			views: viewsDictionary)
 		let stackView_V = NSLayoutConstraint.constraints(
 			withVisualFormat: "V:|-200-[stackView]-200-|",
-			options: NSLayoutFormatOptions(rawValue:0),
+			options: NSLayoutConstraint.FormatOptions(rawValue:0),
 			metrics: nil,
 			views: viewsDictionary)
 		viewController.view.addConstraints(stackView_H)
 		viewController.view.addConstraints(stackView_V)
+		
+		addButtonTargetActions()
 		
 		//Run playground
 		let window = UIWindow(frame: screenBounds)
@@ -80,7 +73,17 @@ public class MainScene {
 		PlaygroundPage.current.liveView = window
 		PlaygroundPage.current.needsIndefiniteExecution = true
 	}
+
+	func addButtonTargetActions() {
+		tableViewButton.addTarget(self, action: #selector(presentTableView(sender:)), for: UIControl.Event.touchUpInside)
+	}
+	
+	@objc func presentTableView(sender:UIButton) {
+		navigationController.pushViewController(PlaygroundTableViewController(), animated: true)
+	}
 }
+
+open class PlaygroundTableViewController: TableViewController { }
 
 open class TableViewController: SparkViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 	public let tableViewData = ["Apple", "Apricot", "Banana", "Blackberry", "Blueberry", "Clementine", "Fig", "Grape", "Grapefruit", "Kiwi", "Lemon", "Lime", "Mango", "Marionberry", "Orange", "Papaya", "Peach", "Pear", "Pineapple", "Plum", "Pomegranate", "Raspberry", "Strawberry", "Tangerine", "Tomato", "Watermelon"]
@@ -91,7 +94,7 @@ open class TableViewController: SparkViewController, UITableViewDelegate, UITabl
 		
 		self.title = "Table View"
 		
-		let tableView = UITableView(frame: screenBounds, style: UITableViewStyle.plain)
+		let tableView = UITableView(frame: screenBounds, style: UITableView.Style.plain)
 		tableView.delegate = self
 		tableView.dataSource = self
 		tableView.register(SparkTableViewCell.self, forCellReuseIdentifier: "tableViewCell")
@@ -107,7 +110,7 @@ open class TableViewController: SparkViewController, UITableViewDelegate, UITabl
 		return tableViewData.count
 	}
 	
-	open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	dynamic open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! SparkTableViewCell
 
 		return cell
@@ -119,65 +122,6 @@ open class TableViewController: SparkViewController, UITableViewDelegate, UITabl
 		super.tableView(tableView, didSelectRowAt: indexPath)
 		
 		tableView.deselectRow(at: indexPath, animated: true)
-	}
-}
-
-public class SparkCollectionViewCellWithTextLabel: SparkCollectionViewCell {
-	public var textLabel: UILabel?
-	
-	override public init(frame: CGRect) {
-		super.init(frame: frame)
-		
-		self.backgroundColor = .orange
-		
-		let label = UILabel(frame: CGRect(x:0.0, y:60.0, width:150.0, height:30.0))
-		label.textColor = .white
-		label.textAlignment = NSTextAlignment.center
-		label.backgroundColor = .clear
-		textLabel = label
-		self.contentView.addSubview(label)
-	}
-	
-	required public init?(coder decoder: NSCoder) {
-		super.init(coder: decoder)
-	}
-}
-
-open class CollectionViewController: SparkViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
-	public var collectionView: UICollectionView!
-	
-	override open func viewDidLoad() {
-		super.viewDidLoad()
-		
-		self.title = "Collection View"
-		
-		let flowLayout = UICollectionViewFlowLayout()
-		flowLayout.scrollDirection = .vertical
-		flowLayout.sectionInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-		flowLayout.minimumInteritemSpacing = 10.0
-		flowLayout.minimumLineSpacing = 10.0
-		flowLayout.itemSize = CGSize(width:145.0, height:145.0)
-		
-		self.collectionView = UICollectionView(frame: screenBounds, collectionViewLayout: flowLayout)
-		self.collectionView.register(SparkCollectionViewCellWithTextLabel.self, forCellWithReuseIdentifier: "collectionViewCell")
-		self.collectionView.delegate = self
-		self.collectionView.dataSource = self
-		self.collectionView.backgroundColor = .white
-		self.view.addSubview(self.collectionView)
-	}
-	
-	open func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return 1
-	}
-	
-	open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 42
-	}
-	
-	open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! SparkCollectionViewCellWithTextLabel
-
-		return cell
 	}
 }
 

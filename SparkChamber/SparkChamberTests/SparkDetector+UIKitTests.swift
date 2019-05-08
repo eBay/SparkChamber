@@ -23,10 +23,10 @@ import XCTest
 
 
 private class UITouchMock : UITouch {
-	var _phase: UITouchPhase = UITouchPhase.ended
+	var _phase: UITouch.Phase = UITouch.Phase.ended
 	var _view: UIView = UIView()
 	
-	override var phase: UITouchPhase {
+	override var phase: UITouch.Phase {
 		get {
 			return _phase
 		}
@@ -197,7 +197,7 @@ class SparkDetectorUIKitTests: XCTestCase {
 		
 		touch.view = PointInsideViewMock()
 		touch.view.isUserInteractionEnabled = true
-		touch.phase = UITouchPhase.began
+		touch.phase = UITouch.Phase.began
 		
 		let sparkEvent = SparkEvent(trigger: SparkTriggerType.didEndTouch) {
 			_ in

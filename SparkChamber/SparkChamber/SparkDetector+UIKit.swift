@@ -73,7 +73,7 @@ extension SparkDetector {
 	- returns: A boolean flag indicating if any supplied touches successfully triggered a didEndTouch event
 	*/
 	@discardableResult public class func trackEnded(withTouches touches: NSSet?) -> Bool {
-		return track(touches: touches, phase: UITouchPhase.ended)
+		return track(touches: touches, phase: UITouch.Phase.ended)
 	}
 	
 	/**
@@ -128,7 +128,7 @@ extension SparkDetector {
 		return result
 	}
 	
-	fileprivate class func track(touches: NSSet?, phase: UITouchPhase) -> Bool {
+	fileprivate class func track(touches: NSSet?, phase: UITouch.Phase) -> Bool {
 		guard let touch = touches?.anyObject() as? UITouch , touch.phase == phase,
 			  let view = touch.view , view.isUserInteractionEnabled else {
 				return false

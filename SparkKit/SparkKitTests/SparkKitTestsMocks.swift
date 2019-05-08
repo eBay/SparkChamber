@@ -23,10 +23,10 @@ import SparkKit
 
 
 class UITouchMock : UITouch {
-	var _phase: UITouchPhase = UITouchPhase.ended
+	var _phase: UITouch.Phase = UITouch.Phase.ended
 	var _view: UIView = UIView()
 	
-	override var phase: UITouchPhase {
+	override var phase: UITouch.Phase {
 		get {
 			return _phase
 		}

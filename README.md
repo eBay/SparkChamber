@@ -32,7 +32,7 @@ Spark Chamber is a lightweight asynchronous trigger-action framework for iOS, de
 ### Quick Start
 If you'd like to see Spark Chamber in action without delay, please follow these steps:
 
-0. Install [Xcode 8](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) on your system
+0. Install [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) on your system
 1. Download and unzip the [current release of the project](https://github.com/eBay/SparkChamber/releases)
 2. Open the package SparkWorkspace.xcworkspace in Xcode
 3. Build the SparkChamber and SparkKit targets in Xcode
